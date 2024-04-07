@@ -31,6 +31,7 @@ namespace JM
         [SerializeField] bool dodgeInput = false;
         [SerializeField] bool sprintInput = false;
         [SerializeField] bool jumpInput = false;
+        [SerializeField] bool RB_Input = false;
 
         private void Awake()
         {
@@ -94,6 +95,7 @@ namespace JM
                 playerControles.PlayerCamera.Movement.performed += i => cameraInput = i.ReadValue<Vector2>();
                 playerControles.PlayerAction.Dodge.performed += i => dodgeInput = true;
                 playerControles.PlayerAction.Jump.performed += i => jumpInput = true;
+                playerControles.PlayerAction.RB.performed += i => RB_Input = true;
 
                 // holding the input, sets the bool to true
                 playerControles.PlayerAction.Sprint.performed += i => sprintInput = true;
@@ -138,6 +140,8 @@ namespace JM
             HandleDodgeInput();
             HandleSprintInput();
             HandleJumpInput();
+            HandleRBInput();
+
         }
 
         // Movemt
@@ -208,6 +212,22 @@ namespace JM
 
                 // attempt to preform jump
                 player.playerLocomotionManager.AttemptToPerformJump();
+            }
+        }
+
+        private void HandleRBInput()
+        {
+            if (RB_Input)
+            {
+                RB_Input = false;
+
+                // todo: if ui window open, retuen and do nothing
+
+                player.playerNetworkManager.SetCharacterActionHand(true);
+
+                // todo: if two handing the weapon, use the two handed action
+
+                player.playerCombatManager.PerformWeaponBasedAction(player.playerInventoryManager.currentRightHandWeapon.oh_RB_Action, player.playerInventoryManager.currentRightHandWeapon);
             }
         }
     }

@@ -41,7 +41,9 @@ namespace JM
         // light attack stamina cost modifier
         // heavy attack stamina cost modifier
 
-        // item based actions
+        [Header("Actions")]
+        public WeaponItemAction oh_RB_Action; // one handed action
+
 
         // ash of war
 

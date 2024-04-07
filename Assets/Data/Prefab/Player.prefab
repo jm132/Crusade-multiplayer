@@ -213,9 +213,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.047501445
-  m_Height: 0.28020614
+  m_Height: 0.19882688
   m_Direction: 0
-  m_Center: {x: -0.0245529, y: -0.014653384, z: -0.008112517}
+  m_Center: {x: -0.069310345, y: -0.01465339, z: -0.00811252}
 --- !u!1 &712999774336024223
 GameObject:
   m_ObjectHideFlags: 0
@@ -973,7 +973,7 @@ CapsuleCollider:
   m_Radius: 0.070361435
   m_Height: 0.37107116
   m_Direction: 0
-  m_Center: {x: 0.03871901, y: 0.014476656, z: -0.0006014695}
+  m_Center: {x: 0.16, y: 0.014476656, z: -0.0006014695}
 --- !u!1 &3832051562531238421
 GameObject:
   m_ObjectHideFlags: 0
@@ -1048,10 +1048,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.07078686
-  m_Height: 0.38039115
+  m_Radius: 0.061174214
+  m_Height: 0.38039118
   m_Direction: 0
-  m_Center: {x: -0.025539624, y: -0.0099885985, z: -0.0006014717}
+  m_Center: {x: -0.15000002, y: -0.01960125, z: -0.0006014792}
 --- !u!1 &3892369553394208540
 GameObject:
   m_ObjectHideFlags: 0
@@ -1127,6 +1127,7 @@ GameObject:
   - component: {fileID: 1107870320057811756}
   - component: {fileID: -5304648331439368700}
   - component: {fileID: -8422472725225772332}
+  - component: {fileID: -8223000218597064781}
   - component: {fileID: 2931106609998499896}
   - component: {fileID: 2205259671876677222}
   - component: {fileID: 3253595229538148444}
@@ -1224,6 +1225,8 @@ MonoBehaviour:
     m_InternalValue: 0
   isSprinting:
     m_InternalValue: 0
+  isJumping:
+    m_InternalValue: 0
   currentHealth:
     m_InternalValue: 0
   maxHealth:
@@ -1305,9 +1308,15 @@ MonoBehaviour:
         byte0059: 0
         byte0060: 0
         byte0061: 0
+  currentWeaponBeingUsed:
+    m_InternalValue: 0
   currentRightHandWeaponID:
     m_InternalValue: 0
   currentLeftHandWeaponID:
+    m_InternalValue: 0
+  isUsingRightHand:
+    m_InternalValue: 0
+  isUsingLeftHand:
     m_InternalValue: 0
 --- !u!114 &-8422472725225772332
 MonoBehaviour:
@@ -1329,7 +1338,6 @@ MonoBehaviour:
   characterEffectsManager: {fileID: 0}
   characterAnimatorManager: {fileID: 0}
   isPerfromingAction: 0
-  isJumping: 0
   isGrounded: 1
   applyRootMotion: 0
   canRotate: 1
@@ -1343,6 +1351,20 @@ MonoBehaviour:
   playerStatsManager: {fileID: 0}
   playerInventoryManager: {fileID: 0}
   playerEquipmentManager: {fileID: 0}
+  playerCombatManager: {fileID: 0}
+--- !u!114 &-8223000218597064781
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4168264135523931776}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9fb91c42081e414fa9a8828b4c4b5d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentWeaponBeingUsed: {fileID: 0}
 --- !u!114 &2931106609998499896
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1835,7 +1857,7 @@ CapsuleCollider:
   m_Radius: 0.04540508
   m_Height: 0.32931194
   m_Direction: 0
-  m_Center: {x: -0.0000000013963423, y: -0.01130052, z: -0.0006014691}
+  m_Center: {x: -0.15, y: -0.01130052, z: -0.0006014691}
 --- !u!1 &5691670364741590553
 GameObject:
   m_ObjectHideFlags: 0
@@ -2580,9 +2602,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.05439596
-  m_Height: 0.27094457
+  m_Height: 0.17841119
   m_Direction: 0
-  m_Center: {x: 0.029183669, y: 0.009815524, z: 0.0031508564}
+  m_Center: {x: 0.08373332, y: 0.009815519, z: 0.0031508543}
 --- !u!1 &7965500293846387671
 GameObject:
   m_ObjectHideFlags: 0
@@ -2785,7 +2807,7 @@ CapsuleCollider:
   m_Radius: 0.04494789
   m_Height: 0.336493
   m_Direction: 0
-  m_Center: {x: 0.0035905237, y: 0.009744086, z: -0.0006014744}
+  m_Center: {x: 0.12, y: 0.009744086, z: -0.0006014744}
 --- !u!1 &9158137587052393671
 GameObject:
   m_ObjectHideFlags: 0
