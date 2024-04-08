@@ -26,7 +26,7 @@ namespace JM
             }
             else
             {
-                Destroy(Instance);
+                Destroy(gameObject);
             }
 
             // add all weapons to the list of items

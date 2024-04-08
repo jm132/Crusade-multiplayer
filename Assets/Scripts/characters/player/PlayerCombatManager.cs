@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Netcode;
 
 namespace JM
 {
@@ -19,11 +20,14 @@ namespace JM
 
         public void PerformWeaponBasedAction(WeaponItemAction weaponAction, WeaponItem weaponPerformingAction)
         {
-            // preform the action
-            weaponAction.AttemptToPerformAction(player, weaponPerformingAction);
+            if (player.IsOwner)
+            {
+                // preform the action
+                weaponAction.AttemptToPerformAction(player, weaponPerformingAction);
 
-            //notify the server action has been performed, perform the action on other clients
-
+                //notify the server action has been performed, perform the action on other clients
+                player.playerNetworkManager.NotifyTheServerOfWeaponActionServerRpc(NetworkManager.Singleton.LocalClientId, weaponAction.actionID, weaponPerformingAction.itemID);
+            }
         }
     }
 }

@@ -51,5 +51,27 @@ namespace JM
             // tell the host it played the animation, and to play that animation for everybody else present
             charater.characterNetworkManager.NotifyTheServerOfActionAnimtionServerRpc(NetworkManager.Singleton.LocalClientId, targetAnimation, applyRootMation);
         }
+
+        public virtual void PlayTargetAttackActionAnimation(
+            string targetAnimation,
+            bool isPerformingAction,
+            bool applyRootMation = true,
+            bool canRotate = false,
+            bool canMove = false)
+        {
+            // keep track of last attack performed (for combos) 
+            // leep track of current attack tyoe (light, heavy, ect)
+            // update animation set to current weapons animations
+            // decide if attack can be parried
+            // tell the network our "isAttacking" flag is active (for cunter damage ect)
+            charater.applyRootMotion = applyRootMation;
+            charater.animator.CrossFade(targetAnimation, 0.2f);
+            charater.isPerfromingAction = isPerformingAction;
+            charater.canRotate = canRotate;
+            charater.canMove = canMove;
+            
+            // tell the host it played the animation, and to play that animation for everybody else present
+            charater.characterNetworkManager.NotifyTheServerOfAttackActionAnimtionServerRpc(NetworkManager.Singleton.LocalClientId, targetAnimation, applyRootMation);
+        }
     }
 }

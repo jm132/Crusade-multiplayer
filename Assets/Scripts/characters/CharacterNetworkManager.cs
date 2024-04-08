@@ -85,5 +85,33 @@ namespace JM
             charater.applyRootMotion = applyRootMotion;
             charater.animator.CrossFade(animationID, 0.2f);
         }
+
+        // a Server rpc is a function called from a client, to the server/host
+        [ServerRpc]
+        public void NotifyTheServerOfAttackActionAnimtionServerRpc(ulong clientID, string animationID, bool applyRootMotion)
+        {
+            // if this Character is the host/server then activate the client rpc
+            if (IsServer)
+            {
+                PlayAttackActionAnimationForAllClientsClientRpc(clientID, animationID, applyRootMotion);
+            }
+        }
+
+        // a client rpc is sent to all clients present, from the server
+        [ClientRpc]
+        public void PlayAttackActionAnimationForAllClientsClientRpc(ulong clientID, string animationID, bool applyRootMotion)
+        {
+            // we make sure to no run the function on the character who sent it(so we dont plat the animation twice)
+            if (clientID != NetworkManager.Singleton.LocalClientId)
+            {
+                performAttackActionAnimationFromServer(animationID, applyRootMotion);
+            }
+        }
+
+        private void performAttackActionAnimationFromServer(string animationID, bool applyRootMotion)
+        {
+            charater.applyRootMotion = applyRootMotion;
+            charater.animator.CrossFade(animationID, 0.2f);
+        }
     }
 }
