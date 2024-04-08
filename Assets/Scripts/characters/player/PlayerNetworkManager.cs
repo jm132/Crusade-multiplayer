@@ -89,7 +89,6 @@ namespace JM
         {
             if (clientID != NetworkManager.Singleton.LocalClientId)
             {
-                Debug.Log("working");
                 PerformWeaponBasedAction(actionID, weaponID);
             }
         }
@@ -100,7 +99,6 @@ namespace JM
 
             if (weaponAction != null)
             {
-                Debug.Log("here 2");
                weaponAction.AttemptToPerformAction(player, WorldItemDatabase.Instance.GetWeaponByID(weaponID));
             }
             else

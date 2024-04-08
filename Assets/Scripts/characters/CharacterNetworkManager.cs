@@ -90,6 +90,7 @@ namespace JM
         [ServerRpc]
         public void NotifyTheServerOfAttackActionAnimtionServerRpc(ulong clientID, string animationID, bool applyRootMotion)
         {
+            Debug.Log("here now");
             // if this Character is the host/server then activate the client rpc
             if (IsServer)
             {

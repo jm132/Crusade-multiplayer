@@ -5699,14 +5699,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 614987542023710188, guid: 91cfdfc35e0e1d84b9164d472bbabf53, type: 3}
-      propertyPath: weaponItemActions.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 614987542023710188, guid: 91cfdfc35e0e1d84b9164d472bbabf53, type: 3}
-      propertyPath: weaponItemActions.Array.data[1]
-      value: 
-      objectReference: {fileID: 11400000, guid: 63c8445ab5b9f9344aa4370a24d02756, type: 2}
     - target: {fileID: 1169683929577287092, guid: 91cfdfc35e0e1d84b9164d472bbabf53, type: 3}
       propertyPath: m_RootOrder
       value: 4
