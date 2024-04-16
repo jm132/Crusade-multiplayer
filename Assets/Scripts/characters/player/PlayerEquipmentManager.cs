@@ -233,5 +233,36 @@ namespace JM
                 leftWeaponManger.SetWeaponDamage(player, player.playerInventoryManager.currentLeftHandWeapon);
             }
         }
+
+        // damage colliders
+        public void OpenDamageCollider()
+        {
+            //open right weapon damage collider
+            if (player.playerNetworkManager.isUsingRightHand.Value)
+            {
+                rightWeaponManger.meleeDamageCollider.EnableDamageCollider();
+            }
+            //open left weapon damage collider
+            else if (player.playerNetworkManager.isUsingLeftHand.Value)
+            {
+                leftWeaponManger.meleeDamageCollider.EnableDamageCollider();
+            }
+
+            //play whoosh sfx
+        }
+
+        public void CloseDamageCollider()
+        {
+            //open right weapon damage collider
+            if (player.playerNetworkManager.isUsingRightHand.Value)
+            {
+                rightWeaponManger.meleeDamageCollider.DisableDamageCollider();
+            }
+            //open left weapon damage collider
+            else if (player.playerNetworkManager.isUsingLeftHand.Value)
+            {
+                leftWeaponManger.meleeDamageCollider.DisableDamageCollider();
+            }
+        }
     }
 }

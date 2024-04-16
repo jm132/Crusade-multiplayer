@@ -52,7 +52,7 @@ namespace JM
             charater.characterNetworkManager.NotifyTheServerOfActionAnimtionServerRpc(NetworkManager.Singleton.LocalClientId, targetAnimation, applyRootMation);
         }
 
-        public virtual void PlayTargetAttackActionAnimation(
+        public virtual void PlayTargetAttackActionAnimation(AttackType attackType,
             string targetAnimation,
             bool isPerformingAction,
             bool applyRootMation = true,
@@ -64,6 +64,8 @@ namespace JM
             // update animation set to current weapons animations
             // decide if attack can be parried
             // tell the network our "isAttacking" flag is active (for cunter damage ect)
+
+            charater.characterCombatManager.currentAttackType = attackType;
             charater.applyRootMotion = applyRootMation;
             charater.animator.CrossFade(targetAnimation, 0.2f);
             charater.isPerfromingAction = isPerformingAction;

@@ -30,15 +30,15 @@ namespace JM
         public float poiseDamage = 10;
         // offensive poise bonus when attacking
 
-        // wepon modifiers
-        // light attack modifier
+        [Header("Attack Modifiers")]
+        public float light_Attack_01_Modifier = 1.1f;
         // heavy attack modifier
         // critical damage modifier ect
 
         [Header("Stamina Costs")]
         public int baseStaminaCost = 20;
+        public float lightAttackStaminaCostMultipler = 0.9f;
         // running attack stamina cost modifier
-        // light attack stamina cost modifier
         // heavy attack stamina cost modifier
 
         [Header("Actions")]

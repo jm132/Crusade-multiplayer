@@ -16,6 +16,7 @@ namespace JM
         [HideInInspector] public CharacterNetworkManager characterNetworkManager;
         [HideInInspector] public CharacterEffectsManager characterEffectsManager;
         [HideInInspector] public CharaterAnimatorManager characterAnimatorManager;
+        [HideInInspector] public CharaterCombatManager characterCombatManager;
 
         [Header("Flags")]
         public bool isPerfromingAction = false;
@@ -34,6 +35,7 @@ namespace JM
             characterNetworkManager = GetComponent<CharacterNetworkManager>();
             characterEffectsManager = GetComponent<CharacterEffectsManager>();
             characterAnimatorManager = GetComponent<CharaterAnimatorManager>();
+            characterCombatManager = GetComponent<CharaterCombatManager>();
         }
 
         protected virtual void Start()

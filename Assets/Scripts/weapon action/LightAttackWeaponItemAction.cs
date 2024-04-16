@@ -30,8 +30,7 @@ namespace JM
 
             if (playerPerformingAction.playerNetworkManager.isUsingRightHand.Value)
             {
-                Debug.Log("being called");
-                playerPerformingAction.playerAnimatorManager.PlayTargetAttackActionAnimation(light_Attack_01, true);
+                playerPerformingAction.playerAnimatorManager.PlayTargetAttackActionAnimation(AttackType.LightAttack01,light_Attack_01, true);
             }
             if (playerPerformingAction.playerNetworkManager.isUsingLeftHand.Value)
             {

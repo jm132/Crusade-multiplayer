@@ -7,7 +7,7 @@ namespace JM
     public class DamageCollider : MonoBehaviour
     {
         [Header("Collider")]
-        protected Collider damageCollider;
+        [SerializeField] protected Collider damageCollider;
 
         [Header("Damage")]
         public float physicalDamage = 0;
@@ -22,7 +22,12 @@ namespace JM
         [Header("Characters Damaged")]
         protected List<CharaterManager> charactersDamaged = new List<CharaterManager>();
 
-        private void OnTriggerEnter(Collider other)
+        protected virtual void Awake ()
+        {
+
+        }
+
+        protected virtual void OnTriggerEnter(Collider other)
         {
 
             CharaterManager damageTarget = other.GetComponentInParent<CharaterManager>();
