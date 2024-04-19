@@ -4938,7 +4938,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8339496917481394952, guid: aad8c593626a69a4fa7c2c8d3a5f2a4b, type: 3}
       propertyPath: physicalDamageSFX.Array.size
-      value: 1
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8339496917481394952, guid: aad8c593626a69a4fa7c2c8d3a5f2a4b, type: 3}
       propertyPath: physicalDamageSFX.Array.data[0]
@@ -4947,15 +4947,19 @@ PrefabInstance:
     - target: {fileID: 8339496917481394952, guid: aad8c593626a69a4fa7c2c8d3a5f2a4b, type: 3}
       propertyPath: physicalDamageSFX.Array.data[1]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 8300000, guid: 28406bf68add30e4e89d6cd063fb84e6, type: 3}
     - target: {fileID: 8339496917481394952, guid: aad8c593626a69a4fa7c2c8d3a5f2a4b, type: 3}
       propertyPath: physicalDamageSFX.Array.data[2]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 8300000, guid: c266e86e5ec11e344bf66dede26cbc46, type: 3}
     - target: {fileID: 8339496917481394952, guid: aad8c593626a69a4fa7c2c8d3a5f2a4b, type: 3}
       propertyPath: physicalDamageSFX.Array.data[3]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 8300000, guid: 90fb91c5d9f18df4183363d36d921429, type: 3}
+    - target: {fileID: 8339496917481394952, guid: aad8c593626a69a4fa7c2c8d3a5f2a4b, type: 3}
+      propertyPath: physicalDamageSFX.Array.data[4]
+      value: 
+      objectReference: {fileID: 8300000, guid: 28406bf68add30e4e89d6cd063fb84e6, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aad8c593626a69a4fa7c2c8d3a5f2a4b, type: 3}
 --- !u!222 &3743146121393909516

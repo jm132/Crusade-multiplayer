@@ -51,7 +51,7 @@ namespace JM
             // check for "invulnerability"
 
             CalaulateDamage(charater);
-            // check which directional damage came from 
+            PlayDirectionalBasedDamageAnimation(charater); 
             // play a damage animation 
             // check for build ups (poison, bleed ect)
             PlayDamageSFX(charater);
@@ -103,7 +103,42 @@ namespace JM
             charater.characterSoundFXManager.PlayScoundFX(physicalDamageSFX);
             // if fire damage is greater then 0, play burn sfx
             // if lightning damage is greater then 0, play zap sfx
+        }
 
+        private void PlayDirectionalBasedDamageAnimation(CharaterManager charater)
+        {
+            if (!charater.IsOwner)
+                return;
+            // todo calculate if poise is broken 
+            poiseIsBroken = true;
+
+            if (angleHitFrom >= 145 && angleHitFrom <= 180)
+            {
+                damageAnimation = charater.characterAnimatorManager.GetRandomAnimationFromList(charater.characterAnimatorManager.forward_Medium_Damage);
+            }
+            else if (angleHitFrom <= -145 && angleHitFrom >= -180)
+            {
+                damageAnimation = charater.characterAnimatorManager.GetRandomAnimationFromList(charater.characterAnimatorManager.forward_Medium_Damage);
+            }
+            else if (angleHitFrom >= -45 && angleHitFrom <= 45)
+            {
+                damageAnimation = charater.characterAnimatorManager.GetRandomAnimationFromList(charater.characterAnimatorManager.backward_Medium_Damage);
+            }
+            else if (angleHitFrom >= -144 && angleHitFrom <= -45)
+            {
+                damageAnimation = charater.characterAnimatorManager.GetRandomAnimationFromList(charater.characterAnimatorManager.left_Medium_Damage);
+            }
+            else if (angleHitFrom >= 45 && angleHitFrom <= 144)
+            {
+                damageAnimation = charater.characterAnimatorManager.GetRandomAnimationFromList(charater.characterAnimatorManager.right_Medium_Damage);
+            }
+
+            // if poise is broken, play a staggering damage animation
+            if (poiseIsBroken)
+            {
+                charater.characterAnimatorManager.lastDamageAnimationPlayed = damageAnimation;
+                charater.characterAnimatorManager.PlayTargetActionAnimation(damageAnimation, true);
+            }
         }
     }
 }
