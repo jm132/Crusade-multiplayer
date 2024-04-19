@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Unity.Netcode;
 
 namespace JM
 {
@@ -65,6 +66,7 @@ namespace JM
         public override void OnNetworkSpawn()
         {
             base.OnNetworkSpawn();
+            NetworkManager.Singleton.OnClientConnectedCallback += OnClientConnectedCallback;
 
             if (IsOwner)
             {
@@ -95,6 +97,24 @@ namespace JM
             if (IsOwner && !IsServer)
             {
                 LoadGameDataFromCurrentCharacterData(ref WorldSaveGameManager.instance.currentCharacterData);
+            }
+        }
+
+        private void OnClientConnectedCallback(ulong clientID)
+        {
+            WorldGameSessionManager.instance.AddPlayerToActivePlayersList(this);
+            
+            // if the sever, and the host, dont need to load players to sync them
+            // only nned to load other players gear to syne it if they join a game thats already been active with out them being present
+            if (!IsServer && IsOwner)
+            {
+                foreach (var player in WorldGameSessionManager.instance.players)
+                {
+                    if (player != this)
+                    {
+                        player.LoadOtherPlayerCharacterWhenJoiningServer();
+                    }
+                }
             }
         }
 
@@ -153,6 +173,15 @@ namespace JM
             playerNetworkManager.currentHealth.Value = currentCharacterData.currentHealth;
             playerNetworkManager.currentStamina.Value = currentCharacterData.currentStamina;
             PlayerUIManager.instance.playerUIHudManager.SetMaxStaminaValue(playerNetworkManager.maxStamina.Value);
+        }
+
+        public void LoadOtherPlayerCharacterWhenJoiningServer()
+        {
+            // sync weapons
+            playerNetworkManager.OnCurrentRightHandWeaponIDChange(0, playerNetworkManager.currentRightHandWeaponID.Value);
+            playerNetworkManager.OnCurrentLeftHandWeaponIDChange(0, playerNetworkManager.currentLeftHandWeaponID.Value);
+
+            // armor
         }
 
         // debug delete later

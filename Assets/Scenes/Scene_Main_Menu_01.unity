@@ -4936,6 +4936,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8339496917481394952, guid: aad8c593626a69a4fa7c2c8d3a5f2a4b, type: 3}
+      propertyPath: physicalDamageSFX.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8339496917481394952, guid: aad8c593626a69a4fa7c2c8d3a5f2a4b, type: 3}
+      propertyPath: physicalDamageSFX.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 0e9bca6dd55d7e541a865752da6415f5, type: 3}
+    - target: {fileID: 8339496917481394952, guid: aad8c593626a69a4fa7c2c8d3a5f2a4b, type: 3}
+      propertyPath: physicalDamageSFX.Array.data[1]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8339496917481394952, guid: aad8c593626a69a4fa7c2c8d3a5f2a4b, type: 3}
+      propertyPath: physicalDamageSFX.Array.data[2]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8339496917481394952, guid: aad8c593626a69a4fa7c2c8d3a5f2a4b, type: 3}
+      propertyPath: physicalDamageSFX.Array.data[3]
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aad8c593626a69a4fa7c2c8d3a5f2a4b, type: 3}
 --- !u!222 &3743146121393909516
@@ -5054,10 +5074,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5075424697538966117, guid: 389139c6e0d425c4dbc820c5d56a4809, type: 3}
-      propertyPath: NetworkConfig.PlayerPrefab
-      value: 
-      objectReference: {fileID: 4168264135523931776, guid: 69657f72359a91c4386d55aa2f4c217f, type: 3}
     - target: {fileID: 5075424697538966119, guid: 389139c6e0d425c4dbc820c5d56a4809, type: 3}
       propertyPath: m_Name
       value: World Network Manager

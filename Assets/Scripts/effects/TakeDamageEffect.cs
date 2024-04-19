@@ -54,13 +54,12 @@ namespace JM
             // check which directional damage came from 
             // play a damage animation 
             // check for build ups (poison, bleed ect)
-            // play damage sound fx
-            // play damage vfx (Blood)
+            PlayDamageSFX(charater);
+            PlayDamageVFX(charater);
 
             // if character is A.I, check for new target if character causing damage is persent
         }
 
-        
         private void CalaulateDamage(CharaterManager charater)
         {
             if (!charater.IsOwner)
@@ -69,7 +68,6 @@ namespace JM
             if (characterCausingDamage != null)
             {
                 // check for damage modifiers and modify base damage (physical damage buff, elemental damage buff ect)
-
             }
 
             // check character for flat defenses and subtract them from damage
@@ -89,6 +87,23 @@ namespace JM
 
             // calculate poise damage to determine if the character will be stunned
         }
-    }
 
+        private void PlayDamageVFX(CharaterManager charater)
+        {
+            // if fire damage, play fire particales
+            // if lightning damage, play lightning particales ect
+
+            charater.characterEffectsManager.PlayBloodSplatterVFX(contactPoint);
+        }
+
+        private void PlayDamageSFX(CharaterManager charater)
+        {
+            AudioClip physicalDamageSFX = WorldSoundFXManager.Instance.ChooseRandomSFXFromArray(WorldSoundFXManager.Instance.physicalDamageSFX);
+
+            charater.characterSoundFXManager.PlayScoundFX(physicalDamageSFX);
+            // if fire damage is greater then 0, play burn sfx
+            // if lightning damage is greater then 0, play zap sfx
+
+        }
+    }
 }

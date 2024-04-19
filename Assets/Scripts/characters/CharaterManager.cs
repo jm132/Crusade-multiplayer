@@ -17,6 +17,7 @@ namespace JM
         [HideInInspector] public CharacterEffectsManager characterEffectsManager;
         [HideInInspector] public CharaterAnimatorManager characterAnimatorManager;
         [HideInInspector] public CharaterCombatManager characterCombatManager;
+        [HideInInspector] public CharaterSoundFXManager characterSoundFXManager;
 
         [Header("Flags")]
         public bool isPerfromingAction = false;
@@ -36,6 +37,7 @@ namespace JM
             characterEffectsManager = GetComponent<CharacterEffectsManager>();
             characterAnimatorManager = GetComponent<CharaterAnimatorManager>();
             characterCombatManager = GetComponent<CharaterCombatManager>();
+            characterSoundFXManager = GetComponent<CharaterSoundFXManager>();
         }
 
         protected virtual void Start()
