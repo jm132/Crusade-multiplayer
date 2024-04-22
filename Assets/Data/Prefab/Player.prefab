@@ -1223,6 +1223,8 @@ MonoBehaviour:
     m_InternalValue: 0
   moveAmount:
     m_InternalValue: 0
+  isLockedOn:
+    m_InternalValue: 0
   isSprinting:
     m_InternalValue: 0
   isJumping:
@@ -1337,6 +1339,8 @@ MonoBehaviour:
   characterNetworkManager: {fileID: 0}
   characterEffectsManager: {fileID: 0}
   characterAnimatorManager: {fileID: 0}
+  characterCombatManager: {fileID: 0}
+  characterSoundFXManager: {fileID: 0}
   isPerfromingAction: 0
   isGrounded: 1
   applyRootMotion: 0
@@ -1364,6 +1368,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9fb91c42081e414fa9a8828b4c4b5d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  curremtTarget: {fileID: 0}
+  currentAttackType: 0
+  lockOnTransform: {fileID: 7289412911152266793}
   currentWeaponBeingUsed: {fileID: 0}
 --- !u!114 &2931106609998499896
 MonoBehaviour:
@@ -1466,6 +1473,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af7fdd0e19db2e94f8aa98d5e105e2dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lastDamageAnimationPlayed: 
+  hit_Forward_Medium_01: hit_Forward_Medium_01
+  hit_Forward_Medium_02: hit_Forward_Medium_02
+  hit_Backward_Medium_01: hit_Backward_Medium_01
+  hit_Backward_Medium_02: hit_Backward_Medium_02
+  hit_Left_Medium_01: hit_Left_Medium_01
+  hit_Left_Medium_02: hit_Left_Medium_02
+  hit_Right_Medium_01: hit_Right_Medium_01
+  hit_Right_Medium_02: hit_Right_Medium_02
+  forward_Medium_Damage: []
+  backward_Medium_Damage: []
+  left_Medium_Damage: []
+  right_Medium_Damage: []
 --- !u!114 &1728283959954216426
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1478,6 +1498,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b20e57603082a584b9fa804dba186bc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bloodSplatterVFX: {fileID: 0}
   effectToTest: {fileID: 11400000, guid: 2d136a2dea9f88843b670578cacc4478, type: 2}
   processEffect: 0
 --- !u!114 &5921395054581917734
@@ -1709,12 +1730,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4545722378613092425}
   m_LocalRotation: {x: -0.46203893, y: 0.53527564, z: 0.46203893, w: 0.53527564}
-  m_LocalPosition: {x: 0.006935013, y: 0.035117745, z: 3.2494063e-16}
+  m_LocalPosition: {x: 0.006935013, y: 0.035117745, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3146650909817322599}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4792823274246306674
 GameObject:
@@ -1810,6 +1831,37 @@ Transform:
   - {fileID: 2401712574265420347}
   m_Father: {fileID: 7945053742301171749}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5490746840370554373
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7289412911152266793}
+  m_Layer: 6
+  m_Name: LockOnTarget
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7289412911152266793
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5490746840370554373}
+  m_LocalRotation: {x: 0.99381036, y: -0.11109034, z: -2.0758772e-15, w: 7.218229e-16}
+  m_LocalPosition: {x: -0.17600001, y: 0.062000077, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3146650909817322599}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5495326151163491744
 GameObject:
@@ -2251,6 +2303,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7945053742301171749}
+  - {fileID: 7289412911152266793}
   - {fileID: 4194263253295755744}
   m_Father: {fileID: 1721701600491488988}
   m_RootOrder: 0

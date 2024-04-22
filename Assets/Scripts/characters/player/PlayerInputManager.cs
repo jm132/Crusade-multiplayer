@@ -17,20 +17,23 @@ namespace JM
         PlayerControles playerControles;
 
         [Header("camera movement input")]
-        [SerializeField] Vector2 cameraInput;
-        public float cameraVericalInput;
-        public float cameraHorizontalInput;
+        [SerializeField] Vector2 camera_Input;
+        public float cameraVerical_Input;
+        public float cameraHorizontal_Input;
+
+        [Header("LOCK ON INPUT")]
+        [SerializeField] bool lockOn_Input;
 
         [Header("player movement input")]
-        [SerializeField] Vector2 movementInput;
-        public float horizontalInput;
-        public float verticalInput;
+        [SerializeField] Vector2 movement_Input;
+        public float horizontal_Input;
+        public float vertical_Input;
         [SerializeField] public float moveAmount;
 
         [Header("Player Action Input")]
-        [SerializeField] bool dodgeInput = false;
-        [SerializeField] bool sprintInput = false;
-        [SerializeField] bool jumpInput = false;
+        [SerializeField] bool dodge_Input = false;
+        [SerializeField] bool sprint_Input = false;
+        [SerializeField] bool jump_Input = false;
         [SerializeField] bool RB_Input = false;
 
         private void Awake()
@@ -91,16 +94,19 @@ namespace JM
             {
                 playerControles = new PlayerControles();
 
-                playerControles.PlayerMovement.Movement.performed += i => movementInput = i.ReadValue<Vector2>();
-                playerControles.PlayerCamera.Movement.performed += i => cameraInput = i.ReadValue<Vector2>();
-                playerControles.PlayerAction.Dodge.performed += i => dodgeInput = true;
-                playerControles.PlayerAction.Jump.performed += i => jumpInput = true;
+                playerControles.PlayerMovement.Movement.performed += i => movement_Input = i.ReadValue<Vector2>();
+                playerControles.PlayerCamera.Movement.performed += i => camera_Input = i.ReadValue<Vector2>();
+                playerControles.PlayerAction.Dodge.performed += i => dodge_Input = true;
+                playerControles.PlayerAction.Jump.performed += i => jump_Input = true;
                 playerControles.PlayerAction.RB.performed += i => RB_Input = true;
 
+                // lock on
+                playerControles.PlayerAction.LockOn.performed += i => lockOn_Input = true;
+
                 // holding the input, sets the bool to true
-                playerControles.PlayerAction.Sprint.performed += i => sprintInput = true;
+                playerControles.PlayerAction.Sprint.performed += i => sprint_Input = true;
                 // releasing the input, sets the bool to false
-                playerControles.PlayerAction.Sprint.canceled += i => sprintInput = false;
+                playerControles.PlayerAction.Sprint.canceled += i => sprint_Input = false;
             }
 
             playerControles.Enable();
@@ -135,24 +141,67 @@ namespace JM
 
         private void HandleAllInputs()
         {
+            HandleLockOnInput();
             HandlePlayerMovementInput();
             HandleCameraMovementInput();
             HandleDodgeInput();
             HandleSprintInput();
             HandleJumpInput();
             HandleRBInput();
+        }
 
+        // Lock on
+        private void HandleLockOnInput()
+        {
+            // check for dead target
+            if (player.playerNetworkManager.isLockedOn.Value)
+            {
+                if (player.playerCombatManager.curremtTarget == null)
+                    return;
+
+                if (player.playerCombatManager.curremtTarget.isDead.Value)
+                {
+                    player.playerNetworkManager.isLockedOn.Value = false;
+                }
+
+                // attempt to find new target
+            }
+
+            if (lockOn_Input && player.playerNetworkManager.isLockedOn.Value)
+            {
+                lockOn_Input = false;
+                PlayerCamera.instance.ClearLockOnTargets();
+                player.playerNetworkManager.isLockedOn.Value = false;
+                // disable lock on 
+                return;
+            }
+
+            if (lockOn_Input && !player.playerNetworkManager.isLockedOn.Value)
+            {
+                lockOn_Input = false;
+
+                // if aiming using ranged weapons return (dont allow lock whilst aiming)
+
+                PlayerCamera.instance.HandleLocatingLockOnTargets();
+
+                if (PlayerCamera.instance.nearestLockOnTarget != null)
+                {
+                    player.playerCombatManager.SetTarget(PlayerCamera.instance.nearestLockOnTarget);
+                    player.playerNetworkManager.isLockedOn.Value = true;
+
+                }
+            }
         }
 
         // Movemt
 
         private void HandlePlayerMovementInput()
         {
-            verticalInput = movementInput.y;
-            horizontalInput = movementInput.x;
+            vertical_Input = movement_Input.y;
+            horizontal_Input = movement_Input.x;
             
             // RETURNS THE ABSOLUTE NUMBER, (Meaning number without the nagative sign, so its always positive)
-            moveAmount = Mathf.Clamp01(Mathf.Abs(verticalInput) + Mathf.Abs(horizontalInput));
+            moveAmount = Mathf.Clamp01(Mathf.Abs(vertical_Input) + Mathf.Abs(horizontal_Input));
 
             //WE CLAMP THE VALUES,so they are 0, 0.5 or 1
             if (moveAmount <= 0.5 && moveAmount > 0)
@@ -172,17 +221,17 @@ namespace JM
 
         private void HandleCameraMovementInput()
         {
-            cameraVericalInput = cameraInput.y;
-            cameraHorizontalInput = cameraInput.x;
+            cameraVerical_Input = camera_Input.y;
+            cameraHorizontal_Input = camera_Input.x;
         }
 
         // Action
 
         private void HandleDodgeInput()
         {
-            if (dodgeInput)
+            if (dodge_Input)
             {
-                dodgeInput = false;
+                dodge_Input = false;
 
                 // furter note: return (do nothing) if menu or ui windows is open
 
@@ -192,7 +241,7 @@ namespace JM
 
         private void HandleSprintInput()
         {
-            if (sprintInput)
+            if (sprint_Input)
             {
                 player.playerLocomotionManager.HandleSprinting();
             }
@@ -204,9 +253,9 @@ namespace JM
 
         private void HandleJumpInput()
         {
-            if (jumpInput)
+            if (jump_Input)
             {
-                jumpInput = false;
+                jump_Input = false;
 
                 // if ui window open, simply return without doing anything
 

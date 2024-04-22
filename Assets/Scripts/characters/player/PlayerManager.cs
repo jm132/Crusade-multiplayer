@@ -68,6 +68,7 @@ namespace JM
             base.OnNetworkSpawn();
             NetworkManager.Singleton.OnClientConnectedCallback += OnClientConnectedCallback;
 
+            // if this is the player object owned by this vlient
             if (IsOwner)
             {
                 PlayerCamera.instance.player = this;
@@ -86,6 +87,10 @@ namespace JM
 
             // stats
             playerNetworkManager.currentHealth.OnValueChanged += playerNetworkManager.CheckHP;
+
+            // lock on
+            playerNetworkManager.isLockedOn.OnValueChanged += playerNetworkManager.OnIsLockedOnChanged;
+            playerNetworkManager.currentTargetNetworkObjectID.OnValueChanged += playerNetworkManager.OnLockOnTargetIDChange;
 
             // equipment
             playerNetworkManager.currentRightHandWeaponID.OnValueChanged += playerNetworkManager.OnCurrentRightHandWeaponIDChange;
@@ -133,6 +138,7 @@ namespace JM
             base.Revivecharacter();
             if (IsOwner)
             {
+                isDead.Value = false;
                 playerNetworkManager.currentHealth.Value = playerNetworkManager.maxHealth.Value;
                 playerNetworkManager.currentStamina.Value = playerNetworkManager.maxStamina.Value;
                 // retore focus points
@@ -182,6 +188,12 @@ namespace JM
             playerNetworkManager.OnCurrentLeftHandWeaponIDChange(0, playerNetworkManager.currentLeftHandWeaponID.Value);
 
             // armor
+
+            // lock on
+            if (playerNetworkManager.isLockedOn.Value)
+            {
+                playerNetworkManager.OnLockOnTargetIDChange(0, playerNetworkManager.currentTargetNetworkObjectID.Value);
+            }
         }
 
         // debug delete later

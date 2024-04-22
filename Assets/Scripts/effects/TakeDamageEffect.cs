@@ -109,6 +109,10 @@ namespace JM
         {
             if (!charater.IsOwner)
                 return;
+
+            if (charater.isDead.Value)
+                return;
+
             // todo calculate if poise is broken 
             poiseIsBroken = true;
 

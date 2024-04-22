@@ -22,7 +22,11 @@ namespace JM
         public NetworkVariable<float> verticalMovement = new NetworkVariable<float>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
         public NetworkVariable<float> moveAmount = new NetworkVariable<float>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
+        [Header("Target")]
+        public NetworkVariable<ulong> currentTargetNetworkObjectID = new NetworkVariable<ulong>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+        
         [Header("Flags")]
+        public NetworkVariable<bool> isLockedOn = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
         public NetworkVariable<bool> isSprinting = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
         public NetworkVariable<bool> isJumping = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
@@ -55,6 +59,22 @@ namespace JM
                 {
                     currentHealth.Value = maxHealth.Value;
                 }
+            }
+        }
+
+        public void OnLockOnTargetIDChange(ulong oldID, ulong newID)
+        {
+            if (!IsOwner)
+            {
+                charater.characterCombatManager.curremtTarget = NetworkManager.Singleton.SpawnManager.SpawnedObjects[newID].gameObject.GetComponent<CharaterManager>();
+            }
+        }
+
+        public void OnIsLockedOnChanged(bool old, bool isLockedOn)
+        {
+            if (!isLockedOn)
+            {
+                charater.characterCombatManager.curremtTarget = null;
             }
         }
 
