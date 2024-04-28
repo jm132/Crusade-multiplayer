@@ -81,18 +81,63 @@ namespace JM
             return finalList[randomValue];
         }
 
-        public void UpdateAnimatorMovementParameters(float horizontalValue, float verticalValue, bool isSprinting)
+        public void UpdateAnimatorMovementParameters(float horizontalMovment, float verticalMovement, bool isSprinting)
         {
-            float horizontalAmount = horizontalValue;
-            float verticalAmount = verticalValue;
+            float snappedHorizontal;
+            float snappedVertical;
+
+            // this if chain will round the horizontal movement to -1, -0.5, 0, 0.5 or 1
+
+            if (horizontalMovment > 0 && horizontalMovment <= 0.5f)
+            {
+                snappedHorizontal = 0.5f;
+            }
+            else if (horizontalMovment > 0.5f && horizontalMovment <= 1)
+            {
+                snappedHorizontal = 1;
+            }
+            else if (horizontalMovment < 0 && horizontalMovment >= -0.5f)
+            {
+                snappedHorizontal = -0.5f;
+            }
+            else if (horizontalMovment < -0.5f &&  horizontalMovment >= -1)
+            {
+                snappedHorizontal = -1;
+            }
+            else
+            {
+                snappedHorizontal = 0;
+            }
+            // this if chain will round the horizontal movement to -1, -0.5, 0, 0.5 or 1
+
+            if (verticalMovement > 0 && verticalMovement <= 0.5f)
+            {
+                snappedVertical = 0.5f;
+            }
+            else if (verticalMovement > 0.5f && verticalMovement <= 1)
+            {
+                snappedVertical = 1;
+            }
+            else if (verticalMovement < 0 && verticalMovement >= -0.5f)
+            {
+                snappedVertical = -0.5f;
+            }
+            else if (verticalMovement < -0.5f && verticalMovement >= -1)
+            {
+                snappedVertical = -1;
+            }
+            else
+            {
+                snappedVertical = 0;
+            }
 
             if (isSprinting)
             {
-                verticalAmount = 2;
+                snappedVertical = 2;
             }
 
-            charater.animator.SetFloat(horizontal, horizontalAmount, 0.1f, Time.deltaTime);
-            charater.animator.SetFloat(vertical, verticalAmount, 0.1f, Time.deltaTime);
+            charater.animator.SetFloat(horizontal, snappedHorizontal, 0.1f, Time.deltaTime);
+            charater.animator.SetFloat(vertical, snappedVertical, 0.1f, Time.deltaTime);
         }
 
         public virtual void PlayTargetActionAnimation(

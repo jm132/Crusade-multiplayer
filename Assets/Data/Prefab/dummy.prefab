@@ -660,11 +660,15 @@ MonoBehaviour:
     m_InternalValue: 0
   moveAmount:
     m_InternalValue: 0
+  currentTargetNetworkObjectID:
+    m_InternalValue: 0
   isLockedOn:
     m_InternalValue: 0
   isSprinting:
     m_InternalValue: 0
   isJumping:
+    m_InternalValue: 0
+  isChargingAttack:
     m_InternalValue: 0
   currentHealth:
     m_InternalValue: 0
@@ -699,6 +703,7 @@ MonoBehaviour:
   characterAnimatorManager: {fileID: 0}
   characterCombatManager: {fileID: 0}
   characterSoundFXManager: {fileID: 0}
+  charaterLocomotionManager: {fileID: 0}
   isPerfromingAction: 0
   isGrounded: 1
   applyRootMotion: 0
@@ -753,6 +758,7 @@ MonoBehaviour:
   yVelocity: {x: 0, y: 0, z: 0}
   groundedYVelocity: -20
   fallStartYVelocity: -5
+  isRolling: 0
 --- !u!114 &177249263946527169
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1156,7 +1162,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: ec5bb35d5e97acf41803f76454f51fda, type: 2}
+  - {fileID: 2100000, guid: 657340e9b82bb94468a9ca45e5804c8b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

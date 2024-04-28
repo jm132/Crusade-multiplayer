@@ -23,6 +23,9 @@ namespace JM
 
         [Header("LOCK ON INPUT")]
         [SerializeField] bool lockOn_Input;
+        [SerializeField] bool lockOn_Left_Input;
+        [SerializeField] bool lockOn_Right_Input;
+        private Coroutine lockOnCoroutine;
 
         [Header("player movement input")]
         [SerializeField] Vector2 movement_Input;
@@ -34,7 +37,16 @@ namespace JM
         [SerializeField] bool dodge_Input = false;
         [SerializeField] bool sprint_Input = false;
         [SerializeField] bool jump_Input = false;
+        [SerializeField] bool switch_Right_Weapon_Input = false;
+        [SerializeField] bool switch_Left_Weapon_Input = false;
+
+        [Header("Bumper Input")]
         [SerializeField] bool RB_Input = false;
+
+        [Header("Trigger Input")]
+        [SerializeField] bool RT_Input = false;
+        [SerializeField] bool Hold_RT_Input = false;
+
 
         private void Awake()
         {
@@ -96,12 +108,25 @@ namespace JM
 
                 playerControles.PlayerMovement.Movement.performed += i => movement_Input = i.ReadValue<Vector2>();
                 playerControles.PlayerCamera.Movement.performed += i => camera_Input = i.ReadValue<Vector2>();
+
+                // Action
                 playerControles.PlayerAction.Dodge.performed += i => dodge_Input = true;
                 playerControles.PlayerAction.Jump.performed += i => jump_Input = true;
+                playerControles.PlayerAction.SwitchRightWeapon.performed += i => switch_Right_Weapon_Input = true;
+                playerControles.PlayerAction.SwitchLeftWeapon.performed += i => switch_Left_Weapon_Input = true;
+
+                //Bumpers
                 playerControles.PlayerAction.RB.performed += i => RB_Input = true;
+
+                // triggers
+                playerControles.PlayerAction.RT.performed += i => RT_Input = true;
+                playerControles.PlayerAction.HoldRT.performed += i => Hold_RT_Input = true;
+                playerControles.PlayerAction.HoldRT.canceled += i => Hold_RT_Input = false;
 
                 // lock on
                 playerControles.PlayerAction.LockOn.performed += i => lockOn_Input = true;
+                playerControles.PlayerAction.SeekLeftLockOnTarget.performed += i => lockOn_Left_Input = true;
+                playerControles.PlayerAction.SeekRightLockOnTarget.performed += i => lockOn_Right_Input = true;
 
                 // holding the input, sets the bool to true
                 playerControles.PlayerAction.Sprint.performed += i => sprint_Input = true;
@@ -142,12 +167,17 @@ namespace JM
         private void HandleAllInputs()
         {
             HandleLockOnInput();
+            HandleLockOnSwitchTargetInput();
             HandlePlayerMovementInput();
             HandleCameraMovementInput();
             HandleDodgeInput();
             HandleSprintInput();
             HandleJumpInput();
             HandleRBInput();
+            HandleRTInput();
+            HandleChargeRTInput();
+            HandleSwitchRightWeaponInput();
+            HandleSwitchLeftWeaponInput();
         }
 
         // Lock on
@@ -165,6 +195,12 @@ namespace JM
                 }
 
                 // attempt to find new target
+
+                // this assures that the coroutine never runs muiltple times overlepping itself
+                if (lockOnCoroutine != null)
+                    StopCoroutine(lockOnCoroutine);
+
+                lockOnCoroutine = StartCoroutine(PlayerCamera.instance.WaitthenFindNewTarget());
             }
 
             if (lockOn_Input && player.playerNetworkManager.isLockedOn.Value)
@@ -193,6 +229,39 @@ namespace JM
             }
         }
 
+        private void HandleLockOnSwitchTargetInput()
+        {
+            if (lockOn_Left_Input)
+            {
+                lockOn_Left_Input = false;
+
+                if (player.playerNetworkManager.isLockedOn.Value)
+                {
+                    PlayerCamera.instance.HandleLocatingLockOnTargets();
+
+                    if (PlayerCamera.instance.leftLockOnTarget != null)
+                    {
+                        player.playerCombatManager.SetTarget(PlayerCamera.instance.leftLockOnTarget);
+                    }
+                }
+            }
+
+            if (lockOn_Right_Input)
+            {
+                lockOn_Right_Input = false;
+
+                if (player.playerNetworkManager.isLockedOn.Value)
+                {
+                    PlayerCamera.instance.HandleLocatingLockOnTargets();
+
+                    if (PlayerCamera.instance.rightLockOnTarget != null)
+                    {
+                        player.playerCombatManager.SetTarget(PlayerCamera.instance.rightLockOnTarget);
+                    }
+                }
+            }
+        }
+
         // Movemt
 
         private void HandlePlayerMovementInput()
@@ -213,10 +282,24 @@ namespace JM
                 moveAmount = 1;
             }
 
+            // pass 0  on the horizontal? because only when want non-strafing movement
+            // used the horizontal when strafing or load on 
+
             if (player == null)
                 return;
 
-            player.playerAnimatorManager.UpdateAnimatorMovementParameters(0, moveAmount, player.playerNetworkManager.isSprinting.Value);
+            // if not locked on, only used the move amount
+
+            if (!player.playerNetworkManager.isLockedOn.Value || player.playerNetworkManager.isSprinting.Value)
+            {
+                player.playerAnimatorManager.UpdateAnimatorMovementParameters(0, moveAmount, player.playerNetworkManager.isSprinting.Value);
+            }
+            else
+            {
+                player.playerAnimatorManager.UpdateAnimatorMovementParameters(horizontal_Input, vertical_Input, player.playerNetworkManager.isSprinting.Value);
+            }
+
+            // if locked on pass the horizontal movement as well
         }
 
         private void HandleCameraMovementInput()
@@ -277,6 +360,52 @@ namespace JM
                 // todo: if two handing the weapon, use the two handed action
 
                 player.playerCombatManager.PerformWeaponBasedAction(player.playerInventoryManager.currentRightHandWeapon.oh_RB_Action, player.playerInventoryManager.currentRightHandWeapon);
+            }
+        }
+
+        private void HandleRTInput()
+        {
+            if (RT_Input)
+            {
+                RT_Input = false;
+
+                // todo: if ui window open, retuen and do nothing
+
+                player.playerNetworkManager.SetCharacterActionHand(true);
+
+                // todo: if two handing the weapon, use the two handed action
+
+                player.playerCombatManager.PerformWeaponBasedAction(player.playerInventoryManager.currentRightHandWeapon.oh_RT_Action, player.playerInventoryManager.currentRightHandWeapon);
+            }
+        }
+
+        private void HandleChargeRTInput()
+        {
+            // only chech for a charge if player are in an action that requires in (attacking)
+            if (player.isPerfromingAction)
+            {
+                if (player.playerNetworkManager.isUsingRightHand.Value)
+                {
+                    player.playerNetworkManager.isChargingAttack.Value = Hold_RT_Input;
+                }
+            }
+        }
+
+        private void HandleSwitchRightWeaponInput()
+        {
+            if (switch_Right_Weapon_Input)
+            {
+                switch_Right_Weapon_Input = false;
+                player.playerEquipmentManager.SwitchRightWeapon();
+            }
+        }
+
+        private void HandleSwitchLeftWeaponInput()
+        {
+            if (switch_Left_Weapon_Input)
+            {
+                switch_Left_Weapon_Input = false;
+                player.playerEquipmentManager.SwitchLeftWeapon();
             }
         }
     }

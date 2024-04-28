@@ -51,5 +51,15 @@ namespace JM
 
             player.playerNetworkManager.currentStamina.Value -= Mathf.RoundToInt(staminaDeducted);
         }
+
+        public override void SetTarget(CharaterManager newTarget)
+        {
+            base.SetTarget(newTarget);
+
+            if (player.IsOwner)
+            {
+                PlayerCamera.instance.SetLockCamerHeight();
+            }
+        }
     }
 }

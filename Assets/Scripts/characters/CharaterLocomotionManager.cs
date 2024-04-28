@@ -18,6 +18,9 @@ namespace JM
         protected bool fallingVelocityHAsBeenSet = false;
         protected float inAirTimer = 0;
 
+        [Header("flags")]
+        public bool isRolling =  false;
+
         protected virtual void Awake()
         {
             charater = GetComponent<CharaterManager>();

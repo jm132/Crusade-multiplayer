@@ -32,8 +32,8 @@ namespace JM
 
         [Header("Attack Modifiers")]
         public float light_Attack_01_Modifier = 1.1f;
-        // heavy attack modifier
-        // critical damage modifier ect
+        public float heavy_Attack_01_Modifier = 1.4f;
+        public float charge_Attack_01_Modifier = 2.0f;
 
         [Header("Stamina Costs")]
         public int baseStaminaCost = 20;
@@ -42,7 +42,8 @@ namespace JM
         // heavy attack stamina cost modifier
 
         [Header("Actions")]
-        public WeaponItemAction oh_RB_Action; // one handed action
+        public WeaponItemAction oh_RB_Action; // one handed bumper action
+        public WeaponItemAction oh_RT_Action; // one handed trigger action
 
 
         // ash of war

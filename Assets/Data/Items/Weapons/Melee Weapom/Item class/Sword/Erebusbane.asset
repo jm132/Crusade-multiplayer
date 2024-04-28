@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 971949c403064034ea79ad1d75ada6b2, type: 3}
+  m_Name: Erebusbane
+  m_EditorClassIdentifier: 
+  itemName: Erebusbane
+  itemIcon: {fileID: 0}
+  itemDescription: 
+  itemID: 5
+  weaponModel: {fileID: 6013990982369288243, guid: 3658d5199bc9aae41a00bccd07def444, type: 3}
+  strengthREQ: 5
+  dexREQ: 7
+  intREQ: 4
+  faithREQ: 0
+  phyicalDamage: 5
+  magicDamage: 0
+  fireDamage: 0
+  holydamage: 0
+  lightningDamage: 15
+  poiseDamage: 10
+  light_Attack_01_Modifier: 1.1
+  heavy_Attack_01_Modifier: 1.4
+  charge_Attack_01_Modifier: 2
+  baseStaminaCost: 20
+  lightAttackStaminaCostMultipler: 0.9
+  oh_RB_Action: {fileID: 11400000, guid: 63c8445ab5b9f9344aa4370a24d02756, type: 2}
+  oh_RT_Action: {fileID: 11400000, guid: 591fb22e16c00ee4ca5f0d8420b1b301, type: 2}

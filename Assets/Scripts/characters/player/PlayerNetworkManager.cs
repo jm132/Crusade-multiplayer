@@ -60,6 +60,11 @@ namespace JM
             player.playerInventoryManager.currentRightHandWeapon = newWeapon;
             player.playerEquipmentManager.LoadRightWeapon();
 
+            if (player.IsOwner)
+            {
+                PlayerUIManager.instance.playerUIHudManager.SetRightWeaponQuickSlotsIcon(newID);
+            }
+
         }
 
         public void OnCurrentLeftHandWeaponIDChange(int oldID, int newID)
@@ -67,6 +72,11 @@ namespace JM
             WeaponItem newWeapon = Instantiate(WorldItemDatabase.Instance.GetWeaponByID(newID));
             player.playerInventoryManager.currentLeftHandWeapon = newWeapon;
             player.playerEquipmentManager.LoadLeftWeapon();
+
+            if (player.IsOwner)
+            {
+                PlayerUIManager.instance.playerUIHudManager.SetLeftWeaponQuickSlotsIcon(newID);
+            }
         }
 
         public void OnCurrentWeaponBeingUsedIDChange(int oldID, int newID)

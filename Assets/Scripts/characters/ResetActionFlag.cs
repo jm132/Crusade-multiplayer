@@ -21,6 +21,7 @@ namespace JM
             charater.applyRootMotion = false;
             charater.canRotate = true;
             charater.canMove = true;
+            charater.charaterLocomotionManager.isRolling = false;
 
             if (charater.IsOwner)
             {

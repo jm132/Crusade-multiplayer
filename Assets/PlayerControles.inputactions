@@ -105,6 +105,24 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "RT",
+                    "type": "Button",
+                    "id": "f872d47b-a638-4376-8bc1-a84e7afd0109",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Hold RT",
+                    "type": "PassThrough",
+                    "id": "375263b2-8908-4b70-96aa-0347454a9be9",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Hold(pressPoint=0.1)",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Sprint",
                     "type": "PassThrough",
                     "id": "5ad20fd9-860d-424f-a6aa-ca69bda90071",
@@ -117,6 +135,42 @@
                     "name": "Lock On",
                     "type": "Button",
                     "id": "21a710d7-94bd-4ec1-8283-1d055b1eb77b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Switch Right Weapon",
+                    "type": "Button",
+                    "id": "788ced9f-f113-4bca-9a44-349ea285610a",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Switch Left Weapon",
+                    "type": "Button",
+                    "id": "e7150895-9a4b-48a9-adec-29b268e0d6e4",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Seek Left Lock On Target",
+                    "type": "Button",
+                    "id": "d9a34a95-b422-4f2e-8247-38bc1e6704f7",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Seek Right Lock On Target",
+                    "type": "Button",
+                    "id": "7c6f6ee0-8558-4207-b1cf-c4fd3c63c3e3",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -176,6 +230,72 @@
                     "processors": "",
                     "groups": "",
                     "action": "Lock On",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ef60aea5-da7a-4424-86b7-0a86cdebc791",
+                    "path": "<Keyboard>/t",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Seek Left Lock On Target",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "667854da-a934-444c-9433-2166093743ea",
+                    "path": "<Keyboard>/y",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Seek Right Lock On Target",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e5308bba-ee1b-4024-9c0e-9d2bbcf46405",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RT",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "bdef5e3b-d708-47fe-8488-78148aa388ed",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Hold RT",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fad0b5fe-1ddb-495f-9eb9-87b19707a1fc",
+                    "path": "<Keyboard>/1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Switch Right Weapon",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "58d5b593-0b0c-47e4-8b18-731cac5bc222",
+                    "path": "<Keyboard>/2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Switch Left Weapon",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

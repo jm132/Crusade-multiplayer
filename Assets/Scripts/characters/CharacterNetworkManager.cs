@@ -29,6 +29,7 @@ namespace JM
         public NetworkVariable<bool> isLockedOn = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
         public NetworkVariable<bool> isSprinting = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
         public NetworkVariable<bool> isJumping = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+        public NetworkVariable<bool> isChargingAttack = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
         [Header("Resources")]
         public NetworkVariable<int> currentHealth = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
@@ -76,6 +77,11 @@ namespace JM
             {
                 charater.characterCombatManager.curremtTarget = null;
             }
+        }
+
+        public void OnIsChargingAttackChaged(bool oldStatus, bool newStatus)
+        {
+            charater.animator.SetBool("isChargingAttack", isChargingAttack.Value);
         }
 
         // a Server rpc is a function called from a client, to the server/host

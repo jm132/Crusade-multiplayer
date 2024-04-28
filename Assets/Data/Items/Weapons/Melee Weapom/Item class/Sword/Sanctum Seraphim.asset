@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Sanctum Seraphim
   m_EditorClassIdentifier: 
   itemName: Sanctum Seraphim
-  itemIcon: {fileID: 21300000, guid: d640137b6b0ba8d4383623bd2906d54c, type: 3}
+  itemIcon: {fileID: 21300000, guid: 310ed06c6adc68c4e8a62913435fec29, type: 3}
   itemDescription: 
   itemID: 4
   weaponModel: {fileID: 6013990982369288243, guid: d08dcc455677e0c40a448dc5dd5191fd, type: 3}
@@ -21,13 +21,16 @@ MonoBehaviour:
   dexREQ: 7
   intREQ: 4
   faithREQ: 0
-  phyicalDamage: 5
+  phyicalDamage: 100
   magicDamage: 0
   fireDamage: 0
   holydamage: 0
   lightningDamage: 15
   poiseDamage: 10
   light_Attack_01_Modifier: 1.1
+  heavy_Attack_01_Modifier: 1.4
+  charge_Attack_01_Modifier: 2
   baseStaminaCost: 20
   lightAttackStaminaCostMultipler: 0.9
   oh_RB_Action: {fileID: 11400000, guid: 63c8445ab5b9f9344aa4370a24d02756, type: 2}
+  oh_RT_Action: {fileID: 11400000, guid: 591fb22e16c00ee4ca5f0d8420b1b301, type: 2}
