@@ -15,8 +15,6 @@ namespace JM
             {
                 playerPerformingAction.playerNetworkManager.currentWeaponBeingUsed.Value = weaponPerformingAction.itemID;
             }
-
-            Debug.Log("the action has fired");
         }
     }
 }

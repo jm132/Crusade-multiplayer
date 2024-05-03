@@ -147,7 +147,6 @@ namespace JM
             bool canRotate = false,
             bool canMove = false)
         {
-            Debug.Log("PLAYING ANIMATION : " + targetAnimation);
             charater.applyRootMotion = applyRootMation;
             charater.animator.CrossFade(targetAnimation, 0.2f);
             // can be used to stop character from attempting new actions
@@ -173,6 +172,7 @@ namespace JM
             // tell the network our "isAttacking" flag is active (for cunter damage ect)
 
             charater.characterCombatManager.currentAttackType = attackType;
+            charater.characterCombatManager.lastAttackAnimationPerformed = targetAnimation;
             charater.applyRootMotion = applyRootMation;
             charater.animator.CrossFade(targetAnimation, 0.2f);
             charater.isPerfromingAction = isPerformingAction;
@@ -181,6 +181,16 @@ namespace JM
             
             // tell the host it played the animation, and to play that animation for everybody else present
             charater.characterNetworkManager.NotifyTheServerOfAttackActionAnimtionServerRpc(NetworkManager.Singleton.LocalClientId, targetAnimation, applyRootMation);
+        }
+
+        public virtual void EnableCanDoCombo()
+        {
+
+        }
+
+        public virtual void DisableCanDoCombo()
+        {
+
         }
     }
 }

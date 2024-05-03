@@ -8,6 +8,7 @@ namespace JM
     public class HeavyAttackWeaponItemAction : WeaponItemAction
     {
         [SerializeField] string heavy_Attack_01 = "Main_Heavy_Attack_01"; // main = main hand
+        [SerializeField] string heavy_Attack_02 = "Main_Heavy_Attack_02";
         public override void AttemptToPerformAction(PlayerManager playerPerformingAction, WeaponItem weaponPerformingAction)
         {
 
@@ -27,14 +28,24 @@ namespace JM
 
         private void PerformHeavyAttacked(PlayerManager playerPerformingAction, WeaponItem weaponPerformingAction)
         {
+            if (playerPerformingAction.playerCombatManager.canComboWithMainHandWeapon && playerPerformingAction.isPerfromingAction)
+            {
+                playerPerformingAction.playerCombatManager.canComboWithMainHandWeapon = false;
 
-            if (playerPerformingAction.playerNetworkManager.isUsingRightHand.Value)
+                // perform an attack based on the pervious attack just played
+                if (playerPerformingAction.characterCombatManager.lastAttackAnimationPerformed == heavy_Attack_01)
+                {
+                    playerPerformingAction.playerAnimatorManager.PlayTargetAttackActionAnimation(AttackType.HeavyAttack02, heavy_Attack_02, true);
+                }
+                else
+                {
+                    playerPerformingAction.playerAnimatorManager.PlayTargetAttackActionAnimation(AttackType.HeavyAttack01, heavy_Attack_01, true);
+                }
+            }
+            // otherwise, if not already attacking, perform a regular attack
+            else if (!playerPerformingAction.isPerfromingAction)
             {
                 playerPerformingAction.playerAnimatorManager.PlayTargetAttackActionAnimation(AttackType.HeavyAttack01, heavy_Attack_01, true);
-            }
-            if (playerPerformingAction.playerNetworkManager.isUsingLeftHand.Value)
-            {
-
             }
         }
     }

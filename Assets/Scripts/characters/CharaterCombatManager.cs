@@ -10,6 +10,9 @@ namespace JM
     {
         CharaterManager charater;
 
+        [Header("Last Attack Animation Performed")]
+        public string lastAttackAnimationPerformed;
+
         [Header("Attack Tagert")]
         public CharaterManager curremtTarget;
 

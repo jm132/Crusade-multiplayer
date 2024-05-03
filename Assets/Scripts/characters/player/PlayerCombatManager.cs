@@ -11,6 +11,10 @@ namespace JM
 
         public WeaponItem currentWeaponBeingUsed;
 
+        [Header("flags")]
+        public bool canComboWithMainHandWeapon = false;
+        //public bool canComboWithOffHandWeapon = false;
+
         protected override void Awake()
         {
             base.Awake();
@@ -60,6 +64,24 @@ namespace JM
             {
                 PlayerCamera.instance.SetLockCamerHeight();
             }
+        }
+
+        public void EnableCanDoCombo()
+        {
+            if (player.playerNetworkManager.isUsingRightHand.Value)
+            {
+                canComboWithMainHandWeapon = true;
+            }
+            else
+            {
+                // enable off hand combo
+            }
+        }
+
+        public void DisableCanDoCombo()
+        {
+            canComboWithMainHandWeapon= false;
+            //canComboWithOffHandWeapon = false;
         }
     }
 }

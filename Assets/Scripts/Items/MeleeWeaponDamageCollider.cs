@@ -11,8 +11,11 @@ namespace JM
 
         [Header("Weapon Attack Modifiers")]
         public float light_Attack_01_Modifier;
+        public float light_Attack_02_Modifier;
         public float heavy_Attack_01_Modifier;
+        public float heavy_Attack_02_Modifier;
         public float charge_Attack_01_Modifier;
+        public float charge_Attack_02_Modifier;
 
         protected override void Awake()
         {
@@ -69,11 +72,20 @@ namespace JM
                 case AttackType.LightAttack01:
                     ApplyAttackDameageModifiers(light_Attack_01_Modifier, damageEffect);
                     break;
+                case AttackType.LightAttack02:
+                    ApplyAttackDameageModifiers(light_Attack_02_Modifier, damageEffect);
+                    break;
                 case AttackType.HeavyAttack01:
                     ApplyAttackDameageModifiers(heavy_Attack_01_Modifier, damageEffect);
                     break;
+                case AttackType.HeavyAttack02:
+                    ApplyAttackDameageModifiers(heavy_Attack_02_Modifier, damageEffect);
+                    break;
                 case AttackType.ChargedAttack01:
                     ApplyAttackDameageModifiers(charge_Attack_01_Modifier, damageEffect);
+                    break;
+                case AttackType.ChargedAttack02:
+                    ApplyAttackDameageModifiers(charge_Attack_02_Modifier, damageEffect);
                     break;
                 default:
                     break;
