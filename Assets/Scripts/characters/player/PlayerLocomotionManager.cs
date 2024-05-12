@@ -164,11 +164,11 @@ namespace JM
                 }
                 else
                 {
-                    if (player.playerCombatManager.curremtTarget == null)
+                    if (player.playerCombatManager.currentTarget == null)
                         return;
 
                     Vector3 targetDirection;
-                    targetDirection = player.playerCombatManager.curremtTarget.transform.position - transform.position;
+                    targetDirection = player.playerCombatManager.currentTarget.transform.position - transform.position;
                     targetDirection.y = 0;
                     targetDirection.Normalize();
 

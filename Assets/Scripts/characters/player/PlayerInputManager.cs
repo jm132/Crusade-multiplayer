@@ -186,10 +186,10 @@ namespace JM
             // check for dead target
             if (player.playerNetworkManager.isLockedOn.Value)
             {
-                if (player.playerCombatManager.curremtTarget == null)
+                if (player.playerCombatManager.currentTarget == null)
                     return;
 
-                if (player.playerCombatManager.curremtTarget.isDead.Value)
+                if (player.playerCombatManager.currentTarget.isDead.Value)
                 {
                     player.playerNetworkManager.isLockedOn.Value = false;
                 }

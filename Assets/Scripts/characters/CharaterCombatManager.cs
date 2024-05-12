@@ -8,13 +8,13 @@ namespace JM
 {
     public class CharaterCombatManager : NetworkBehaviour
     {
-        CharaterManager charater;
+        protected CharaterManager charater;
 
         [Header("Last Attack Animation Performed")]
         public string lastAttackAnimationPerformed;
 
         [Header("Attack Tagert")]
-        public CharaterManager curremtTarget;
+        public CharaterManager currentTarget;
 
         [Header("Attack Type")]
         public AttackType currentAttackType;
@@ -33,12 +33,12 @@ namespace JM
             {
                 if (newTarget != null)
                 {
-                    curremtTarget = newTarget;
+                    currentTarget = newTarget;
                     charater.characterNetworkManager.currentTargetNetworkObjectID.Value = newTarget.GetComponent<NetworkObject>().NetworkObjectId; 
                 }
                 else
                 {
-                    curremtTarget = null;
+                    currentTarget = null;
                 }
             }
         }

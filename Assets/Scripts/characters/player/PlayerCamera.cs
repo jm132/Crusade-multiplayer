@@ -85,7 +85,7 @@ namespace JM
             if (player.playerNetworkManager.isLockedOn.Value)
             {
                 //this roataes this gameobject
-                Vector3 rotationDirection = player.playerCombatManager.curremtTarget.characterCombatManager.lockOnTransform.position - transform.position;
+                Vector3 rotationDirection = player.playerCombatManager.currentTarget.characterCombatManager.lockOnTransform.position - transform.position;
                 rotationDirection.Normalize();
                 rotationDirection.y = 0;
 
@@ -93,7 +93,7 @@ namespace JM
                 transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, lockOnTargetFollowSpeed);
 
                 // this rotates the pivot object
-                rotationDirection = player.playerCombatManager.curremtTarget.characterCombatManager.lockOnTransform.position - cameraPivotTransform.position;
+                rotationDirection = player.playerCombatManager.currentTarget.characterCombatManager.lockOnTransform.position - cameraPivotTransform.position;
                 rotationDirection.Normalize();
 
                 targetRotation = Quaternion.LookRotation(rotationDirection);
@@ -228,7 +228,7 @@ namespace JM
                         var distanceFromLeftTarget = relativeEnemyPosition.x;
                         var distanceFromRightTarget = relativeEnemyPosition.y;
 
-                        if (availableTargets[k] == player.playerCombatManager.curremtTarget)
+                        if (availableTargets[k] == player.playerCombatManager.currentTarget)
                             continue;
                        
                         // check the left side for targets
@@ -305,7 +305,7 @@ namespace JM
 
                 if (player != null )
                 {
-                    if (player.playerCombatManager.curremtTarget  != null)
+                    if (player.playerCombatManager.currentTarget  != null)
                     {
                         cameraPivotTransform.transform.localPosition = 
                             Vector3.SmoothDamp(cameraPivotTransform.transform.localPosition, newLockedCameraheight, ref velocity, setCameraHeightSpeed);
@@ -325,7 +325,7 @@ namespace JM
 
             if (player != null)
             {
-                if (player.playerCombatManager.curremtTarget != null)
+                if (player.playerCombatManager.currentTarget != null)
                 {
                     cameraPivotTransform.transform.localPosition = newLockedCameraheight;
                     cameraPivotTransform.transform.localRotation = Quaternion.Euler(0, 0, 0);

@@ -20,6 +20,9 @@ namespace JM
         [HideInInspector] public CharaterSoundFXManager characterSoundFXManager;
         [HideInInspector] public CharaterLocomotionManager charaterLocomotionManager;
 
+        [Header("CharacterGroup")]
+        public CharacterGroup characterGroup;
+        
         [Header("Flags")]
         public bool isPerfromingAction = false;
         public bool isGrounded = true;
@@ -72,6 +75,11 @@ namespace JM
                     characterNetworkManager.networkRotation.Value,
                     characterNetworkManager.networkRotationSmoothTime);
             }
+        }
+        
+        protected virtual void FixedUpdate()
+        {
+
         }
 
         protected virtual void LateUpdate()

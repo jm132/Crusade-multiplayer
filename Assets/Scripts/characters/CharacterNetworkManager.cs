@@ -67,7 +67,7 @@ namespace JM
         {
             if (!IsOwner)
             {
-                charater.characterCombatManager.curremtTarget = NetworkManager.Singleton.SpawnManager.SpawnedObjects[newID].gameObject.GetComponent<CharaterManager>();
+                charater.characterCombatManager.currentTarget = NetworkManager.Singleton.SpawnManager.SpawnedObjects[newID].gameObject.GetComponent<CharaterManager>();
             }
         }
 
@@ -75,7 +75,7 @@ namespace JM
         {
             if (!isLockedOn)
             {
-                charater.characterCombatManager.curremtTarget = null;
+                charater.characterCombatManager.currentTarget = null;
             }
         }
 
