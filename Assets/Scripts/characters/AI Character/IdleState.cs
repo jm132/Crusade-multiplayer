@@ -11,16 +11,12 @@ namespace JM
         {
             if (aICharacter.characterCombatManager.currentTarget != null)
             {
-                // retuen the pursue target state (change the state to the pursue target state)
-                Debug.Log("have a target");
-
-                return this;
+                return SwitchState(aICharacter, aICharacter.pursueTarget);
             }
             else
             {
                 // return this state, to continually search for a taget (keep the state here, until a target is found)
                 aICharacter.aiCharacterCombarManager.FindATargetViaLineOfSight(aICharacter);
-                Debug.Log("dont have a target");
                 return this;
             }
         }
