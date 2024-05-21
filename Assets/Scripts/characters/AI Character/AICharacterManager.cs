@@ -7,7 +7,7 @@ namespace JM
 {
     public class AICharacterManager : CharaterManager
     {
-        [HideInInspector] public AICharacterNetworkManager aICharacterNetworkManager;
+        [HideInInspector] public AICharacterNetworkManager aiCharacterNetworkManager;
         [HideInInspector] public AiCharacterCombarManager aiCharacterCombarManager;
         [HideInInspector] public AICharacterLocomotionManager aiCharacterLocomotionManager;
 
@@ -20,14 +20,14 @@ namespace JM
         [Header("States")]
         public IdleState idle;
         public PursueTargetState pursueTarget;
-        // combat stance
-        // attack
+        public CombatStanceState combatStance;
+        public AttackState attacks;
 
         protected override void Awake()
         {
             base.Awake();
 
-            aICharacterNetworkManager = GetComponent<AICharacterNetworkManager>();
+            aiCharacterNetworkManager = GetComponent<AICharacterNetworkManager>();
             aiCharacterCombarManager = GetComponent<AiCharacterCombarManager>();
             aiCharacterLocomotionManager = GetComponent<AICharacterLocomotionManager>();
 
@@ -40,11 +40,19 @@ namespace JM
             currentState = idle;
         }
 
+        protected override void Update()
+        {
+            base.Update();
+
+            aiCharacterCombarManager.HandleActionRecovery(this);
+        }
+
         protected override void FixedUpdate()
         {
             base.FixedUpdate();
 
-            ProcessStateMachine();
+            if (IsOwner)
+                ProcessStateMachine();
         }
 
         private void ProcessStateMachine()
@@ -60,6 +68,13 @@ namespace JM
             navMeshAgent.transform.localPosition = Vector3.zero;
             navMeshAgent.transform.localRotation = Quaternion.identity;
 
+            if (aiCharacterCombarManager.currentTarget != null)
+            {
+                aiCharacterCombarManager.targetsDirection = aiCharacterCombarManager.currentTarget.transform.position - transform.position;
+                aiCharacterCombarManager.viewableAngle = WorldUtilityManager.instance.GetAngleOfTarget(transform, aiCharacterCombarManager.targetsDirection);
+                aiCharacterCombarManager.distanceFromTarget = Vector3.Distance(transform.position, aiCharacterCombarManager.currentTarget.transform.position);
+            }
+            
             if (navMeshAgent.enabled)
             {
                 Vector3 agentDestination = navMeshAgent.destination;
@@ -67,16 +82,16 @@ namespace JM
 
                 if (remainingDistance > navMeshAgent.stoppingDistance)
                 {
-                    aICharacterNetworkManager.isMoving.Value = true;
+                    aiCharacterNetworkManager.isMoving.Value = true;
                 }
                 else
                 {
-                    aICharacterNetworkManager.isMoving.Value= false;
+                    aiCharacterNetworkManager.isMoving.Value= false;
                 }
             }
             else
             {
-                aICharacterNetworkManager.isMoving.Value = false;
+                aiCharacterNetworkManager.isMoving.Value = false;
             }
         }
     }

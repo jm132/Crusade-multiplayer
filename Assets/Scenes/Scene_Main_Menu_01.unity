@@ -5094,6 +5094,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5075424697538966117, guid: 389139c6e0d425c4dbc820c5d56a4809, type: 3}
+      propertyPath: NetworkConfig.NetworkPrefabs.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5075424697538966117, guid: 389139c6e0d425c4dbc820c5d56a4809, type: 3}
+      propertyPath: NetworkConfig.NetworkPrefabs.Array.data[1].Prefab
+      value: 
+      objectReference: {fileID: 1288826595186099660, guid: 7d44d29c5040b6e4c946a5b66bd98a45, type: 3}
     - target: {fileID: 5075424697538966119, guid: 389139c6e0d425c4dbc820c5d56a4809, type: 3}
       propertyPath: m_Name
       value: World Network Manager
@@ -5231,6 +5239,14 @@ PrefabInstance:
     - target: {fileID: 3292246627811796502, guid: 661cac377c15b8c48bf82268c80c1c70, type: 3}
       propertyPath: m_Name
       value: Player Camera (Left & Right)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4185927504888308567, guid: 661cac377c15b8c48bf82268c80c1c70, type: 3}
+      propertyPath: upAndDownRotationSpeed
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 4185927504888308567, guid: 661cac377c15b8c48bf82268c80c1c70, type: 3}
+      propertyPath: leftAndRightRotationSpeed
+      value: 60
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 661cac377c15b8c48bf82268c80c1c70, type: 3}

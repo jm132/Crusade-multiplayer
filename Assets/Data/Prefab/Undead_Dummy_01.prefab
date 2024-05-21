@@ -566,17 +566,17 @@ GameObject:
   - component: {fileID: -3640838971570698708}
   - component: {fileID: 2876729880020003330}
   - component: {fileID: 4514113650713190467}
+  - component: {fileID: 5217800910503654700}
   - component: {fileID: 1420719136427279479}
   - component: {fileID: 177249263946527169}
   - component: {fileID: 1758088045608827233}
-  - component: {fileID: 7872197560585648358}
   - component: {fileID: 4029350345896510375}
   - component: {fileID: 1919170503578859677}
   - component: {fileID: 3652954663778914001}
   - component: {fileID: 6858679948751353928}
   - component: {fileID: 6423272322832036945}
   m_Layer: 6
-  m_Name: dummy_01
+  m_Name: Undead_Dummy_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -590,7 +590,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1954129479639435311}
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -22.430706, y: 0.14431858, z: 24.58307}
+  m_LocalPosition: {x: -29.028923, y: -4.9051337, z: 23.55394}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -610,7 +610,7 @@ Animator:
   m_GameObject: {fileID: 1954129479639435311}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 28ff47efbc4d96348b73b9bd385f91bd, type: 3}
-  m_Controller: {fileID: 9100000, guid: c12279816cb26b14494247b92ec69c23, type: 2}
+  m_Controller: {fileID: 9100000, guid: 06931340b9d6d2242a509fbf75c2ea4d, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -713,13 +713,15 @@ MonoBehaviour:
   applyRootMotion: 0
   canRotate: 1
   canMove: 1
-  aICharacterNetworkManager: {fileID: 0}
+  aiCharacterNetworkManager: {fileID: 0}
   aiCharacterCombarManager: {fileID: 0}
   aiCharacterLocomotionManager: {fileID: 0}
   navMeshAgent: {fileID: 0}
   currentState: {fileID: 11400000, guid: b87d677f226a89c4d8dc7c286654db24, type: 2}
   idle: {fileID: 11400000, guid: b87d677f226a89c4d8dc7c286654db24, type: 2}
   pursueTarget: {fileID: 11400000, guid: 42c1ca89295cc1a45ac0a90a999f5585, type: 2}
+  combatStance: {fileID: 11400000, guid: 24cc79642bb098a4c809ad34361e78e6, type: 2}
+  attacks: {fileID: 11400000, guid: eb690a822a351a64fbc20e79978ce353, type: 2}
 --- !u!114 &2876729880020003330
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -736,9 +738,14 @@ MonoBehaviour:
   currentTarget: {fileID: 0}
   currentAttackType: 0
   lockOnTransform: {fileID: 5183610352830570630}
+  actionRecoveryTimer: 0
+  distanceFromTarget: 0
+  viewableAngle: 0
+  targetsDirection: {x: 0, y: 0, z: 0}
   detectionRadius: 15
-  minimumDetectionAngle: -35
-  maximumDetectionAngle: 35
+  minimumFOV: -35
+  maximumFOV: 35
+  attackRotationSpeed: 25
 --- !u!114 &4514113650713190467
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -760,6 +767,31 @@ MonoBehaviour:
   groundedYVelocity: -20
   fallStartYVelocity: -5
   isRolling: 0
+--- !u!114 &5217800910503654700
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1954129479639435311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8376c5c8cec92ec4d8f02d49a0909034, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lastDamageAnimationPlayed: 
+  hit_Forward_Medium_01: hit_Forward_Medium_01
+  hit_Forward_Medium_02: hit_Forward_Medium_02
+  hit_Backward_Medium_01: hit_Backward_Medium_01
+  hit_Backward_Medium_02: hit_Backward_Medium_02
+  hit_Left_Medium_01: hit_Left_Medium_01
+  hit_Left_Medium_02: hit_Left_Medium_02
+  hit_Right_Medium_01: hit_Right_Medium_01
+  hit_Right_Medium_02: hit_Right_Medium_02
+  forward_Medium_Damage: []
+  backward_Medium_Damage: []
+  left_Medium_Damage: []
+  right_Medium_Damage: []
 --- !u!114 &1420719136427279479
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -798,31 +830,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5afeb3500fee1449bb34f6142a9ab2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &7872197560585648358
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1954129479639435311}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 25a9a4542c6048849813b925555a68b3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lastDamageAnimationPlayed: 
-  hit_Forward_Medium_01: hit_Forward_Medium_01
-  hit_Forward_Medium_02: hit_Forward_Medium_02
-  hit_Backward_Medium_01: hit_Backward_Medium_01
-  hit_Backward_Medium_02: hit_Backward_Medium_02
-  hit_Left_Medium_01: hit_Left_Medium_01
-  hit_Left_Medium_02: hit_Left_Medium_02
-  hit_Right_Medium_01: hit_Right_Medium_01
-  hit_Right_Medium_02: hit_Right_Medium_02
-  forward_Medium_Damage: []
-  backward_Medium_Damage: []
-  left_Medium_Damage: []
-  right_Medium_Damage: []
 --- !u!114 &4029350345896510375
 MonoBehaviour:
   m_ObjectHideFlags: 0
