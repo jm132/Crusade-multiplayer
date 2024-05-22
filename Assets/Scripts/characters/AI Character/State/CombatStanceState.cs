@@ -73,23 +73,18 @@ namespace JM
 
             foreach (var potentialAttack in aiCharacterAttacks)
             {
-                Debug.Log("0");
                 // if too close for this attack, check the next
                 if (potentialAttack.minimumAttackDistance > aiCharacter.aiCharacterCombarManager.distanceFromTarget)
                     continue;
-                Debug.Log("1");
                 //  if too far for this attack, check the next
                 if (potentialAttack.maximumAttackDistance < aiCharacter.aiCharacterCombarManager.distanceFromTarget)
-                    continue;
-                Debug.Log("2");
+                    continue;;
                 // if the target is outside minimum field of view for this attack, check the next
                 if (potentialAttack.minimumAttackAngle > aiCharacter.aiCharacterCombarManager.distanceFromTarget)
                     continue;
-                Debug.Log("3");
                 // if the target is outside maximum field of view for this attack, check the next 
                 if (potentialAttack.maximumAttackAngle < aiCharacter.aiCharacterCombarManager.distanceFromTarget)
-                    continue;
-                Debug.Log("4");
+                    continue;;
 
                 potentialAttacks.Add(potentialAttack);
             }

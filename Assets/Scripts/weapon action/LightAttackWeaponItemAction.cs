@@ -20,7 +20,7 @@ namespace JM
             if (playerPerformingAction.playerNetworkManager.currentStamina.Value <= 0)
                 return;
 
-            if (!playerPerformingAction.isGrounded)
+            if (!playerPerformingAction.charaterLocomotionManager.isGrounded)
                 return;
 
             PerformLightAttacked(playerPerformingAction,weaponPerformingAction);

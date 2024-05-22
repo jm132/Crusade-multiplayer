@@ -19,7 +19,7 @@ namespace JM
         {
             if (aICharacter.IsOwner)
             {
-                if (!aICharacter.isGrounded)
+                if (!aICharacter.charaterLocomotionManager.isGrounded)
                     return;
 
                 Vector3 velocity = aICharacter.animator.deltaPosition;
@@ -29,7 +29,7 @@ namespace JM
             }
             else
             {
-                if (!aICharacter.isGrounded)
+                if (!aICharacter.charaterLocomotionManager.isGrounded)
                     return;
 
                 Vector3 velocity = aICharacter.animator.deltaPosition;

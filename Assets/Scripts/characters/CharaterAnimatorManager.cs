@@ -12,6 +12,9 @@ namespace JM
         int vertical;
         int horizontal;
 
+        [Header("Flags")]
+        public bool applyRootMotion = false;
+
         [Header("Damage Animations")]
         public string lastDamageAnimationPlayed;
 
@@ -143,19 +146,19 @@ namespace JM
         public virtual void PlayTargetActionAnimation(
             string targetAnimation,
             bool isPerformingAction,
-            bool applyRootMation = true,
+            bool applyRootMotion = true,
             bool canRotate = false,
             bool canMove = false)
         {
-            charater.applyRootMotion = applyRootMation;
+            this.applyRootMotion = applyRootMotion;
             charater.animator.CrossFade(targetAnimation, 0.2f);
             // can be used to stop character from attempting new actions
             charater.isPerfromingAction = isPerformingAction;
-            charater.canRotate = canRotate;
-            charater.canMove = canMove;
+            charater.charaterLocomotionManager.canRotate = canRotate;
+            charater.charaterLocomotionManager.canMove = canMove;
 
             // tell the host it played the animation, and to play that animation for everybody else present
-            charater.characterNetworkManager.NotifyTheServerOfActionAnimtionServerRpc(NetworkManager.Singleton.LocalClientId, targetAnimation, applyRootMation);
+            charater.characterNetworkManager.NotifyTheServerOfActionAnimtionServerRpc(NetworkManager.Singleton.LocalClientId, targetAnimation, applyRootMotion);
         }
 
         public virtual void PlayTargetAttackActionAnimation(AttackType attackType,
@@ -173,11 +176,11 @@ namespace JM
 
             charater.characterCombatManager.currentAttackType = attackType;
             charater.characterCombatManager.lastAttackAnimationPerformed = targetAnimation;
-            charater.applyRootMotion = applyRootMation;
+            charater.characterAnimatorManager.applyRootMotion = applyRootMation;
             charater.animator.CrossFade(targetAnimation, 0.2f);
             charater.isPerfromingAction = isPerformingAction;
-            charater.canRotate = canRotate;
-            charater.canMove = canMove;
+            charater.charaterLocomotionManager.canRotate = canRotate;
+            charater.charaterLocomotionManager.canMove = canMove;
             
             // tell the host it played the animation, and to play that animation for everybody else present
             charater.characterNetworkManager.NotifyTheServerOfAttackActionAnimtionServerRpc(NetworkManager.Singleton.LocalClientId, targetAnimation, applyRootMation);

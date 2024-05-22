@@ -25,11 +25,6 @@ namespace JM
         
         [Header("Flags")]
         public bool isPerfromingAction = false;
-        public bool isGrounded = true;
-        public bool applyRootMotion = false;
-        public bool canRotate = true;
-        public bool canMove = true;
-
 
         protected virtual void Awake()
         {
@@ -52,7 +47,7 @@ namespace JM
 
         protected virtual void Update()
         {
-            animator.SetBool("isGrounded", isGrounded);
+            animator.SetBool("isGrounded", charaterLocomotionManager.isGrounded);
 
             //If THIS CHARACTER IS BEING CONTROLLED FROM OUR SIDE, THEN ASSIGN ITS NETWORK POSITION TO THE POSITION OF OUR TRANSFORM
             if (IsOwner)

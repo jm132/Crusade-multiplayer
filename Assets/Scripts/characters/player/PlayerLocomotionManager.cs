@@ -86,7 +86,7 @@ namespace JM
 
         public void HandleGroundedMovement()
         {
-            if (!player.canMove)
+            if (!player.charaterLocomotionManager.canMove)
                 return;
 
             GetMovementValues();
@@ -125,7 +125,7 @@ namespace JM
 
         private void HandleFreeFallMovement()
         {
-            if (!player.isGrounded)
+            if (!player.charaterLocomotionManager.isGrounded)
             {
                 Vector3 freeFallDirection;
 
@@ -142,7 +142,7 @@ namespace JM
             if (player.isDead.Value)
                 return;
 
-            if (!player.canRotate)
+            if (!player.charaterLocomotionManager.canRotate)
                 return;
 
             if (player.playerNetworkManager.isLockedOn.Value)
@@ -272,7 +272,7 @@ namespace JM
                 return;
 
             //if not grounded, dont allow a jump, 
-            if(!player.isGrounded)
+            if(!player.charaterLocomotionManager.isGrounded)
                 return;
 
             // if two handing weapon, play the two handed jump animation, otherwise play the one handed animation (to do)

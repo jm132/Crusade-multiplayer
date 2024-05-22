@@ -23,6 +23,13 @@ namespace JM
         [Header("Attack Rotation Speed")]
         public float attackRotationSpeed = 25;
 
+        protected override void Awake()
+        {
+            base.Awake();
+
+            lockOnTransform = GetComponentInChildren<LockOnTransform>().transform;
+        }
+
         public void FindATargetViaLineOfSight(AICharacterManager aiCharacter)
         {
             if (currentTarget != null)
@@ -124,7 +131,7 @@ namespace JM
             if (currentTarget == null)
                 return;
 
-            if (!aiCharacter.canRotate)
+            if (!aiCharacter.charaterLocomotionManager.canRotate)
                 return;
 
             if (!aiCharacter.isPerfromingAction)
@@ -132,7 +139,7 @@ namespace JM
 
             Vector3 targetDirection = currentTarget.transform.position - aiCharacter.transform.position;
             targetDirection.y = 0;
-            targetDirection.x = 0;
+            targetDirection.Normalize();
 
             if (targetDirection ==  Vector3.zero)
                 targetDirection = aiCharacter.transform.forward;

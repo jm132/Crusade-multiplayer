@@ -20,6 +20,9 @@ namespace JM
 
         [Header("flags")]
         public bool isRolling =  false;
+        public bool canRotate = true;
+        public bool canMove = true;
+        public bool isGrounded = true;
 
         protected virtual void Awake()
         {
@@ -30,7 +33,7 @@ namespace JM
         {
             HandleGroundCheck();
 
-            if (charater.isGrounded)
+            if (charater.charaterLocomotionManager.isGrounded)
             {
                 // not attempting to jump or move upward
                 if(yVelocity.y < 0)
@@ -61,13 +64,23 @@ namespace JM
 
         protected void HandleGroundCheck()
         {
-            charater.isGrounded = Physics.CheckSphere(charater.transform.position, groundCheckSpherRadius, groundLayer);
+            charater.charaterLocomotionManager.isGrounded = Physics.CheckSphere(charater.transform.position, groundCheckSpherRadius, groundLayer);
         }
 
         // draws ground check sphere in scene view
         protected void OnDrawGizmosSelected()
         {
             //Gizmos.DrawSphere(charater.transform.position, groundCheckSpherRadius);
+        }
+
+        public void EnableCanRotate()
+        {
+            canRotate = true;
+        }
+
+        public void DisableCanRotate()
+        {
+            canRotate = false;
         }
     }
 }

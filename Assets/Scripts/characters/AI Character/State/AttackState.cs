@@ -24,8 +24,8 @@ namespace JM
 
             if (aICharacter.aiCharacterCombarManager.currentTarget.isDead.Value)
                 return SwitchState(aICharacter, aICharacter.idle);
-            
-            // roate towards the target whilst attacking
+
+            aICharacter.aiCharacterCombarManager.RoatateTowardsTargetWhilstAttacking(aICharacter);
 
             aICharacter.characterAnimatorManager.UpdateAnimatorMovementParameters(0, 0, false);
 
@@ -40,13 +40,13 @@ namespace JM
                 }
             }
 
+            if (aICharacter.isPerfromingAction)
+                return this;
+
             if (!hasPerformedAttack)
             {
                 // if still recovering from an action, wait before performing another
                 if (aICharacter.aiCharacterCombarManager.actionRecoveryTimer > 0)
-                    return this;
-
-                if (aICharacter.isPerfromingAction)
                     return this;
 
                 PerformAttack(aICharacter);

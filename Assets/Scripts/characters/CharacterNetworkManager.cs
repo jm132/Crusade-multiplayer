@@ -114,7 +114,7 @@ namespace JM
         
         private void performActionAnimationFromServer(string animationID, bool applyRootMotion)
         {
-            charater.applyRootMotion = applyRootMotion;
+            charater.characterAnimatorManager.applyRootMotion = applyRootMotion;
             charater.animator.CrossFade(animationID, 0.2f);
         }
 
@@ -142,7 +142,7 @@ namespace JM
 
         private void performAttackActionAnimationFromServer(string animationID, bool applyRootMotion)
         {
-            charater.applyRootMotion = applyRootMotion;
+            charater.characterAnimatorManager.applyRootMotion = applyRootMotion;
             charater.animator.CrossFade(animationID, 0.2f);
         }
 

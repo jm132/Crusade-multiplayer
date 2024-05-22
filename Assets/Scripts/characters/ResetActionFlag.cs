@@ -18,9 +18,9 @@ namespace JM
 
             // this is called when an action ends, and the state returns to "empty"
             charater.isPerfromingAction = false;
-            charater.applyRootMotion = false;
-            charater.canRotate = true;
-            charater.canMove = true;
+            charater.characterAnimatorManager.applyRootMotion = false;
+            charater.charaterLocomotionManager.canRotate = true;
+            charater.charaterLocomotionManager.canMove = true;
             charater.charaterLocomotionManager.isRolling = false;
             charater.characterAnimatorManager.DisableCanDoCombo();
 
