@@ -241,11 +241,13 @@ namespace JM
             if (player.playerNetworkManager.isUsingRightHand.Value)
             {
                 rightWeaponManger.meleeDamageCollider.EnableDamageCollider();
+                player.characterSoundFXManager.PlayScoundFX(WorldSoundFXManager.Instance.ChooseRandomSFXFromArray(player.playerInventoryManager.currentRightHandWeapon.whooshes));
             }
             //open left weapon damage collider
             else if (player.playerNetworkManager.isUsingLeftHand.Value)
             {
                 leftWeaponManger.meleeDamageCollider.EnableDamageCollider();
+                player.characterSoundFXManager.PlayScoundFX(WorldSoundFXManager.Instance.ChooseRandomSFXFromArray(player.playerInventoryManager.currentLeftHandWeapon.whooshes));
             }
 
             //play whoosh sfx

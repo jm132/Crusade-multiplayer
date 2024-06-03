@@ -1,14 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.Mathematics;
-using Unity.Netcode;
 using UnityEngine;
+using Unity.Netcode;
 
 namespace JM
 {
     public class CharacterNetworkManager : NetworkBehaviour
     {
         CharaterManager charater;
+
+        [Header("Active")]
+        public NetworkVariable<bool> isActive = new NetworkVariable<bool>(true, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
         [Header("Position")]
         public NetworkVariable<Vector3> networkPosition = new NetworkVariable<Vector3>(Vector3.zero, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
@@ -88,6 +90,11 @@ namespace JM
         public void OnIsMovingChanged(bool oldStatus, bool newStatus)
         {
             charater.animator.SetBool("isMoving", isMoving.Value);
+        }
+
+        public virtual void OnIsActiveChanged(bool oldStatus, bool newStatus)
+        {
+            gameObject.SetActive(isActive.Value);
         }
 
         // a Server rpc is a function called from a client, to the server/host

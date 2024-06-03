@@ -1217,17 +1217,23 @@ MonoBehaviour:
   networkPositionVelocity: {x: 0, y: 0, z: 0}
   networkPositionSmoothTime: 0.1
   networkRotationSmoothTime: 0.1
+  isMoving:
+    m_InternalValue: 0
   horizontalMovement:
     m_InternalValue: 0
   verticalMovement:
     m_InternalValue: 0
   moveAmount:
     m_InternalValue: 0
+  currentTargetNetworkObjectID:
+    m_InternalValue: 0
   isLockedOn:
     m_InternalValue: 0
   isSprinting:
     m_InternalValue: 0
   isJumping:
+    m_InternalValue: 0
+  isChargingAttack:
     m_InternalValue: 0
   currentHealth:
     m_InternalValue: 0
@@ -1341,14 +1347,9 @@ MonoBehaviour:
   characterAnimatorManager: {fileID: 0}
   characterCombatManager: {fileID: 0}
   characterSoundFXManager: {fileID: 0}
+  charaterLocomotionManager: {fileID: 0}
+  characterGroup: 0
   isPerfromingAction: 0
-  isGrounded: 1
-  applyRootMotion: 0
-  canRotate: 1
-  canMove: 1
-  respawnCharacter: 0
-  switchRightWeapon: 0
-  switchLeftWeapon: 0
   playerAnimatorManager: {fileID: 0}
   playerLocomotionManager: {fileID: 0}
   playerNetworkManager: {fileID: 0}
@@ -1368,10 +1369,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9fb91c42081e414fa9a8828b4c4b5d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  curremtTarget: {fileID: 0}
+  lastAttackAnimationPerformed: 
+  currentTarget: {fileID: 0}
   currentAttackType: 0
   lockOnTransform: {fileID: 7289412911152266793}
   currentWeaponBeingUsed: {fileID: 0}
+  canComboWithMainHandWeapon: 0
 --- !u!114 &2931106609998499896
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1406,6 +1409,10 @@ MonoBehaviour:
   yVelocity: {x: 0, y: 0, z: 0}
   groundedYVelocity: -20
   fallStartYVelocity: -5
+  isRolling: 0
+  canRotate: 1
+  canMove: 1
+  isGrounded: 1
   verticalMovement: 0
   horizontalMovement: 0
   moveAmount: 0
@@ -1473,6 +1480,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af7fdd0e19db2e94f8aa98d5e105e2dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  applyRootMotion: 0
   lastDamageAnimationPlayed: 
   hit_Forward_Medium_01: hit_Forward_Medium_01
   hit_Forward_Medium_02: hit_Forward_Medium_02
@@ -1513,6 +1521,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 753c60f18feea894f9f224751e0033e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damageGrunts:
+  - {fileID: 8300000, guid: 99e30fe6817ec0e43b6298edae728d08, type: 3}
+  - {fileID: 8300000, guid: e40eef95660f1a74a99c649076c565c0, type: 3}
+  - {fileID: 8300000, guid: 9af6dcc416ee1a049af6d61487a3d118, type: 3}
+  - {fileID: 8300000, guid: c7017c47427a2504786ed6724612d56d, type: 3}
+  - {fileID: 8300000, guid: 9fcf4f7931532d441b025fdcb539c570, type: 3}
+  - {fileID: 8300000, guid: 9944b9165e300f04193878aecbab86bf, type: 3}
 --- !u!143 &-8036894929671778178
 CharacterController:
   m_ObjectHideFlags: 0

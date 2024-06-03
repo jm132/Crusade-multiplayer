@@ -6,6 +6,8 @@ namespace JM
 {
     public class AiCharacterCombarManager : CharaterCombatManager
     {
+        protected AICharacterManager aICharacter;
+
         [Header("Action Recovery")]
         public float actionRecoveryTimer = 0;
 
@@ -27,6 +29,7 @@ namespace JM
         {
             base.Awake();
 
+            aICharacter = GetComponent<AICharacterManager>();
             lockOnTransform = GetComponentInChildren<LockOnTransform>().transform;
         }
 

@@ -29,5 +29,15 @@ namespace JM
         [Header("Stats")]
         public int vitality;
         public int endurance;
+
+        [Header("Bosses")]
+        public SerializableDictionary<int, bool> bossesAwakened; // the int is the boss I.D, the bool is the awwkened status
+        public SerializableDictionary<int, bool> bossesDefeated; // the int is the boss I.D, the bool is the defeated status
+
+        public CharaterSaveData()
+        {
+            bossesAwakened = new SerializableDictionary<int, bool>();
+            bossesDefeated = new SerializableDictionary<int, bool>();
+        }
     }
 }

@@ -682,6 +682,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a29e9c90f40952f46850e86ae121e68d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isActive:
+    m_InternalValue: 1
   networkPosition:
     m_InternalValue: {x: 0, y: 0, z: 0}
   networkRotation:
@@ -741,12 +743,8 @@ MonoBehaviour:
   characterCombatManager: {fileID: 0}
   characterSoundFXManager: {fileID: 0}
   charaterLocomotionManager: {fileID: 0}
-  characterGroup: 1
+  characterGroup: 0
   isPerfromingAction: 0
-  isGrounded: 1
-  applyRootMotion: 0
-  canRotate: 1
-  canMove: 1
   aiCharacterNetworkManager: {fileID: 0}
   aiCharacterCombarManager: {fileID: 0}
   aiCharacterLocomotionManager: {fileID: 0}
@@ -806,6 +804,9 @@ MonoBehaviour:
   groundedYVelocity: -20
   fallStartYVelocity: -5
   isRolling: 0
+  canRotate: 1
+  canMove: 1
+  isGrounded: 1
 --- !u!114 &5217800910503654700
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -818,6 +819,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8376c5c8cec92ec4d8f02d49a0909034, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  applyRootMotion: 0
   lastDamageAnimationPlayed: 
   hit_Forward_Medium_01: hit_Forward_Medium_01
   hit_Forward_Medium_02: hit_Forward_Medium_02
@@ -894,6 +896,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f521f40bf944c0e4a9cec4de76ea517f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damageGrunts:
+  - {fileID: 8300000, guid: 99e30fe6817ec0e43b6298edae728d08, type: 3}
+  - {fileID: 8300000, guid: e40eef95660f1a74a99c649076c565c0, type: 3}
+  - {fileID: 8300000, guid: 9af6dcc416ee1a049af6d61487a3d118, type: 3}
+  - {fileID: 8300000, guid: c7017c47427a2504786ed6724612d56d, type: 3}
+  - {fileID: 8300000, guid: 9fcf4f7931532d441b025fdcb539c570, type: 3}
+  - {fileID: 8300000, guid: 9944b9165e300f04193878aecbab86bf, type: 3}
+  attackGrunts:
+  - {fileID: 8300000, guid: e7cd19dc6d989fb4686ffc6057ad9b66, type: 3}
+  - {fileID: 8300000, guid: 53dce7d06c55c194f80015a7fcd7c623, type: 3}
+  - {fileID: 8300000, guid: 42e97f1c1fb921c4cbad979986cce035, type: 3}
+  - {fileID: 8300000, guid: 57ad52e4a60fbc744a691e2da06a0309, type: 3}
 --- !u!143 &3652954663778914001
 CharacterController:
   m_ObjectHideFlags: 0

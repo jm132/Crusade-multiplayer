@@ -101,6 +101,7 @@ namespace JM
             AudioClip physicalDamageSFX = WorldSoundFXManager.Instance.ChooseRandomSFXFromArray(WorldSoundFXManager.Instance.physicalDamageSFX);
 
             charater.characterSoundFXManager.PlayScoundFX(physicalDamageSFX);
+            charater.characterSoundFXManager.PlayDamageGrunt();
             // if fire damage is greater then 0, play burn sfx
             // if lightning damage is greater then 0, play zap sfx
         }

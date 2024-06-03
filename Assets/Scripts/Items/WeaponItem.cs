@@ -52,5 +52,7 @@ namespace JM
         // ash of war
 
         // blocking sounds
+        [Header("Whooshes")]
+        public AudioClip[] whooshes;
     }
 }
