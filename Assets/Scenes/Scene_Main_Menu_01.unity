@@ -5095,6 +5095,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5075424697538966117, guid: 389139c6e0d425c4dbc820c5d56a4809, type: 3}
+      propertyPath: NetworkConfig.TickRate
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 5075424697538966117, guid: 389139c6e0d425c4dbc820c5d56a4809, type: 3}
       propertyPath: NetworkConfig.NetworkPrefabs.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -5102,6 +5106,10 @@ PrefabInstance:
       propertyPath: NetworkConfig.NetworkPrefabs.Array.data[1].Prefab
       value: 
       objectReference: {fileID: 1954129479639435311, guid: 3a6c33d94c9096b46beb7a05f1df4d8d, type: 3}
+    - target: {fileID: 5075424697538966117, guid: 389139c6e0d425c4dbc820c5d56a4809, type: 3}
+      propertyPath: NetworkConfig.NetworkPrefabs.Array.data[2].Prefab
+      value: 
+      objectReference: {fileID: 8714850715696751405, guid: 47931466a8ff9914181cd526c90152a6, type: 3}
     - target: {fileID: 5075424697538966119, guid: 389139c6e0d425c4dbc820c5d56a4809, type: 3}
       propertyPath: m_Name
       value: World Network Manager
