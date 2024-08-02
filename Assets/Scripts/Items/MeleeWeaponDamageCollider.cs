@@ -44,8 +44,6 @@ namespace JM
 
                 // check if target is blocking
 
-                // check if target is invulnerable
-
                 DamageTarget(damageTarget);
             }
         }

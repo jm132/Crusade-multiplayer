@@ -42,5 +42,17 @@ namespace JM
                 }
             }
         }
+
+        public void EnableIsInvulnerable()
+        {
+            if (charater.IsOwner)
+                charater.characterNetworkManager.isInvulnerable.Value = true;
+        }
+
+        public void DisableIsInvulnerable()
+        {
+            if (charater.IsOwner)
+                charater.characterNetworkManager.isInvulnerable.Value = false;
+        }
     }
 }

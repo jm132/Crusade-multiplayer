@@ -38,12 +38,14 @@ namespace JM
 
         public virtual void PlayDamageGrunt()
         {
-            PlayScoundFX(WorldSoundFXManager.Instance.ChooseRandomSFXFromArray(damageGrunts));
+            if (damageGrunts.Length > 0)
+                PlayScoundFX(WorldSoundFXManager.Instance.ChooseRandomSFXFromArray(damageGrunts));
         }
 
         public virtual void PlayAttackGrunt()
         {
-            PlayScoundFX(WorldSoundFXManager.Instance.ChooseRandomSFXFromArray(attackGrunts));
+            if (attackGrunts.Length > 0)
+                PlayScoundFX(WorldSoundFXManager.Instance.ChooseRandomSFXFromArray(attackGrunts));
         }
     }
 }

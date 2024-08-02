@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 54867efb500eeff4e8ddbaf47ab3417f, type: 3}
-  m_Name: Combat Stance State
+  m_Name: Undead_Combat Stance State
   m_EditorClassIdentifier: 
   aiCharacterAttacks:
   - {fileID: 11400000, guid: c004ae2f9af456e49bfcf1a4b5ab40f1, type: 2}

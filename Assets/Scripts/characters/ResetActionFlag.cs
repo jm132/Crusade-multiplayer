@@ -27,6 +27,7 @@ namespace JM
             if (charater.IsOwner)
             {
                 charater.characterNetworkManager.isJumping.Value = false;
+                charater.characterNetworkManager.isInvulnerable.Value = false;
             }
         }
 

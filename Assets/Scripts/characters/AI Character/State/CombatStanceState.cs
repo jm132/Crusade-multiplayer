@@ -32,12 +32,15 @@ namespace JM
                 aiCharacter.navMeshAgent.enabled = true;
 
             // if the ai character to face and turn toward its target when its outside it's fov include this
-            if (!aiCharacter.aiCharacterNetworkManager.isMoving.Value)
+            if (aiCharacter.aiCharacterCombarManager.enablePivot)
             {
-                if (aiCharacter.aiCharacterCombarManager.viewableAngle < -30 || aiCharacter.aiCharacterCombarManager.viewableAngle > 30)
-                    aiCharacter.aiCharacterCombarManager.PivotTowardsTarget(aiCharacter);
+                if (!aiCharacter.aiCharacterNetworkManager.isMoving.Value)
+                {
+                    if (aiCharacter.aiCharacterCombarManager.viewableAngle < -30 || aiCharacter.aiCharacterCombarManager.viewableAngle > 30)
+                        aiCharacter.aiCharacterCombarManager.PivotTowardsTarget(aiCharacter);
+                }
             }
-
+            
             aiCharacter.aiCharacterCombarManager.RoatateTowardsAgent(aiCharacter);
 
             // if target is no longer present, switch back to idle

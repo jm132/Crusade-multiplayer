@@ -23,9 +23,13 @@ namespace JM
                 aiCharacter.navMeshAgent.enabled = true;
 
             // if the target gose outdise of the characters f.o.v, pivot to face them
-            if (aiCharacter.aiCharacterCombarManager.viewableAngle < aiCharacter.aiCharacterCombarManager.minimumFOV
-                || aiCharacter.aiCharacterCombarManager.viewableAngle > aiCharacter.aiCharacterCombarManager.maximumFOV)
-                aiCharacter.aiCharacterCombarManager.PivotTowardsTarget(aiCharacter);
+            if (aiCharacter.aiCharacterCombarManager.enablePivot)
+            {
+                if (aiCharacter.aiCharacterCombarManager.viewableAngle < aiCharacter.aiCharacterCombarManager.minimumFOV
+                    || aiCharacter.aiCharacterCombarManager.viewableAngle > aiCharacter.aiCharacterCombarManager.maximumFOV)
+                    aiCharacter.aiCharacterCombarManager.PivotTowardsTarget(aiCharacter);
+            }
+            
 
             aiCharacter.aiCharacterLocomotionManager.RotateTowardsAgent(aiCharacter);
 

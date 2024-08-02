@@ -44,6 +44,9 @@ namespace JM
         {
             base.ProcessEffect(charater);
 
+            if (charater.characterNetworkManager.isInvulnerable.Value)
+                return;
+
             // if the character is dead, no additional damafe effects should be processed
             if (charater.isDead.Value)
                 return;
