@@ -127,9 +127,27 @@ public partial class @PlayerControles : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""Qued RB"",
+                    ""type"": ""Button"",
+                    ""id"": ""71e85883-e335-4489-a52b-c3e4ffef161c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""RT"",
                     ""type"": ""Button"",
                     ""id"": ""f872d47b-a638-4376-8bc1-a84e7afd0109"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Qued RT"",
+                    ""type"": ""Button"",
+                    ""id"": ""e986db3e-deb5-4780-8cfe-478ce891e8d5"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -320,6 +338,28 @@ public partial class @PlayerControles : IInputActionCollection2, IDisposable
                     ""action"": ""Switch Left Weapon"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f5716bd1-fc5f-4554-a7c3-e1b3ebb52292"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Qued RB"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2097d53a-614b-4870-962f-599ec18f9097"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Qued RT"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -390,7 +430,9 @@ public partial class @PlayerControles : IInputActionCollection2, IDisposable
         m_PlayerAction_Dodge = m_PlayerAction.FindAction("Dodge", throwIfNotFound: true);
         m_PlayerAction_Jump = m_PlayerAction.FindAction("Jump", throwIfNotFound: true);
         m_PlayerAction_RB = m_PlayerAction.FindAction("RB", throwIfNotFound: true);
+        m_PlayerAction_QuedRB = m_PlayerAction.FindAction("Qued RB", throwIfNotFound: true);
         m_PlayerAction_RT = m_PlayerAction.FindAction("RT", throwIfNotFound: true);
+        m_PlayerAction_QuedRT = m_PlayerAction.FindAction("Qued RT", throwIfNotFound: true);
         m_PlayerAction_HoldRT = m_PlayerAction.FindAction("Hold RT", throwIfNotFound: true);
         m_PlayerAction_Sprint = m_PlayerAction.FindAction("Sprint", throwIfNotFound: true);
         m_PlayerAction_LockOn = m_PlayerAction.FindAction("Lock On", throwIfNotFound: true);
@@ -499,7 +541,9 @@ public partial class @PlayerControles : IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerAction_Dodge;
     private readonly InputAction m_PlayerAction_Jump;
     private readonly InputAction m_PlayerAction_RB;
+    private readonly InputAction m_PlayerAction_QuedRB;
     private readonly InputAction m_PlayerAction_RT;
+    private readonly InputAction m_PlayerAction_QuedRT;
     private readonly InputAction m_PlayerAction_HoldRT;
     private readonly InputAction m_PlayerAction_Sprint;
     private readonly InputAction m_PlayerAction_LockOn;
@@ -514,7 +558,9 @@ public partial class @PlayerControles : IInputActionCollection2, IDisposable
         public InputAction @Dodge => m_Wrapper.m_PlayerAction_Dodge;
         public InputAction @Jump => m_Wrapper.m_PlayerAction_Jump;
         public InputAction @RB => m_Wrapper.m_PlayerAction_RB;
+        public InputAction @QuedRB => m_Wrapper.m_PlayerAction_QuedRB;
         public InputAction @RT => m_Wrapper.m_PlayerAction_RT;
+        public InputAction @QuedRT => m_Wrapper.m_PlayerAction_QuedRT;
         public InputAction @HoldRT => m_Wrapper.m_PlayerAction_HoldRT;
         public InputAction @Sprint => m_Wrapper.m_PlayerAction_Sprint;
         public InputAction @LockOn => m_Wrapper.m_PlayerAction_LockOn;
@@ -540,9 +586,15 @@ public partial class @PlayerControles : IInputActionCollection2, IDisposable
                 @RB.started -= m_Wrapper.m_PlayerActionActionsCallbackInterface.OnRB;
                 @RB.performed -= m_Wrapper.m_PlayerActionActionsCallbackInterface.OnRB;
                 @RB.canceled -= m_Wrapper.m_PlayerActionActionsCallbackInterface.OnRB;
+                @QuedRB.started -= m_Wrapper.m_PlayerActionActionsCallbackInterface.OnQuedRB;
+                @QuedRB.performed -= m_Wrapper.m_PlayerActionActionsCallbackInterface.OnQuedRB;
+                @QuedRB.canceled -= m_Wrapper.m_PlayerActionActionsCallbackInterface.OnQuedRB;
                 @RT.started -= m_Wrapper.m_PlayerActionActionsCallbackInterface.OnRT;
                 @RT.performed -= m_Wrapper.m_PlayerActionActionsCallbackInterface.OnRT;
                 @RT.canceled -= m_Wrapper.m_PlayerActionActionsCallbackInterface.OnRT;
+                @QuedRT.started -= m_Wrapper.m_PlayerActionActionsCallbackInterface.OnQuedRT;
+                @QuedRT.performed -= m_Wrapper.m_PlayerActionActionsCallbackInterface.OnQuedRT;
+                @QuedRT.canceled -= m_Wrapper.m_PlayerActionActionsCallbackInterface.OnQuedRT;
                 @HoldRT.started -= m_Wrapper.m_PlayerActionActionsCallbackInterface.OnHoldRT;
                 @HoldRT.performed -= m_Wrapper.m_PlayerActionActionsCallbackInterface.OnHoldRT;
                 @HoldRT.canceled -= m_Wrapper.m_PlayerActionActionsCallbackInterface.OnHoldRT;
@@ -577,9 +629,15 @@ public partial class @PlayerControles : IInputActionCollection2, IDisposable
                 @RB.started += instance.OnRB;
                 @RB.performed += instance.OnRB;
                 @RB.canceled += instance.OnRB;
+                @QuedRB.started += instance.OnQuedRB;
+                @QuedRB.performed += instance.OnQuedRB;
+                @QuedRB.canceled += instance.OnQuedRB;
                 @RT.started += instance.OnRT;
                 @RT.performed += instance.OnRT;
                 @RT.canceled += instance.OnRT;
+                @QuedRT.started += instance.OnQuedRT;
+                @QuedRT.performed += instance.OnQuedRT;
+                @QuedRT.canceled += instance.OnQuedRT;
                 @HoldRT.started += instance.OnHoldRT;
                 @HoldRT.performed += instance.OnHoldRT;
                 @HoldRT.canceled += instance.OnHoldRT;
@@ -680,7 +738,9 @@ public partial class @PlayerControles : IInputActionCollection2, IDisposable
         void OnDodge(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnRB(InputAction.CallbackContext context);
+        void OnQuedRB(InputAction.CallbackContext context);
         void OnRT(InputAction.CallbackContext context);
+        void OnQuedRT(InputAction.CallbackContext context);
         void OnHoldRT(InputAction.CallbackContext context);
         void OnSprint(InputAction.CallbackContext context);
         void OnLockOn(InputAction.CallbackContext context);

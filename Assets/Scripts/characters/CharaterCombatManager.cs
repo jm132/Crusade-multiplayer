@@ -22,6 +22,10 @@ namespace JM
         [Header("Lock On TransForm")]
         public Transform lockOnTransform;
 
+        [Header("Attack Flags")]
+        public bool canPerformRollingAttack = false;
+        public bool canPerformBackstepAttack = false;
+
         protected virtual void Awake()
         {
             charater = GetComponent<CharaterManager>();
@@ -53,6 +57,36 @@ namespace JM
         {
             if (charater.IsOwner)
                 charater.characterNetworkManager.isInvulnerable.Value = false;
+        }
+
+        public void EnableCanDoRollingAttack()
+        {
+            canPerformRollingAttack = true;
+        }
+
+        public void DisableCanDoRollingAttack()
+        {
+            canPerformRollingAttack = false;
+        }
+
+        public void EnableCanDoBackstepAttack()
+        {
+            canPerformBackstepAttack = true;
+        }
+
+        public void DisableCanDoBackStepAttack()
+        {
+            canPerformBackstepAttack = false;
+        }
+
+        public virtual void EnableCanDoCombo()
+        {
+
+        }
+
+        public virtual void DisableCanDoCombo()
+        {
+
         }
     }
 }

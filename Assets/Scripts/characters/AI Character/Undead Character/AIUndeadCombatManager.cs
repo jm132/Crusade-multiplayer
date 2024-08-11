@@ -29,7 +29,7 @@ namespace JM
 
         public void OpenRightHandDamageCollider()
         {
-            aICharacter.characterSoundFXManager.PlayAttackGrunt();
+            aICharacter.characterSoundFXManager.PlayAttackGruntSoundFX();
             rightHandDamageCollider.DisableDamageCollider();
         }
 
@@ -40,7 +40,7 @@ namespace JM
 
         public void OpenLeftHandDamageCollider()
         {
-            aICharacter.characterSoundFXManager.PlayAttackGrunt();
+            aICharacter.characterSoundFXManager.PlayAttackGruntSoundFX();
             leftHandDamageCollider.DisableDamageCollider();
         }
 

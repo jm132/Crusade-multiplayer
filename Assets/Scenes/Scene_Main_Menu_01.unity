@@ -4905,6 +4905,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2251542984026849056, guid: aad8c593626a69a4fa7c2c8d3a5f2a4b, type: 3}
+      propertyPath: m_Volume
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5035092624412524507, guid: aad8c593626a69a4fa7c2c8d3a5f2a4b, type: 3}
       propertyPath: m_Name
       value: World Sound FX Manager
@@ -5664,6 +5668,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 358054321296260089, guid: 4a60e6d9bf59b794891a9f4a694eb70f, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 392708678218323241, guid: 4a60e6d9bf59b794891a9f4a694eb70f, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -5683,6 +5691,22 @@ PrefabInstance:
     - target: {fileID: 700827106462233760, guid: 4a60e6d9bf59b794891a9f4a694eb70f, type: 3}
       propertyPath: m_RootOrder
       value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 761016616031103748, guid: 4a60e6d9bf59b794891a9f4a694eb70f, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 761016616031103748, guid: 4a60e6d9bf59b794891a9f4a694eb70f, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 761016616031103748, guid: 4a60e6d9bf59b794891a9f4a694eb70f, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 761016616031103748, guid: 4a60e6d9bf59b794891a9f4a694eb70f, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2254693941172297091, guid: 4a60e6d9bf59b794891a9f4a694eb70f, type: 3}
       propertyPath: m_Name
@@ -5772,6 +5796,14 @@ PrefabInstance:
       propertyPath: youDiedPopUpGameObject
       value: 
       objectReference: {fileID: 548412433}
+    - target: {fileID: 3719444203943892187, guid: 4a60e6d9bf59b794891a9f4a694eb70f, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3719444203943892187, guid: 4a60e6d9bf59b794891a9f4a694eb70f, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4243290755431780463, guid: 4a60e6d9bf59b794891a9f4a694eb70f, type: 3}
       propertyPath: startGameAsClinet
       value: 0

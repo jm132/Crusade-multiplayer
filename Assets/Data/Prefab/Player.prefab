@@ -1210,6 +1210,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2204730b62077f4db40ee43cb1b219b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isActive:
+    m_InternalValue: 1
   networkPosition:
     m_InternalValue: {x: 0, y: 0, z: 0}
   networkRotation:
@@ -1226,6 +1228,8 @@ MonoBehaviour:
   moveAmount:
     m_InternalValue: 0
   currentTargetNetworkObjectID:
+    m_InternalValue: 0
+  isInvulnerable:
     m_InternalValue: 0
   isLockedOn:
     m_InternalValue: 0
@@ -1387,8 +1391,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df58d54f490ba96448b9f8c6a50f0d20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  staminaRegenerationAmount: 0.5
-  staminaRegenerationDelay: 2
+  staminaRegenerationAmount: 1
+  staminaRegenerationDelay: 1.5
 --- !u!114 &2205259671876677222
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1405,7 +1409,7 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 1
-  groundCheckSpherRadius: 0.3
+  groundCheckSpherRadius: 0.2
   yVelocity: {x: 0, y: 0, z: 0}
   groundedYVelocity: -20
   fallStartYVelocity: -5
@@ -1528,6 +1532,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: c7017c47427a2504786ed6724612d56d, type: 3}
   - {fileID: 8300000, guid: 9fcf4f7931532d441b025fdcb539c570, type: 3}
   - {fileID: 8300000, guid: 9944b9165e300f04193878aecbab86bf, type: 3}
+  attackGrunts: []
+  footSteps: []
 --- !u!143 &-8036894929671778178
 CharacterController:
   m_ObjectHideFlags: 0

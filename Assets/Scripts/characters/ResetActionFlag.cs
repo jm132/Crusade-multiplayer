@@ -22,7 +22,9 @@ namespace JM
             charater.charaterLocomotionManager.canRotate = true;
             charater.charaterLocomotionManager.canMove = true;
             charater.charaterLocomotionManager.isRolling = false;
-            charater.characterAnimatorManager.DisableCanDoCombo();
+            charater.characterCombatManager.DisableCanDoCombo();
+            charater.characterCombatManager.DisableCanDoRollingAttack();
+            charater.characterCombatManager.DisableCanDoBackStepAttack();
 
             if (charater.IsOwner)
             {

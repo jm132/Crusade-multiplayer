@@ -43,13 +43,35 @@ namespace JM
                 return;
 
             float staminaDeducted = 0;
-            
+
             switch (currentAttackType)
             {
                 case AttackType.LightAttack01:
-                    staminaDeducted = currentWeaponBeingUsed.baseStaminaCost * currentWeaponBeingUsed.light_Attack_01_Modifier;
+                    staminaDeducted = currentWeaponBeingUsed.baseStaminaCost * currentWeaponBeingUsed.lightAttackStaminaCostMultipler;
                     break;
-                default:
+                case AttackType.LightAttack02:
+                    staminaDeducted = currentWeaponBeingUsed.baseStaminaCost * currentWeaponBeingUsed.lightAttackStaminaCostMultipler;
+                    break;
+                case AttackType.HeavyAttack01:
+                    staminaDeducted = currentWeaponBeingUsed.baseStaminaCost * currentWeaponBeingUsed.heavyAttackStaminaCostMultipler;
+                    break;
+                case AttackType.HeavyAttack02:
+                    staminaDeducted = currentWeaponBeingUsed.baseStaminaCost * currentWeaponBeingUsed.heavyAttackStaminaCostMultipler;
+                    break;
+                case AttackType.ChargedAttack01:
+                    staminaDeducted = currentWeaponBeingUsed.baseStaminaCost * currentWeaponBeingUsed.chargedAttackStaminaCostMultipler;
+                    break;
+                case AttackType.ChargedAttack02:
+                    staminaDeducted = currentWeaponBeingUsed.baseStaminaCost * currentWeaponBeingUsed.chargedAttackStaminaCostMultipler;
+                    break;
+                case AttackType.RunningAttack01:
+                    staminaDeducted = currentWeaponBeingUsed.baseStaminaCost * currentWeaponBeingUsed.runningAttackStaminaCostMultipler;
+                    break;
+                case AttackType.RollingAttack01:
+                    staminaDeducted = currentWeaponBeingUsed.baseStaminaCost * currentWeaponBeingUsed.rollingAttackStaminaCostMultipler;
+                    break;
+                case AttackType.BackstepAttack01:
+                    staminaDeducted = currentWeaponBeingUsed.baseStaminaCost * currentWeaponBeingUsed.backstepAttackStaminaCostMultipler;
                     break;
             }
 
@@ -66,11 +88,12 @@ namespace JM
             }
         }
 
-        public void EnableCanDoCombo()
+        // animation event call
+        public override void EnableCanDoCombo()
         {
             if (player.playerNetworkManager.isUsingRightHand.Value)
             {
-                canComboWithMainHandWeapon = true;
+                player.playerCombatManager.canComboWithMainHandWeapon = true;
             }
             else
             {
@@ -78,10 +101,10 @@ namespace JM
             }
         }
 
-        public void DisableCanDoCombo()
+        public override void DisableCanDoCombo()
         {
-            canComboWithMainHandWeapon= false;
-            //canComboWithOffHandWeapon = false;
+            player.playerCombatManager.canComboWithMainHandWeapon = false;
+            //player.playerCombatManager.canComboWithOffHandWeapon = false;
         }
     }
 }

@@ -16,6 +16,9 @@ namespace JM
         public float heavy_Attack_02_Modifier;
         public float charge_Attack_01_Modifier;
         public float charge_Attack_02_Modifier;
+        public float running_Attack_01_Modifier;
+        public float rolling_Attack_01_Modifier;
+        public float backstep_Attack_01_Modifier;
 
         protected override void Awake()
         {
@@ -84,6 +87,15 @@ namespace JM
                     break;
                 case AttackType.ChargedAttack02:
                     ApplyAttackDameageModifiers(charge_Attack_02_Modifier, damageEffect);
+                    break;
+                case AttackType.RunningAttack01:
+                    ApplyAttackDameageModifiers(running_Attack_01_Modifier, damageEffect);
+                    break;
+                case AttackType.RollingAttack01:
+                    ApplyAttackDameageModifiers(rolling_Attack_01_Modifier, damageEffect);
+                    break;
+                case AttackType.BackstepAttack01:
+                    ApplyAttackDameageModifiers(backstep_Attack_01_Modifier, damageEffect);
                     break;
                 default:
                     break;

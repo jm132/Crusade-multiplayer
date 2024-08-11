@@ -37,12 +37,18 @@ namespace JM
         public float heavy_Attack_02_Modifier = 1.6f;
         public float charge_Attack_01_Modifier = 2.0f;
         public float charge_Attack_02_Modifier = 2.2f;
+        public float running_Attack_01_Modifier = 1.1f;
+        public float rolling_Attack_01_Modifier = 1.1f;
+        public float backstep_Attack_01_Modifier = 1.1f;
 
         [Header("Stamina Costs")]
         public int baseStaminaCost = 20;
         public float lightAttackStaminaCostMultipler = 0.9f;
-        // running attack stamina cost modifier
-        // heavy attack stamina cost modifier
+        public float heavyAttackStaminaCostMultipler = 1.3f;
+        public float chargedAttackStaminaCostMultipler = 1.5f;
+        public float runningAttackStaminaCostMultipler = 1.1f;
+        public float rollingAttackStaminaCostMultipler = 1.1f;
+        public float backstepAttackStaminaCostMultipler = 1.1f;
 
         [Header("Actions")]
         public WeaponItemAction oh_RB_Action; // one handed bumper action

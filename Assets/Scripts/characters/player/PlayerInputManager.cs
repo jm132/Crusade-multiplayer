@@ -47,6 +47,13 @@ namespace JM
         [SerializeField] bool RT_Input = false;
         [SerializeField] bool Hold_RT_Input = false;
 
+        [Header("Qued Inputs")]
+        [SerializeField] private bool input_Que_Is_Active = false;
+        [SerializeField] float default_Que_Input_Time = 0.35f;
+        [SerializeField] float que_Input_Timer = 0;
+        [SerializeField] bool que_RB_Input = false;
+        [SerializeField] bool que_RT_Input = false;
+
 
         private void Awake()
         {
@@ -118,20 +125,24 @@ namespace JM
                 //Bumpers
                 playerControles.PlayerAction.RB.performed += i => RB_Input = true;
 
-                // triggers
+                // Triggers
                 playerControles.PlayerAction.RT.performed += i => RT_Input = true;
                 playerControles.PlayerAction.HoldRT.performed += i => Hold_RT_Input = true;
                 playerControles.PlayerAction.HoldRT.canceled += i => Hold_RT_Input = false;
 
-                // lock on
+                // Lock on
                 playerControles.PlayerAction.LockOn.performed += i => lockOn_Input = true;
                 playerControles.PlayerAction.SeekLeftLockOnTarget.performed += i => lockOn_Left_Input = true;
                 playerControles.PlayerAction.SeekRightLockOnTarget.performed += i => lockOn_Right_Input = true;
 
-                // holding the input, sets the bool to true
+                // Holding the input, sets the bool to true
                 playerControles.PlayerAction.Sprint.performed += i => sprint_Input = true;
-                // releasing the input, sets the bool to false
+                // Releasing the input, sets the bool to false
                 playerControles.PlayerAction.Sprint.canceled += i => sprint_Input = false;
+
+                // Qued Input
+                playerControles.PlayerAction.QuedRB.performed += i => QueInput(ref que_RB_Input);
+                playerControles.PlayerAction.QuedRT.performed += i => QueInput(ref que_RT_Input);
             }
 
             playerControles.Enable();
@@ -178,6 +189,7 @@ namespace JM
             HandleChargeRTInput();
             HandleSwitchRightWeaponInput();
             HandleSwitchLeftWeaponInput();
+            HandleQuedInputs();
         }
 
         // Lock on
@@ -263,7 +275,6 @@ namespace JM
         }
 
         // Movemt
-
         private void HandlePlayerMovementInput()
         {
             vertical_Input = movement_Input.y;
@@ -318,7 +329,6 @@ namespace JM
         }
 
         // Action
-
         private void HandleDodgeInput()
         {
             if (dodge_Input)
@@ -415,6 +425,58 @@ namespace JM
             {
                 switch_Left_Weapon_Input = false;
                 player.playerEquipmentManager.SwitchLeftWeapon();
+            }
+        }
+
+        private void QueInput(ref bool quedInput) // passing a reference will pass a specific bool, and not the value of that bool (true or false)
+        {
+            // rest all qued inputs so only one can que at a time
+            que_RB_Input = false;
+            que_RT_Input = false;
+            //que_LB_Input = false;
+            //que_LT_Input = false;
+
+            // check for ui windows bring open, if its open return
+
+            if(player.isPerfromingAction || player.playerNetworkManager.isJumping.Value)
+            {
+                quedInput = true;
+                que_Input_Timer = default_Que_Input_Time;
+                input_Que_Is_Active = true;
+            }
+        }
+
+        private void ProcessQuedInput()
+        {
+            if (player.isDead.Value)
+                return;
+
+            if(que_RB_Input)
+                RB_Input = true;
+
+            if (que_RT_Input)
+                RT_Input = true;
+        }
+
+        private void HandleQuedInputs()
+        {
+            if (input_Que_Is_Active)
+            {
+                // while the timer is above 0, keep attempting press the input
+                if (que_Input_Timer > 0)
+                {
+                    que_Input_Timer -= Time.deltaTime;
+                    ProcessQuedInput();
+                }
+                else
+                {
+                    // reset all qued inputs
+                    que_RB_Input = false;
+                    que_RT_Input = false;
+
+                    input_Que_Is_Active = false;
+                    que_Input_Timer = 0;
+                }
             }
         }
     }

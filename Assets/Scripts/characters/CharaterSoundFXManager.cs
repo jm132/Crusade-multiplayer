@@ -14,12 +14,15 @@ namespace JM
         [Header("Attack Grunts")]
         [SerializeField] protected AudioClip[] attackGrunts;
 
+        [Header("FootSteps")]
+        [SerializeField] protected AudioClip[] footSteps;
+
         protected virtual void Awake()
         {
             audioSource = GetComponent<AudioSource>();
         }
 
-        public void PlayScoundFX(AudioClip soundFX, float volume = 1, bool randomizePitch = true, float pitchRandom = 0.1f)
+        public void PlaySoundFX(AudioClip soundFX, float volume = 1, bool randomizePitch = true, float pitchRandom = 0.1f)
         {
             audioSource.PlayOneShot(soundFX, volume);
             // resets pitch
@@ -36,16 +39,22 @@ namespace JM
             audioSource.PlayOneShot(WorldSoundFXManager.Instance.rollSFX);
         }
 
-        public virtual void PlayDamageGrunt()
+        public virtual void PlayDamageGruntSoundFX()
         {
             if (damageGrunts.Length > 0)
-                PlayScoundFX(WorldSoundFXManager.Instance.ChooseRandomSFXFromArray(damageGrunts));
+                PlaySoundFX(WorldSoundFXManager.Instance.ChooseRandomSFXFromArray(damageGrunts));
         }
 
-        public virtual void PlayAttackGrunt()
+        public virtual void PlayAttackGruntSoundFX()
         {
             if (attackGrunts.Length > 0)
-                PlayScoundFX(WorldSoundFXManager.Instance.ChooseRandomSFXFromArray(attackGrunts));
+                PlaySoundFX(WorldSoundFXManager.Instance.ChooseRandomSFXFromArray(attackGrunts));
+        }
+
+        public virtual void PlayFootStepSoundFX()
+        {
+            if (footSteps.Length > 0)
+                PlaySoundFX(WorldSoundFXManager.Instance.ChooseRandomSFXFromArray(footSteps));
         }
     }
 }

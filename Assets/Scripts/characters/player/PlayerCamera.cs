@@ -14,7 +14,7 @@ namespace JM
 
         // change these to tweak camera perfromance
         [Header("Camera Settings")]
-        private float cameraSmoothSpeed = 1; // the bigger this number, longer for the camera to reach its position during movement
+        [SerializeField] private float cameraSmoothSpeed = 1; // the bigger this number, longer for the camera to reach its position during movement
         [SerializeField] float leftAndRightRotationSpeed = 220;
         [SerializeField] float upAndDownRotationSpeed = 220;
         [SerializeField] float minimumPivot = -30; // the lowest point able to look down
@@ -75,7 +75,7 @@ namespace JM
 
         private void HandleFollowTarget()
         {
-            Vector3 targetCameraPosition = Vector3.SmoothDamp(transform.position, player.transform.position, ref cameraVelocity, cameraSmoothSpeed * Time.deltaTime);
+            Vector3 targetCameraPosition = Vector3.SmoothDamp(transform.position, player.transform.position, ref cameraVelocity, cameraSmoothSpeed);
             transform.position = targetCameraPosition;
         }
 

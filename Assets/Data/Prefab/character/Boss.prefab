@@ -484,6 +484,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7572989818500005011}
+  - component: {fileID: 4048406748406671612}
+  - component: {fileID: 748288409462470866}
+  - component: {fileID: 4574291679521482709}
   m_Layer: 6
   m_Name: Toes_R
   m_TagString: Untagged
@@ -506,6 +509,134 @@ Transform:
   m_Father: {fileID: 2923075670120936818}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4048406748406671612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1722907072968207546}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df242fae8a861fd4e963e5f8ae4a57a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distanceToGround: 0.05
+--- !u!82 &748288409462470866
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1722907072968207546}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 7
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &4574291679521482709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1722907072968207546}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ae6cc0baed36ca44a55b0214716ce01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageCollider: {fileID: 0}
+  physicalDamage: 0
+  magicDamage: 0
+  fireDamage: 0
+  lightningDamage: 0
+  holyDamage: 0
+  durkCharacterManager: {fileID: 0}
 --- !u!1 &1726586502391033130
 GameObject:
   m_ObjectHideFlags: 0
@@ -596,8 +727,8 @@ GameObject:
   - component: {fileID: 1177030238869607061}
   - component: {fileID: 6347348386822704272}
   - component: {fileID: 3285695210211646851}
-  - component: {fileID: -2156198687845917842}
-  - component: {fileID: -2895398913048347123}
+  - component: {fileID: -4264022134827011754}
+  - component: {fileID: 8986494902092834863}
   - component: {fileID: 1063650772704901540}
   - component: {fileID: 4514113650713190467}
   - component: {fileID: 5217800910503654700}
@@ -605,7 +736,7 @@ GameObject:
   - component: {fileID: 177249263946527169}
   - component: {fileID: 1758088045608827233}
   - component: {fileID: 4029350345896510375}
-  - component: {fileID: 1919170503578859677}
+  - component: {fileID: 1827387459577226539}
   - component: {fileID: 3652954663778914001}
   - component: {fileID: 6858679948751353928}
   - component: {fileID: 6423272322832036945}
@@ -670,7 +801,7 @@ MonoBehaviour:
   AlwaysReplicateAsRoot: 0
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
---- !u!114 &-2156198687845917842
+--- !u!114 &-4264022134827011754
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -679,7 +810,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1954129479639435311}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a29e9c90f40952f46850e86ae121e68d, type: 3}
+  m_Script: {fileID: 11500000, guid: 9ac4f3a0a76ec324c9dd0667a7c24772, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   isActive:
@@ -712,18 +843,18 @@ MonoBehaviour:
   isChargingAttack:
     m_InternalValue: 0
   currentHealth:
-    m_InternalValue: 0
+    m_InternalValue: 1000
   maxHealth:
-    m_InternalValue: 0
+    m_InternalValue: 1000
   currentStamina:
     m_InternalValue: 0
   maxStamina:
-    m_InternalValue: 0
+    m_InternalValue: 500
   vitality:
     m_InternalValue: 1
   endurance:
     m_InternalValue: 1
---- !u!114 &-2895398913048347123
+--- !u!114 &8986494902092834863
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -732,7 +863,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1954129479639435311}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 918fef65af29ec44c80fcbb503e10e49, type: 3}
+  m_Script: {fileID: 11500000, guid: a1f2ecd8fc05fbc4bae5898c5080cfe5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   isDead:
@@ -747,6 +878,7 @@ MonoBehaviour:
   charaterLocomotionManager: {fileID: 0}
   characterGroup: 1
   isPerfromingAction: 0
+  characterName: Phoenix, the wing of hermes
   aiCharacterNetworkManager: {fileID: 0}
   aiCharacterCombarManager: {fileID: 0}
   aiCharacterLocomotionManager: {fileID: 0}
@@ -757,10 +889,23 @@ MonoBehaviour:
   combatStance: {fileID: 11400000, guid: ff6203997ff754c49a42938164a6bfc4, type: 2}
   attacks: {fileID: 11400000, guid: dbd3642bae1b2254faa5770ef49930ad, type: 2}
   bossID: 0
-  hasBeenDefeated: 0
-  hasBeenAwakened: 0
+  bossIntroClip: {fileID: 8300000, guid: 1452c72f2f3a79747940704189939951, type: 3}
+  bossBattleLoopClip: {fileID: 8300000, guid: 64a9f170b73918045a6b7d75359b4e12, type: 3}
+  bossFightIsActive:
+    m_InternalValue: 0
+  hasBeenDefeated:
+    m_InternalValue: 0
+  hasBeenAwakened:
+    m_InternalValue: 0
   fogWalls: []
-  wakeBossUp: 0
+  sleepAnimation: Sleep_01
+  awakenAnimation: Awaken_01
+  minimumHealthPercentageToShift: 50
+  phaseShiftAnimation: Phase_Change_01
+  phase02CombatStanceState: {fileID: 11400000, guid: 94e6aa8fce46ba745bf9ee67224fb003, type: 2}
+  bossSleepState: {fileID: 11400000, guid: d21bdaddecedaf5478857f7d8425f7d2, type: 2}
+  durkSoundFXManager: {fileID: 0}
+  durkCombatManager: {fileID: 0}
 --- !u!114 &1063650772704901540
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -787,13 +932,14 @@ MonoBehaviour:
   maximumFOV: 35
   attackRotationSpeed: 25
   clubDamageCollider: {fileID: 6145413385395011169}
-  durksStompingFoot: {fileID: 2923075670120936818}
+  stompCollider: {fileID: 0}
   stompAttackAOERadius: 5
   baseDamage: 25
   attack01DamageModifier: 1
   attack02DamageModifier: 1
   attack03DamageModifier: 1
   stompDamage: 25
+  durkInpactVFX: {fileID: 2981034129387644132, guid: 378ed7ea346d95d4ebc7a1658a461000, type: 3}
 --- !u!114 &4514113650713190467
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -895,7 +1041,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bloodSplatterVFX: {fileID: 0}
---- !u!114 &1919170503578859677
+--- !u!114 &1827387459577226539
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -904,7 +1050,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1954129479639435311}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f521f40bf944c0e4a9cec4de76ea517f, type: 3}
+  m_Script: {fileID: 11500000, guid: 475507db98e5353458aaa406cfa33444, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   damageGrunts:
@@ -915,10 +1061,26 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 9fcf4f7931532d441b025fdcb539c570, type: 3}
   - {fileID: 8300000, guid: 9944b9165e300f04193878aecbab86bf, type: 3}
   attackGrunts:
-  - {fileID: 8300000, guid: e7cd19dc6d989fb4686ffc6057ad9b66, type: 3}
-  - {fileID: 8300000, guid: 53dce7d06c55c194f80015a7fcd7c623, type: 3}
-  - {fileID: 8300000, guid: 42e97f1c1fb921c4cbad979986cce035, type: 3}
-  - {fileID: 8300000, guid: 57ad52e4a60fbc744a691e2da06a0309, type: 3}
+  - {fileID: 8300000, guid: 9fcf4f7931532d441b025fdcb539c570, type: 3}
+  - {fileID: 8300000, guid: c7017c47427a2504786ed6724612d56d, type: 3}
+  - {fileID: 8300000, guid: 9af6dcc416ee1a049af6d61487a3d118, type: 3}
+  footSteps:
+  - {fileID: 8300000, guid: 45c3b9b2adb63864988b8cefa4c3f842, type: 3}
+  - {fileID: 8300000, guid: 13329186a538ed94bba8524231077bfb, type: 3}
+  - {fileID: 8300000, guid: 3000f5e2dcea67644a59a98632c96c40, type: 3}
+  - {fileID: 8300000, guid: c89d8f3e1849c564bbf55bfa1a359c7c, type: 3}
+  - {fileID: 8300000, guid: 26b46db01b25e1543bf04b53ab71ec10, type: 3}
+  - {fileID: 8300000, guid: 57d86e75cbc05324fbceebee50de2eb2, type: 3}
+  - {fileID: 8300000, guid: d860254632f555a49a7d61b0814b8a09, type: 3}
+  - {fileID: 8300000, guid: f3db360332f758043bbaa3a1829a4bb5, type: 3}
+  - {fileID: 8300000, guid: fb3345a94bf231d44b7d8f8cfa62d550, type: 3}
+  weaponWhooshes:
+  - {fileID: 8300000, guid: 15da0b7a4bef36746a6591b1879e33be, type: 3}
+  weaponInpacts:
+  - {fileID: 8300000, guid: 4845ba7a92761d44abc63597a6cd9aa9, type: 3}
+  - {fileID: 8300000, guid: d972a4841c6fbb544bf557d42db596df, type: 3}
+  StompInpacts:
+  - {fileID: 8300000, guid: 270c26f54cc392c41b0a5b2c5e447e88, type: 3}
 --- !u!143 &3652954663778914001
 CharacterController:
   m_ObjectHideFlags: 0
@@ -957,7 +1119,7 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
+  MinDistance: 7
   MaxDistance: 500
   Pan2D: 0
   rolloffMode: 0
@@ -1448,10 +1610,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.059827343
-  m_Height: 0.28598025
+  m_Radius: 0.03637196
+  m_Height: 0.28598028
   m_Direction: 0
-  m_Center: {x: -0.03499608, y: -0.008992171, z: -0.0040222825}
+  m_Center: {x: -0.034996077, y: -0.032447584, z: -0.004022287}
 --- !u!1 &3880628756967461965
 GameObject:
   m_ObjectHideFlags: 0
@@ -1557,6 +1719,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2078504967774171891}
+  - component: {fileID: 8247920567407359288}
+  - component: {fileID: 1921236258097392477}
+  - component: {fileID: 5842675588963547595}
   m_Layer: 6
   m_Name: Toes_L
   m_TagString: Untagged
@@ -1579,6 +1744,134 @@ Transform:
   m_Father: {fileID: 4822900904601104994}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8247920567407359288
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4279631193566906436}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df242fae8a861fd4e963e5f8ae4a57a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distanceToGround: 0.05
+--- !u!82 &1921236258097392477
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4279631193566906436}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 7
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &5842675588963547595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4279631193566906436}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ae6cc0baed36ca44a55b0214716ce01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageCollider: {fileID: 0}
+  physicalDamage: 0
+  magicDamage: 0
+  fireDamage: 0
+  lightningDamage: 0
+  holyDamage: 0
+  durkCharacterManager: {fileID: 0}
 --- !u!1 &4383451131097700808
 GameObject:
   m_ObjectHideFlags: 0
@@ -2963,10 +3256,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.05205101
-  m_Height: 0.26543158
+  m_Radius: 0.037813086
+  m_Height: 0.26543155
   m_Direction: 0
-  m_Center: {x: 0.024452122, y: 0.017781207, z: 0.008291338}
+  m_Center: {x: 0.024452124, y: 0.032019135, z: 0.008291335}
 --- !u!1001 &2189614758987713627
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3078,7 +3371,7 @@ MonoBehaviour:
   fireDamage: 0
   lightningDamage: 0
   holyDamage: 0
-  bossCharacter: {fileID: -2895398913048347123}
+  bossCharacter: {fileID: 0}
 --- !u!4 &2189614758987868747 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 452112, guid: 6d137d44990918a48bfc447d3dda3796, type: 3}

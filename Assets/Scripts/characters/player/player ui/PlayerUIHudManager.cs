@@ -7,13 +7,17 @@ namespace JM
 {
     public class PlayerUIHudManager : MonoBehaviour
     {
-        [Header("STAT BARS")]
+        [Header("Stat Bars")]
         [SerializeField] UI_StatBar healthBar;
         [SerializeField] UI_StatBar staminaBar;
 
-        [Header("QUICK SLOTS")]
+        [Header("Quick Slots")]
         [SerializeField] Image rightWeaponQuickSlotsIcon;
         [SerializeField] Image leftWeaponQuickSlotsIcon;
+
+        [Header("Boss Health Bar")]
+        public Transform bossHealthBarParent;
+        public GameObject bossHealthBarObjects;
 
         public void RefreshHUD()
         {

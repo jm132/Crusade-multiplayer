@@ -86,10 +86,14 @@ namespace JM
 
         public void HandleGroundedMovement()
         {
+            if (player.charaterLocomotionManager.canMove || player.playerLocomotionManager.canRotate)
+            {
+                GetMovementValues();
+            }
+
             if (!player.charaterLocomotionManager.canMove)
                 return;
 
-            GetMovementValues();
             // MOVE DIRECTION IS BADED ON THE CAMER FACING PERSECTIVE & MOVEMENT INPUTS
             moveDirection = PlayerCamera.instance.transform.forward * verticalMovement;
             moveDirection = moveDirection + PlayerCamera.instance.transform.right * horizontalMovement;
