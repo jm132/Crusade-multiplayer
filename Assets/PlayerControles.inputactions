@@ -141,6 +141,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "Interact",
+                    "type": "Button",
+                    "id": "c8545e6f-ca9b-4238-95f0-9f68ea87a4bf",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Sprint",
                     "type": "PassThrough",
                     "id": "5ad20fd9-860d-424f-a6aa-ca69bda90071",
@@ -275,28 +284,6 @@
                 },
                 {
                     "name": "",
-                    "id": "e5308bba-ee1b-4024-9c0e-9d2bbcf46405",
-                    "path": "<Mouse>/rightButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "RT",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "bdef5e3b-d708-47fe-8488-78148aa388ed",
-                    "path": "<Mouse>/rightButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Hold RT",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "fad0b5fe-1ddb-495f-9eb9-87b19707a1fc",
                     "path": "<Keyboard>/1",
                     "interactions": "",
@@ -319,6 +306,17 @@
                 },
                 {
                     "name": "",
+                    "id": "9339f7eb-4c5b-48d7-8d73-383367b8207e",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "f5716bd1-fc5f-4554-a7c3-e1b3ebb52292",
                     "path": "<Mouse>/leftButton",
                     "interactions": "",
@@ -330,12 +328,34 @@
                 },
                 {
                     "name": "",
+                    "id": "e5308bba-ee1b-4024-9c0e-9d2bbcf46405",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RT",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "2097d53a-614b-4870-962f-599ec18f9097",
                     "path": "<Mouse>/rightButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Qued RT",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "bdef5e3b-d708-47fe-8488-78148aa388ed",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Hold RT",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

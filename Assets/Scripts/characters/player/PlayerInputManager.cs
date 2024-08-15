@@ -31,7 +31,7 @@ namespace JM
         [SerializeField] Vector2 movement_Input;
         public float horizontal_Input;
         public float vertical_Input;
-        [SerializeField] public float moveAmount;
+        public float moveAmount;
 
         [Header("Player Action Input")]
         [SerializeField] bool dodge_Input = false;
@@ -39,6 +39,7 @@ namespace JM
         [SerializeField] bool jump_Input = false;
         [SerializeField] bool switch_Right_Weapon_Input = false;
         [SerializeField] bool switch_Left_Weapon_Input = false;
+        [SerializeField] bool interaction_Input = false;
 
         [Header("Bumper Input")]
         [SerializeField] bool RB_Input = false;
@@ -121,6 +122,7 @@ namespace JM
                 playerControles.PlayerAction.Jump.performed += i => jump_Input = true;
                 playerControles.PlayerAction.SwitchRightWeapon.performed += i => switch_Right_Weapon_Input = true;
                 playerControles.PlayerAction.SwitchLeftWeapon.performed += i => switch_Left_Weapon_Input = true;
+                playerControles.PlayerAction.Interact.performed += i => interaction_Input = true;
 
                 //Bumpers
                 playerControles.PlayerAction.RB.performed += i => RB_Input = true;
@@ -190,6 +192,7 @@ namespace JM
             HandleSwitchRightWeaponInput();
             HandleSwitchLeftWeaponInput();
             HandleQuedInputs();
+            HandleInteractionInput();
         }
 
         // Lock on
@@ -425,6 +428,16 @@ namespace JM
             {
                 switch_Left_Weapon_Input = false;
                 player.playerEquipmentManager.SwitchLeftWeapon();
+            }
+        }
+
+        private void HandleInteractionInput()
+        {
+            if (interaction_Input)
+            {
+                interaction_Input = false;
+
+                player.playerInteractionManager.Interact();
             }
         }
 

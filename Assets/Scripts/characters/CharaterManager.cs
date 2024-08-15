@@ -19,6 +19,7 @@ namespace JM
         [HideInInspector] public CharaterCombatManager characterCombatManager;
         [HideInInspector] public CharaterSoundFXManager characterSoundFXManager;
         [HideInInspector] public CharaterLocomotionManager charaterLocomotionManager;
+        [HideInInspector] public CharacterUIManager characterUIManager;
 
         [Header("CharacterGroup")]
         public CharacterGroup characterGroup;
@@ -32,12 +33,14 @@ namespace JM
 
             characterController = GetComponent<CharacterController>();
             animator = GetComponent<Animator>();
+
             characterNetworkManager = GetComponent<CharacterNetworkManager>();
             characterEffectsManager = GetComponent<CharacterEffectsManager>();
             characterAnimatorManager = GetComponent<CharaterAnimatorManager>();
             characterCombatManager = GetComponent<CharaterCombatManager>();
             characterSoundFXManager = GetComponent<CharaterSoundFXManager>();
             charaterLocomotionManager = GetComponent<CharaterLocomotionManager>();
+            characterUIManager = GetComponent<CharacterUIManager>();
         }
 
         protected virtual void Start()
@@ -78,6 +81,16 @@ namespace JM
         }
 
         protected virtual void LateUpdate()
+        {
+
+        }
+
+        protected virtual void OnEnable()
+        {
+
+        }
+
+        protected virtual void OnDisable()
         {
 
         }

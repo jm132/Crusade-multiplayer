@@ -15,6 +15,10 @@ namespace JM
         [HideInInspector] public PlayerUIHudManager playerUIHudManager;
         [HideInInspector] public PlayerUIPopUpManager playerUIPopUpManager;
 
+        [Header("UI Flags")]
+        public bool menuWindowIsOpen = false;  // inventory sceen, equipment menu ect
+        public bool popUpWindowIsOpen = false; // item pick up, dialogue pop up ect
+
 
         private void Awake()
         {

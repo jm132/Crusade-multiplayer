@@ -5105,7 +5105,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5075424697538966117, guid: 389139c6e0d425c4dbc820c5d56a4809, type: 3}
       propertyPath: NetworkConfig.NetworkPrefabs.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5075424697538966117, guid: 389139c6e0d425c4dbc820c5d56a4809, type: 3}
       propertyPath: NetworkConfig.NetworkPrefabs.Array.data[0].Prefab
@@ -5256,6 +5256,10 @@ PrefabInstance:
     - target: {fileID: 3292246627811796502, guid: 661cac377c15b8c48bf82268c80c1c70, type: 3}
       propertyPath: m_Name
       value: Player Camera (Left & Right)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4185927504888308567, guid: 661cac377c15b8c48bf82268c80c1c70, type: 3}
+      propertyPath: cameraSmoothSpeed
+      value: 0.015
       objectReference: {fileID: 0}
     - target: {fileID: 4185927504888308567, guid: 661cac377c15b8c48bf82268c80c1c70, type: 3}
       propertyPath: upAndDownRotationSpeed
