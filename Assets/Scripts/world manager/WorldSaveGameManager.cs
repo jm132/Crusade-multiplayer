@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Unity.Netcode;
 
 namespace JM
 {
@@ -243,7 +244,7 @@ namespace JM
             player.playerNetworkManager.endurance.Value = 10;
             
             SaveGame();
-            StartCoroutine(LoadWorldScene());
+            LoadWorldScene(WorldSceneIndex);
         }
 
         public void LoadGame()
@@ -257,7 +258,7 @@ namespace JM
             saveFileDateWriter.saveFileName = saveFileName;
             currentCharacterData = saveFileDateWriter.LoadSaveFile();
 
-            StartCoroutine(LoadWorldScene());
+            LoadWorldScene(WorldSceneIndex);
         }
 
         public void SaveGame()
@@ -325,17 +326,12 @@ namespace JM
 
         }
 
-        public IEnumerator LoadWorldScene()
+        public void LoadWorldScene(int buidIndex)
         {
-            // for i world scene use this 
-            AsyncOperation loadOperation = SceneManager.LoadSceneAsync(WorldSceneIndex);
-            
-            // if wanting to use different scenes for levels in project us this
-            //AsyncOperation loadOperation = SceneManager.LoadSceneAsync(currentCharacterData.sceneIndex);
+            string worldScene = SceneUtility.GetScenePathByBuildIndex(buidIndex);
+            NetworkManager.Singleton.SceneManager.LoadScene(worldScene, LoadSceneMode.Single);
 
             player.LoadGameDataFromCurrentCharacterData(ref currentCharacterData);
-
-            yield return null;
         }
 
         public int GetWorldSceneIndex()

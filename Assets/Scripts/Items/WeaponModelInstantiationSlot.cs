@@ -17,7 +17,7 @@ namespace JM
             }
         }
 
-        public void LoadWeapon(GameObject weaponModel)
+        public void PlaceWeaponModelIntoSlot(GameObject weaponModel)
         { 
             currentWeaponModel = weaponModel;
             weaponModel.transform.parent = transform;
@@ -25,6 +25,34 @@ namespace JM
             weaponModel.transform.localPosition = Vector3.zero;
             weaponModel.transform.localRotation = Quaternion.identity;
             weaponModel.transform.localScale = Vector3.one;
+        }
+
+        public void PlaceWeaponModelInUnequippedSlot(GameObject weaponModel, WeaponClass weaponClass, PlayerManager player)
+        {
+            // to do, move weapon on back closer or more outward depending on chest equipment (so it dosnt appear to float)
+
+            currentWeaponModel = weaponModel;
+            weaponModel.transform.parent = transform;
+
+            switch (weaponClass)
+            {
+                case WeaponClass.StraightSword:
+                    weaponModel.transform.localPosition = new Vector3(0.064f, 0, -0.06f);
+                    weaponModel.transform.localRotation = Quaternion.Euler(194, 90, -0.22f);
+                    break;
+                case WeaponClass.Spear:
+                    weaponModel.transform.localPosition = new Vector3(0.064f, 0, -0.06f);
+                    weaponModel.transform.localRotation = Quaternion.Euler(194, 90, -0.22f);
+                    break;
+                case WeaponClass.MediumShield:
+                    weaponModel.transform.localPosition = new Vector3(0.064f, 0, -0.06f);
+                    weaponModel.transform.localRotation = Quaternion.Euler(194, 90, -0.22f);
+                    break;
+                default:
+                    break;
+
+
+            }
         }
     }
 }

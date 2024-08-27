@@ -105,6 +105,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "LB",
+                    "type": "Button",
+                    "id": "5cf8f58f-a813-43c0-9547-3cb7cf54d408",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Qued RB",
                     "type": "Button",
                     "id": "71e85883-e335-4489-a52b-c3e4ffef161c",
@@ -144,6 +153,33 @@
                     "name": "Interact",
                     "type": "Button",
                     "id": "c8545e6f-ca9b-4238-95f0-9f68ea87a4bf",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Two Hand Weapon",
+                    "type": "PassThrough",
+                    "id": "400e71a4-60af-4a64-bb19-fefb1a6379bf",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Hold(duration=0.4,pressPoint=0.5)",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Two Hand Right Weapon",
+                    "type": "Button",
+                    "id": "d0487a98-a566-429a-bba5-445ec2c3e676",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Two Hand Left Weapon",
+                    "type": "Button",
+                    "id": "f725a5df-06fc-477d-9f7b-3364311c1a75",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -356,6 +392,50 @@
                     "processors": "",
                     "groups": "",
                     "action": "Hold RT",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "eedd850d-f634-4609-ad09-c054ac19675d",
+                    "path": "<Keyboard>/b",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LB",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1f76d2af-7e4e-4ec3-bb6f-665aa8634d97",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Two Hand Weapon",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "694929d4-3690-4c5f-809a-f761f86a8424",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Two Hand Right Weapon",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c7fd531d-fa52-45f3-a443-1dd0585ddcef",
+                    "path": "<Keyboard>/b",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Two Hand Left Weapon",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

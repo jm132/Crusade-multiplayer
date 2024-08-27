@@ -34,6 +34,9 @@ namespace JM
             if (!playerPerformingAction.charaterLocomotionManager.isGrounded)
                 return;
 
+            if(playerPerformingAction.IsOwner)
+                playerPerformingAction.playerNetworkManager.isAttacking.Value = true;
+
             // if sprinting, perform a running attack
             if (playerPerformingAction.characterNetworkManager.isSprinting.Value)
             {
@@ -68,35 +71,35 @@ namespace JM
                 // perform an attack based on the pervious attack just played
                 if (playerPerformingAction.characterCombatManager.lastAttackAnimationPerformed == light_Attack_01)
                 {
-                    playerPerformingAction.playerAnimatorManager.PlayTargetAttackActionAnimation(AttackType.LightAttack02, light_Attack_02, true);
+                    playerPerformingAction.playerAnimatorManager.PlayTargetAttackActionAnimation(weaponPerformingAction, AttackType.LightAttack02, light_Attack_02, true);
                 }
                 else
                 {
-                    playerPerformingAction.playerAnimatorManager.PlayTargetAttackActionAnimation(AttackType.LightAttack01, light_Attack_01, true);
+                    playerPerformingAction.playerAnimatorManager.PlayTargetAttackActionAnimation(weaponPerformingAction, AttackType.LightAttack01, light_Attack_01, true);
                 }
             }
             // otherwise, if not already attacking, perform a regular attack
             else if (!playerPerformingAction.isPerfromingAction)
             {
-                playerPerformingAction.playerAnimatorManager.PlayTargetAttackActionAnimation(AttackType.LightAttack01, light_Attack_01, true);
+                playerPerformingAction.playerAnimatorManager.PlayTargetAttackActionAnimation(weaponPerformingAction, AttackType.LightAttack01, light_Attack_01, true);
             }
         }
 
         private void PerformRunningAttacked(PlayerManager playerPerformingAction, WeaponItem weaponPerformingAction)
         {
-            playerPerformingAction.playerAnimatorManager.PlayTargetAttackActionAnimation(AttackType.RunningAttack01, run_Attack_01, true);
+            playerPerformingAction.playerAnimatorManager.PlayTargetAttackActionAnimation(weaponPerformingAction, AttackType.RunningAttack01, run_Attack_01, true);
         }
 
         private void PerformRollingAttacked(PlayerManager playerPerformingAction, WeaponItem weaponPerformingAction)
         {
             playerPerformingAction.playerCombatManager.canPerformRollingAttack = false;
-            playerPerformingAction.playerAnimatorManager.PlayTargetAttackActionAnimation(AttackType.RollingAttack01, roll_Attack_01, true);
+            playerPerformingAction.playerAnimatorManager.PlayTargetAttackActionAnimation(weaponPerformingAction, AttackType.RollingAttack01, roll_Attack_01, true);
         }
 
         private void PerformBackstepAttacked(PlayerManager playerPerformingAction, WeaponItem weaponPerformingAction)
         {
             playerPerformingAction.playerCombatManager.canPerformBackstepAttack = false;
-            playerPerformingAction.playerAnimatorManager.PlayTargetAttackActionAnimation(AttackType.BackstepAttack01, backstep_Attack_01, true);
+            playerPerformingAction.playerAnimatorManager.PlayTargetAttackActionAnimation(weaponPerformingAction, AttackType.BackstepAttack01, backstep_Attack_01, true);
         }
     }
 }

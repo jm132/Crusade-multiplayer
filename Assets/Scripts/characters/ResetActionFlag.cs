@@ -30,6 +30,7 @@ namespace JM
             {
                 charater.characterNetworkManager.isJumping.Value = false;
                 charater.characterNetworkManager.isInvulnerable.Value = false;
+                charater.characterNetworkManager.isAttacking.Value = false;
             }
         }
 

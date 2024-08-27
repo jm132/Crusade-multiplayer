@@ -61,12 +61,24 @@ namespace JM
             return spawnedInBosses.FirstOrDefault(boss => boss.bossID == ID);
         }
 
+        public void RestAllCharacters()
+        {
+            DespawnAllCharacters();
+
+            foreach (var spawner in aICharacterSpawners)
+            {
+                spawner.AttemptToSpawnCharacter();
+            }
+        }
+
         private void DespawnAllCharacters()
         {
             foreach(var character in spawnedInCharacters)
             {
                 character.GetComponent<NetworkObject>().Despawn();
             }
+
+            spawnedInCharacters.Clear();
         }
 
         private void DisableAllCharacter()

@@ -71,5 +71,31 @@ namespace JM
 
             return viewableAngle;
         }
+
+        public DamageIntensity GetDamageIntensityBasedOnPoiseDamage(float poiseDamage)
+        {
+            //small items
+            DamageIntensity damageIntensity = DamageIntensity.Ping;
+
+            // small weapon / lightr attacks
+            if (poiseDamage >= 10)
+                damageIntensity = DamageIntensity.Light;
+
+            // standard weapon / meduium attacks
+            if (poiseDamage >= 30)
+                damageIntensity = DamageIntensity.Medium;
+
+            // great weapon / heavy attacks
+            if (poiseDamage >= 70)
+                damageIntensity = DamageIntensity.Heavy;
+
+            // ultra weapon / colossal attacks
+            if (poiseDamage >= 120)
+                damageIntensity = DamageIntensity.Colossal;
+
+
+
+            return damageIntensity;
+        }
     }
 }

@@ -1,0 +1,62 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 971949c403064034ea79ad1d75ada6b2, type: 3}
+  m_Name: Buster
+  m_EditorClassIdentifier: 
+  itemName: Buster
+  itemIcon: {fileID: 0}
+  itemDescription: 
+  itemID: 8
+  weaponAnimator: {fileID: 22100000, guid: 71665764250737c4da53533efeaf635e, type: 2}
+  weaponModelType: 0
+  weaponModel: {fileID: 380578702698817919, guid: de4b71eebf4a1644c93ffd984f00ba31, type: 3}
+  weaponClass: 0
+  strengthREQ: 5
+  dexREQ: 7
+  intREQ: 4
+  faithREQ: 0
+  phyicalDamage: 100
+  magicDamage: 0
+  fireDamage: 0
+  holydamage: 0
+  lightningDamage: 15
+  poiseDamage: 10
+  light_Attack_01_Modifier: 1.1
+  light_Attack_02_Modifier: 1.2
+  heavy_Attack_01_Modifier: 1.4
+  heavy_Attack_02_Modifier: 1.6
+  charge_Attack_01_Modifier: 2
+  charge_Attack_02_Modifier: 2.2
+  running_Attack_01_Modifier: 1.1
+  rolling_Attack_01_Modifier: 1.1
+  backstep_Attack_01_Modifier: 1.1
+  baseStaminaCost: 20
+  lightAttackStaminaCostMultipler: 0.9
+  heavyAttackStaminaCostMultipler: 1.3
+  chargedAttackStaminaCostMultipler: 1.5
+  runningAttackStaminaCostMultipler: 1.1
+  rollingAttackStaminaCostMultipler: 1.1
+  backstepAttackStaminaCostMultipler: 1.1
+  physicalBaseDamegeAbsorption: 50
+  magicBaseDamageAbsorption: 50
+  fireBaseDamageAbsorption: 50
+  holyBaseDamageAbsorption: 50
+  lightningBaseDamageAbsorption: 50
+  stability: 50
+  oh_RB_Action: {fileID: 11400000, guid: 63c8445ab5b9f9344aa4370a24d02756, type: 2}
+  oh_RT_Action: {fileID: 11400000, guid: 591fb22e16c00ee4ca5f0d8420b1b301, type: 2}
+  oh_LB_Action: {fileID: 11400000, guid: 2f209ba78676f2640887ec77516c9235, type: 2}
+  whooshes:
+  - {fileID: 8300000, guid: eaad5bf6aa7d1984da1fb738da2e6926, type: 3}
+  - {fileID: 8300000, guid: 15da0b7a4bef36746a6591b1879e33be, type: 3}
+  blocking:
+  - {fileID: 8300000, guid: 4845ba7a92761d44abc63597a6cd9aa9, type: 3}

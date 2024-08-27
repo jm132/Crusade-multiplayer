@@ -56,5 +56,10 @@ namespace JM
             if (footSteps.Length > 0)
                 PlaySoundFX(WorldSoundFXManager.Instance.ChooseRandomSFXFromArray(footSteps));
         }
+
+        public virtual void PlayBlockSoundFX()
+        {
+
+        }
     }
 }

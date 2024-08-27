@@ -491,11 +491,17 @@ namespace SG
 
             if (playManualOffHandWeaponFX)
             {
+                if (offWeaponFX == null)
+                    return;
+
                 offWeaponFX.Stop();
                 offWeaponFX.Play();
             }
             if (playManualMainHandWeaponFX)
             {
+                if (mainWeaponFX == null)
+                    return;
+
                 mainWeaponFX.Stop();
                 mainWeaponFX.Play();
             }
@@ -576,13 +582,20 @@ namespace SG
             if (Input.GetKeyDown(KeyCode.E))
             {
                 lightAttackInput = true;
-                mainWeaponFX.Stop();
-                mainWeaponFX.Play();
+
+                if (mainWeaponFX != null)
+                {
+                    mainWeaponFX.Stop();
+                    mainWeaponFX.Play();
+                }
 
                 if (isDualWielding)
                 {
-                    offWeaponFX.Stop();
-                    offWeaponFX.Play();
+                    if (offWeaponChargeFX != null)
+                    {
+                        offWeaponFX.Stop();
+                        offWeaponFX.Play();
+                    }
                 }
             }
 
@@ -640,8 +653,12 @@ namespace SG
                     if (Input.GetKeyDown(KeyCode.E))
                     {
                         PlayActionAnimation("Main_Light_Attack_02", true);
-                        mainWeaponFX.Stop();
-                        mainWeaponFX.Play();
+                        if (mainWeaponFX != null)
+                        {
+                            mainWeaponFX.Stop();
+                            mainWeaponFX.Play();
+                        }
+
                         attackLastPerformed = main_Light_Attack_02;
                         return;
                     }
@@ -651,8 +668,12 @@ namespace SG
                     if (Input.GetKeyDown(KeyCode.E))
                     {
                         PlayActionAnimation("Main_Light_Attack_01", true);
-                        mainWeaponFX.Stop();
-                        mainWeaponFX.Play();
+                        if (mainWeaponFX != null)
+                        {
+                            mainWeaponFX.Stop();
+                            mainWeaponFX.Play();
+                        }
+
                         attackLastPerformed = main_Light_Attack_01;
                     }
                 }
@@ -661,8 +682,12 @@ namespace SG
                     if (Input.GetKeyDown(KeyCode.E))
                     {
                         PlayActionAnimation("TH_Light_Attack_02", true);
-                        mainWeaponFX.Stop();
-                        mainWeaponFX.Play();
+                        if (mainWeaponFX != null)
+                        {
+                            mainWeaponFX.Stop();
+                            mainWeaponFX.Play();
+                        }
+
                         attackLastPerformed = th_Light_Attack_02;
                     }
                 }
@@ -681,10 +706,15 @@ namespace SG
                     if (Input.GetKeyDown(KeyCode.E))
                     {
                         PlayActionAnimation("DW_Light_Attack_02", true);
-                        mainWeaponFX.Stop();
-                        mainWeaponFX.Play();
-                        offWeaponFX.Stop();
-                        offWeaponFX.Play();
+
+                        if (mainWeaponFX != null && offWeaponFX != null)
+                        {
+                            mainWeaponFX.Stop();
+                            mainWeaponFX.Play();
+                            offWeaponFX.Stop();
+                            offWeaponFX.Play();
+                        }
+
                         attackLastPerformed = dw_Light_Attack_02;
                     }
                 }
@@ -693,10 +723,15 @@ namespace SG
                     if (Input.GetKeyDown(KeyCode.E))
                     {
                         PlayActionAnimation("DW_Light_Attack_01", true);
-                        mainWeaponFX.Stop();
-                        mainWeaponFX.Play();
-                        offWeaponFX.Stop();
-                        offWeaponFX.Play();
+
+                        if (mainWeaponFX != null && offWeaponFX != null)
+                        {
+                            mainWeaponFX.Stop();
+                            mainWeaponFX.Play();
+                            offWeaponFX.Stop();
+                            offWeaponFX.Play();
+                        }
+
                         attackLastPerformed = dw_Light_Attack_01;
                     }
                 }
@@ -722,11 +757,15 @@ namespace SG
 
                 if (isDualWielding)
                 {
-                    PlayActionAnimation("DW_Charge_Attack_01", true);
-                    mainWeaponChargeFX.Stop();
-                    mainWeaponChargeFX.Play();
-                    offWeaponChargeFX.Stop();
-                    offWeaponChargeFX.Play();
+                    PlayActionAnimation("Main_Charge_Attack_01", true);
+
+                    if (mainWeaponChargeFX != null && offWeaponChargeFX != null)
+                    {
+                        mainWeaponChargeFX.Stop();
+                        mainWeaponChargeFX.Play();
+                        offWeaponChargeFX.Stop();
+                        offWeaponChargeFX.Play();
+                    }
                     attackLastPerformed = dw_Charge_Attack_01;
                     return;
                 }
@@ -734,15 +773,25 @@ namespace SG
                 if (isTwoHandingWeapon)
                 {
                     PlayActionAnimation("TH_Charge_Attack_01", true);
-                    mainWeaponChargeFX.Stop();
-                    mainWeaponChargeFX.Play();
+
+                    if (mainWeaponChargeFX != null)
+                    {
+                        mainWeaponChargeFX.Stop();
+                        mainWeaponChargeFX.Play();
+                    }
+
                     attackLastPerformed = th_Charge_Attack_01;
                 }
                 else
                 {
                     PlayActionAnimation("Main_Charge_Attack_01", true);
-                    mainWeaponChargeFX.Stop();
-                    mainWeaponChargeFX.Play();
+
+                    if (mainWeaponChargeFX != null)
+                    {
+                        mainWeaponChargeFX.Stop();
+                        mainWeaponChargeFX.Play();
+                    }
+
                     attackLastPerformed = main_Charge_Attack_01;
                 }
             }
@@ -845,10 +894,14 @@ namespace SG
                 if (isDualWielding)
                 {
                     PlayActionAnimation("DW_Jumping_Heavy_Attack_01", false, false);
-                    mainWeaponChargeFX.Stop();
-                    mainWeaponChargeFX.Play();
-                    offWeaponChargeFX.Stop();
-                    offWeaponChargeFX.Play();
+                    if (mainWeaponFX != null && offWeaponFX != null)
+                    {
+                        mainWeaponFX.Stop();
+                        mainWeaponFX.Play();
+                        offWeaponFX.Stop();
+                        offWeaponFX.Play();
+                    }
+
                     attackLastPerformed = dw_Charge_Attack_01;
                     return;
                 }
@@ -856,15 +909,24 @@ namespace SG
                 if (isTwoHandingWeapon)
                 {
                     PlayActionAnimation("TH_Jumping_Heavy_Attack_01", false, false);
-                    mainWeaponChargeFX.Stop();
-                    mainWeaponChargeFX.Play();
+                    if (mainWeaponFX != null)
+                    {
+                        mainWeaponFX.Stop();
+                        mainWeaponFX.Play();
+                    }
+
                     attackLastPerformed = th_Charge_Attack_01;
                 }
                 else
                 {
                     PlayActionAnimation("Main_Jumping_Heavy_Attack_01", false, false);
-                    mainWeaponChargeFX.Stop();
-                    mainWeaponChargeFX.Play();
+
+                    if (mainWeaponFX != null)
+                    {
+                        mainWeaponFX.Stop();
+                        mainWeaponFX.Play();
+                    }
+
                     attackLastPerformed = main_Charge_Attack_01;
                 }
             }
@@ -874,10 +936,15 @@ namespace SG
                 if (isDualWielding)
                 {
                     PlayActionAnimation("DW_Jumping_Light_Attack_01", false, false);
-                    mainWeaponChargeFX.Stop();
-                    mainWeaponChargeFX.Play();
-                    offWeaponChargeFX.Stop();
-                    offWeaponChargeFX.Play();
+
+                    if (mainWeaponFX != null && offWeaponFX != null)
+                    {
+                        mainWeaponFX.Stop();
+                        mainWeaponFX.Play();
+                        offWeaponFX.Stop();
+                        offWeaponFX.Play();
+                    }
+
                     attackLastPerformed = dw_Charge_Attack_01;
                     return;
                 }
@@ -885,15 +952,24 @@ namespace SG
                 if (isTwoHandingWeapon)
                 {
                     PlayActionAnimation("TH_Jumping_Light_Attack_01", false, false);
-                    mainWeaponChargeFX.Stop();
-                    mainWeaponChargeFX.Play();
+
+                    if (mainWeaponFX != null)
+                    {
+                        mainWeaponFX.Stop();
+                        mainWeaponFX.Play();
+                    }
+
                     attackLastPerformed = th_Charge_Attack_01;
                 }
                 else
                 {
                     PlayActionAnimation("Main_Jumping_Light_Attack_01", false, false);
-                    mainWeaponChargeFX.Stop();
-                    mainWeaponChargeFX.Play();
+                    if (mainWeaponFX != null)
+                    {
+                        mainWeaponFX.Stop();
+                        mainWeaponFX.Play();
+                    }
+
                     attackLastPerformed = main_Charge_Attack_01;
                 }
             }
@@ -938,24 +1014,41 @@ namespace SG
                     if (isDualWielding)
                     {
                         PlayActionAnimation("DW_Backstep_Attack_01", true);
-                        mainWeaponFX.Stop();
-                        mainWeaponFX.Play();
-                        offWeaponFX.Stop();
-                        offWeaponFX.Play();
+
+                        if (mainWeaponFX != null && offWeaponFX != null)
+                        {
+                            mainWeaponFX.Stop();
+                            mainWeaponFX.Play();
+                            offWeaponFX.Stop();
+                            offWeaponFX.Play();
+                        }
+
                         return;
                     }
 
                     if (isTwoHandingWeapon)
                     {
                         PlayActionAnimation("TH_Backstep_Attack_01", true);
-                        mainWeaponFX.Stop();
-                        mainWeaponFX.Play();
+
+                        if (mainWeaponFX != null)
+                        {
+                            mainWeaponFX.Stop();
+                            mainWeaponFX.Play();
+                        }
+
                     }
                     else
                     {
                         PlayActionAnimation("Main_Backstep_Attack_01", true);
-                        mainWeaponFX.Stop();
-                        mainWeaponFX.Play();
+
+                        if (mainWeaponFX != null && offWeaponFX != null)
+                        {
+                            mainWeaponFX.Stop();
+                            mainWeaponFX.Play();
+                            offWeaponFX.Stop();
+                            offWeaponFX.Play();
+                        }
+
                     }
                 }
             }

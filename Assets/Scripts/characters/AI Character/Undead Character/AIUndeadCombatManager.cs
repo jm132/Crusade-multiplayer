@@ -12,6 +12,7 @@ namespace JM
 
         [Header("Damage")]
         [SerializeField] int baseDamage = 25;
+        [SerializeField] int basePoiseDamage = 25;
         [SerializeField] float attack01DamageModifier = 1.0f;
         [SerializeField] float attack02DamageModifier = 1.0f;
 
@@ -19,12 +20,18 @@ namespace JM
         {
             rightHandDamageCollider.physicalDamage = baseDamage * attack01DamageModifier;
             leftHandDamageCollider.physicalDamage = baseDamage * attack01DamageModifier;
+
+            rightHandDamageCollider.poiseDamage = basePoiseDamage * attack01DamageModifier;
+            leftHandDamageCollider.poiseDamage = basePoiseDamage * attack01DamageModifier;
         }
 
         public void SetAttack02Damage()
         {
             rightHandDamageCollider.physicalDamage = baseDamage * attack02DamageModifier;
             leftHandDamageCollider.physicalDamage = baseDamage * attack02DamageModifier;
+
+            rightHandDamageCollider.poiseDamage = basePoiseDamage * attack02DamageModifier;
+            leftHandDamageCollider.poiseDamage = basePoiseDamage * attack02DamageModifier;
         }
 
         public void OpenRightHandDamageCollider()

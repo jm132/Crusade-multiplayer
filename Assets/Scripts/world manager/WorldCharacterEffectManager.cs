@@ -13,6 +13,7 @@ namespace JM
 
         [Header("Damage")]
         public TakeDamageEffect takeDamageEffect;
+        public TakeBlockDamageEffect takeBlockDamageEffect;
 
         [SerializeField] List<InstantCharacterEffect> instantEffects;
 

@@ -5,7 +5,7 @@ using Unity.Netcode;
 
 namespace JM
 {
-    public class Interactable : MonoBehaviour
+    public class Interactable : NetworkBehaviour
     {
         public string interactableText; // text prompt when entering the interaction collider (pick up iten, pull level ect)
         [SerializeField] protected Collider interactableCollider; // collider that checks for player interaction

@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 namespace JM
 {
@@ -9,14 +8,19 @@ namespace JM
     {
         PlayerManager player;
 
-        public WeaponModelInstantiationSlot rightHandSlot;
-        public WeaponModelInstantiationSlot leftHandSlot;
+        [Header("Weapon Model Instantiation Slots")]
+        public WeaponModelInstantiationSlot rightHandWeaponSlot;
+        public WeaponModelInstantiationSlot leftHandWeaponSlot;
+        public WeaponModelInstantiationSlot leftHandShieldSlot;
+        public WeaponModelInstantiationSlot BackSlot;
 
-        [SerializeField] WeaponManager rightWeaponManger;
-        [SerializeField] WeaponManager leftWeaponManger;
-
+        [Header("Weapon Models")]
         public GameObject rightHandWeaponModel;
         public GameObject leftHandWeaponModel;
+
+        [Header("Weapon Managers")]
+        [SerializeField] WeaponManager rightWeaponManger;
+        [SerializeField] WeaponManager leftWeaponManger;
 
         protected override void Awake()
         {
@@ -42,11 +46,19 @@ namespace JM
             {
                 if (weaponSlot.weaponSlot == WeaponModelSlot.RightHand)
                 {
-                    rightHandSlot = weaponSlot;
+                    rightHandWeaponSlot = weaponSlot;
                 }
-                else if (weaponSlot.weaponSlot == WeaponModelSlot.LeftHand)
+                else if (weaponSlot.weaponSlot == WeaponModelSlot.LeftHandWeaponSlot)
                 {
-                    leftHandSlot = weaponSlot;
+                    leftHandWeaponSlot = weaponSlot;
+                }
+                else if (weaponSlot.weaponSlot == WeaponModelSlot.LeftHandShieldSlot)
+                {
+                    leftHandShieldSlot = weaponSlot;
+                }
+                else if (weaponSlot.weaponSlot == WeaponModelSlot.BackSlot)
+                {
+                    BackSlot = weaponSlot;
                 }
             }
         }
@@ -135,13 +147,14 @@ namespace JM
             if (player.playerInventoryManager.currentRightHandWeapon != null)
             {
                 // remove the old weapon
-                rightHandSlot.UnloadWeapon();
+                rightHandWeaponSlot.UnloadWeapon();
 
                 // bring in the new weapon
                 rightHandWeaponModel = Instantiate(player.playerInventoryManager.currentRightHandWeapon.weaponModel);
-                rightHandSlot.LoadWeapon(rightHandWeaponModel);
+                rightHandWeaponSlot.PlaceWeaponModelIntoSlot(rightHandWeaponModel);
                 rightWeaponManger = rightHandWeaponModel.GetComponent<WeaponManager>();
                 rightWeaponManger.SetWeaponDamage(player, player.playerInventoryManager.currentRightHandWeapon);
+                player.playerAnimatorManager.UpdatedAnimatorController(player.playerInventoryManager.currentRightHandWeapon.weaponAnimator);
             }
         }
 
@@ -224,14 +237,118 @@ namespace JM
             if (player.playerInventoryManager.currentLeftHandWeapon != null)
             {
                 // remove the old weapon
-                leftHandSlot.UnloadWeapon();
+                if (leftHandWeaponSlot.currentWeaponModel != null)
+                    leftHandWeaponSlot.UnloadWeapon();
+
+                if (leftHandShieldSlot.currentWeaponModel != null)
+                    leftHandShieldSlot.UnloadWeapon();
 
                 // bring in the new weapon
                 leftHandWeaponModel = Instantiate(player.playerInventoryManager.currentLeftHandWeapon.weaponModel);
-                leftHandSlot.LoadWeapon(leftHandWeaponModel);
+
+                switch (player.playerInventoryManager.currentLeftHandWeapon.weaponModelType)
+                {
+                    case WeaponModelType.Weapon:
+                        leftHandWeaponSlot.PlaceWeaponModelIntoSlot(leftHandWeaponModel);
+                        break;
+                    case WeaponModelType.Shield:
+                        leftHandShieldSlot.PlaceWeaponModelIntoSlot(leftHandWeaponModel);
+                        break;
+                    default:
+                        break;
+                }
+
                 leftWeaponManger = leftHandWeaponModel.GetComponent<WeaponManager>();
                 leftWeaponManger.SetWeaponDamage(player, player.playerInventoryManager.currentLeftHandWeapon);
             }
+        }
+
+        // two hand
+
+        public void UnTwoHandWeapon()
+        {
+            // update animator controller to current main hand wepaom
+            player.playerAnimatorManager.UpdatedAnimatorController(player.playerInventoryManager.currentRightHandWeapon.weaponAnimator);
+            // remove the strength bonus (two handing a weapon gives make the player strength level (strength + (strength * 0.5)
+
+            // un-two hand the model and move the model that isnt being two handed back to its hand (if there is any)
+            
+            // left hand 
+            if (player.playerInventoryManager.currentLeftHandWeapon.weaponModelType == WeaponModelType.Weapon)
+            {
+                leftHandWeaponSlot.PlaceWeaponModelIntoSlot(leftHandWeaponModel);
+            }
+            else if (player.playerInventoryManager.currentLeftHandWeapon.weaponModelType == WeaponModelType.Shield)
+            {
+                leftHandShieldSlot.PlaceWeaponModelIntoSlot(leftHandWeaponModel);
+            }
+
+            // right hand
+            rightHandWeaponSlot.PlaceWeaponModelIntoSlot(rightHandWeaponModel);
+
+            // refresh the damage collider calculations (strenght scaling would be effected since the strength bonus was removed)
+            rightWeaponManger.SetWeaponDamage(player, player.playerInventoryManager.currentRightHandWeapon);
+            leftWeaponManger.SetWeaponDamage(player, player.playerInventoryManager.currentLeftHandWeapon);
+        }
+
+        public void TwoHandRightWeapon()
+        {
+            // check for untwohandable item (like unarmed) if attempting to two hand unarmed, return
+            if (player.playerInventoryManager.currentRightHandWeapon == WorldItemDatabase.Instance.unarmedWeapon)
+            {
+                // if returning and not two handing the weapon, reset bool status's
+                if (player.IsOwner)
+                {
+                    player.playerNetworkManager.isTwoHandingRightWeapon.Value = false;
+                    player.playerNetworkManager.isTwoHandingWeapon.Value = false;
+                }
+
+                return;
+            }
+
+            // update animator
+            player.playerAnimatorManager.UpdatedAnimatorController(player.playerInventoryManager.currentRightHandWeapon.weaponAnimator);
+
+            // place the non-two handed weapon model in the back slot or hip slot
+            BackSlot.PlaceWeaponModelInUnequippedSlot(leftHandWeaponModel, player.playerInventoryManager.currentLeftHandWeapon.weaponClass, player);
+
+            // add two hand strenght bonus
+
+            // place the two handed weapon model in the main (right hand)
+            rightHandWeaponSlot.PlaceWeaponModelIntoSlot(rightHandWeaponModel);
+
+            rightWeaponManger.SetWeaponDamage(player, player.playerInventoryManager.currentRightHandWeapon);
+            leftWeaponManger.SetWeaponDamage(player, player.playerInventoryManager.currentLeftHandWeapon);
+        }
+
+        public void TwoHandLeftWeapon()
+        {
+            // check for untwohandable item (like unarmed) if attempting to two hand unarmed, return
+            if (player.playerInventoryManager.currentLeftHandWeapon == WorldItemDatabase.Instance.unarmedWeapon)
+            {
+                // if returning and not two handing the weapon, reset bool status's
+                if (player.IsOwner)
+                {
+                    player.playerNetworkManager.isTwoHandingLeftWeapon.Value = false;
+                    player.playerNetworkManager.isTwoHandingWeapon.Value = false;
+                }
+
+                return;
+            }
+
+            // update animator
+            player.playerAnimatorManager.UpdatedAnimatorController(player.playerInventoryManager.currentLeftHandWeapon.weaponAnimator);
+
+            // place the non-two handed weapon model in the back slot or hip slot
+            BackSlot.PlaceWeaponModelInUnequippedSlot(rightHandWeaponModel, player.playerInventoryManager.currentRightHandWeapon.weaponClass, player);
+
+            // add two hand strenght bonus
+
+            // place the two handed weapon model in the main (right hand)
+            rightHandWeaponSlot.PlaceWeaponModelIntoSlot(leftHandWeaponModel);
+
+            rightWeaponManger.SetWeaponDamage(player, player.playerInventoryManager.currentRightHandWeapon);
+            leftWeaponManger.SetWeaponDamage(player, player.playerInventoryManager.currentLeftHandWeapon);
         }
 
         // damage colliders

@@ -18,15 +18,28 @@ namespace JM
         [Header("Damage Animations")]
         public string lastDamageAnimationPlayed;
 
+        // Ping Hit Reactions
+        [SerializeField] string hit_Forward_Ping_01 = "hit_Forward_Ping_01";
+        [SerializeField] string hit_Forward_Ping_02 = "hit_Forward_Ping_02";
+        [SerializeField] string hit_Backward_Ping_01 = "hit_Backward_Ping_01";
+        [SerializeField] string hit_Backward_Ping_02 = "hit_Backward_Ping_02";
+        [SerializeField] string hit_Left_Ping_01 = "hit_Left_Ping_01";
+        [SerializeField] string hit_Left_Ping_02 = "hit_Left_Ping_02";
+        [SerializeField] string hit_Right_Ping_01 = "hit_Right_Ping_01";
+        [SerializeField] string hit_Right_Ping_02 = "hit_Right_Ping_02";
+
+        public List<string> forward_Ping_Damage = new List<string>();
+        public List<string> backward_Ping_Damage = new List<string>();
+        public List<string> left_Ping_Damage = new List<string>();
+        public List<string> right_Ping_Damage = new List<string>();
+
+        // Medium Hit Reactions
         [SerializeField] string hit_Forward_Medium_01 = "hit_Forward_Medium_01";
         [SerializeField] string hit_Forward_Medium_02 = "hit_Forward_Medium_02";
-
         [SerializeField] string hit_Backward_Medium_01 = "hit_Backward_Medium_01";
         [SerializeField] string hit_Backward_Medium_02 = "hit_Backward_Medium_02";
-
         [SerializeField] string hit_Left_Medium_01 = "hit_Left_Medium_01";
         [SerializeField] string hit_Left_Medium_02 = "hit_Left_Medium_02";
-
         [SerializeField] string hit_Right_Medium_01 = "hit_Right_Medium_01";
         [SerializeField] string hit_Right_Medium_02 = "hit_Right_Medium_02";
 
@@ -45,6 +58,18 @@ namespace JM
 
         protected virtual void Start()
         {
+            forward_Ping_Damage.Add(hit_Forward_Ping_01);
+            forward_Medium_Damage.Add(hit_Forward_Ping_02);
+
+            backward_Ping_Damage.Add(hit_Backward_Ping_01);
+            backward_Ping_Damage.Add(hit_Backward_Ping_02);
+
+            left_Ping_Damage.Add(hit_Left_Ping_01);
+            left_Ping_Damage.Add(hit_Left_Ping_02);
+
+            right_Ping_Damage.Add(hit_Right_Ping_01);
+            right_Ping_Damage.Add(hit_Right_Ping_02);
+
             forward_Medium_Damage.Add(hit_Forward_Medium_01);
             forward_Medium_Damage.Add(hit_Forward_Medium_02);
 
@@ -161,7 +186,8 @@ namespace JM
             charater.characterNetworkManager.NotifyTheServerOfActionAnimtionServerRpc(NetworkManager.Singleton.LocalClientId, targetAnimation, applyRootMotion);
         }
 
-        public virtual void PlayTargetAttackActionAnimation(AttackType attackType,
+        public virtual void PlayTargetAttackActionAnimation(WeaponItem weapon,
+            AttackType attackType,
             string targetAnimation,
             bool isPerformingAction,
             bool applyRootMation = true,
@@ -176,6 +202,7 @@ namespace JM
 
             charater.characterCombatManager.currentAttackType = attackType;
             charater.characterCombatManager.lastAttackAnimationPerformed = targetAnimation;
+            UpdatedAnimatorController(weapon.weaponAnimator);
             charater.characterAnimatorManager.applyRootMotion = applyRootMation;
             charater.animator.CrossFade(targetAnimation, 0.2f);
             charater.isPerfromingAction = isPerformingAction;
@@ -186,5 +213,9 @@ namespace JM
             charater.characterNetworkManager.NotifyTheServerOfAttackActionAnimtionServerRpc(NetworkManager.Singleton.LocalClientId, targetAnimation, applyRootMation);
         }
 
+        public void UpdatedAnimatorController(AnimatorOverrideController weaponController)
+        {
+            charater.animator.runtimeAnimatorController = weaponController;
+        }
     }
 }

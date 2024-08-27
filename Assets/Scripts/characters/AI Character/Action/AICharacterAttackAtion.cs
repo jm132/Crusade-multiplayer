@@ -24,7 +24,7 @@ namespace JM
         public float maximumAttackDistance = 2;
         public void AttemptToPerformAction(AICharacterManager aICharacter)
         {
-            aICharacter.characterAnimatorManager.PlayTargetAttackActionAnimation(attackType, attackAnimation, true);
+            aICharacter.characterAnimatorManager.PlayTargetActionAnimation( attackAnimation, true);
         }
     }
 }

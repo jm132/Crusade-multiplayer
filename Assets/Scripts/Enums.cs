@@ -31,10 +31,25 @@ public enum CharacterGroup
 public enum WeaponModelSlot
 {
     RightHand,
-    LeftHand,
+    LeftHandWeaponSlot,
+    LeftHandShieldSlot,
+    BackSlot,
     //Right Hips
     //Left Hips
-    //Back
+}
+
+public enum WeaponModelType
+{
+    Weapon,
+    Shield
+}
+
+public enum WeaponClass
+{
+    StraightSword,
+    Spear,
+    MediumShield,
+    Fist
 }
 
 // this is used to calculate damage bades on attack type 
@@ -49,4 +64,13 @@ public enum AttackType
     RunningAttack01,
     RollingAttack01,
     BackstepAttack01,
+}
+
+public enum DamageIntensity
+{
+    Ping,
+    Light,
+    Medium,
+    Heavy,
+    Colossal
 }

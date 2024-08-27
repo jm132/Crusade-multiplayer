@@ -30,12 +30,16 @@ namespace JM
         public int vitality;
         public int endurance;
 
+        [Header("Sites Of Grace")]
+        public SerializableDictionary<int, bool> sitesOfGrace;  // the int is the site of grace I.D, the bool is the "activated" status
+
         [Header("Bosses")]
         public SerializableDictionary<int, bool> bossesAwakened; // the int is the boss I.D, the bool is the awwkened status
         public SerializableDictionary<int, bool> bossesDefeated; // the int is the boss I.D, the bool is the defeated status
 
         public CharaterSaveData()
         {
+            sitesOfGrace = new SerializableDictionary<int, bool>();
             bossesAwakened = new SerializableDictionary<int, bool>();
             bossesDefeated = new SerializableDictionary<int, bool>();
         }

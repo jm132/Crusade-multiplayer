@@ -17,6 +17,7 @@ namespace JM
         [HideInInspector] public CharacterEffectsManager characterEffectsManager;
         [HideInInspector] public CharaterAnimatorManager characterAnimatorManager;
         [HideInInspector] public CharaterCombatManager characterCombatManager;
+        [HideInInspector] public CharaterStatsManager characterStatsManager;
         [HideInInspector] public CharaterSoundFXManager characterSoundFXManager;
         [HideInInspector] public CharaterLocomotionManager charaterLocomotionManager;
         [HideInInspector] public CharacterUIManager characterUIManager;
@@ -38,6 +39,7 @@ namespace JM
             characterEffectsManager = GetComponent<CharacterEffectsManager>();
             characterAnimatorManager = GetComponent<CharaterAnimatorManager>();
             characterCombatManager = GetComponent<CharaterCombatManager>();
+            characterStatsManager = GetComponent<CharaterStatsManager>();
             characterSoundFXManager = GetComponent<CharaterSoundFXManager>();
             charaterLocomotionManager = GetComponent<CharaterLocomotionManager>();
             characterUIManager = GetComponent<CharacterUIManager>();

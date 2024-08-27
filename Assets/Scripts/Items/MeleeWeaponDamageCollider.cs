@@ -51,6 +51,12 @@ namespace JM
             }
         }
 
+        protected override void GetBlockingDotValues(CharaterManager damageTarget)
+        {
+            directionFromAttackToDamageTarget = characterCausingDamage.transform.position - damageTarget.transform.position;
+            dotValueFromAttackToDamageTarget = Vector3.Dot(directionFromAttackToDamageTarget, damageTarget.transform.forward);
+        }
+
         protected override void DamageTarget(CharaterManager damageTarget)
         {
             // don't want to damage the same target more than once in a single attack
@@ -65,6 +71,7 @@ namespace JM
             damageEffect.magicDamage = magicDamage;
             damageEffect.fireDamage = fireDamage;
             damageEffect.holyDamage = holyDamage;
+            damageEffect.poiseDamage = poiseDamage;
             damageEffect.contactPoint = contactPoint;
             damageEffect.angleHitFrom = Vector3.SignedAngle(characterCausingDamage.transform.forward, damageTarget.transform.forward, Vector3.up);
 

@@ -43,10 +43,16 @@ namespace JM
 
         [Header("Bumper Input")]
         [SerializeField] bool RB_Input = false;
+        [SerializeField] bool LB_Input = false;
 
         [Header("Trigger Input")]
         [SerializeField] bool RT_Input = false;
         [SerializeField] bool Hold_RT_Input = false;
+
+        [Header("Two Hand Input")]
+        [SerializeField] bool two_Hand_Input = false;
+        [SerializeField] bool two_Hand_Right_Weapon_Input = false;
+        [SerializeField] bool two_Hand_Left_Weapon_Input = false;
 
         [Header("Qued Inputs")]
         [SerializeField] private bool input_Que_Is_Active = false;
@@ -126,11 +132,21 @@ namespace JM
 
                 //Bumpers
                 playerControles.PlayerAction.RB.performed += i => RB_Input = true;
+                playerControles.PlayerAction.LB.performed += i => LB_Input = true;
+                playerControles.PlayerAction.LB.canceled += i => player.playerNetworkManager.isBlocking.Value = false;
 
                 // Triggers
                 playerControles.PlayerAction.RT.performed += i => RT_Input = true;
                 playerControles.PlayerAction.HoldRT.performed += i => Hold_RT_Input = true;
                 playerControles.PlayerAction.HoldRT.canceled += i => Hold_RT_Input = false;
+
+                // Two Hand
+                playerControles.PlayerAction.TwoHandWeapon.performed += i => two_Hand_Input = true;
+                playerControles.PlayerAction.TwoHandWeapon.canceled += i => two_Hand_Input = false;
+                playerControles.PlayerAction.TwoHandRightWeapon.performed += i => two_Hand_Right_Weapon_Input = true;
+                playerControles.PlayerAction.TwoHandRightWeapon.canceled += i => two_Hand_Right_Weapon_Input = false;
+                playerControles.PlayerAction.TwoHandLeftWeapon.performed += i => two_Hand_Left_Weapon_Input = true;
+                playerControles.PlayerAction.TwoHandLeftWeapon.canceled += i => two_Hand_Left_Weapon_Input = false;
 
                 // Lock on
                 playerControles.PlayerAction.LockOn.performed += i => lockOn_Input = true;
@@ -179,6 +195,7 @@ namespace JM
 
         private void HandleAllInputs()
         {
+            HandleTwoHandInput();
             HandleLockOnInput();
             HandleLockOnSwitchTargetInput();
             HandlePlayerMovementInput();
@@ -187,12 +204,63 @@ namespace JM
             HandleSprintInput();
             HandleJumpInput();
             HandleRBInput();
+            HandleLBInput();
             HandleRTInput();
             HandleChargeRTInput();
             HandleSwitchRightWeaponInput();
             HandleSwitchLeftWeaponInput();
             HandleQuedInputs();
             HandleInteractionInput();
+        }
+
+        // Two Hand
+        private void HandleTwoHandInput()
+        {
+            if (!two_Hand_Input)
+                return;
+
+            if (two_Hand_Right_Weapon_Input)
+            {
+                // if using the two hand input and press the right two hand button want to stop the regular rb input (or else we would attack)
+                RB_Input = false;
+                two_Hand_Right_Weapon_Input = false;
+                player.playerNetworkManager.isBlocking.Value = false;
+
+                if (player.playerNetworkManager.isTwoHandingWeapon.Value)
+                {
+                    // if is two handing a weapon alreay, change the is twohanding bool to false which trigger an "onvaluechanged" function, which un-twohands current weapon
+                    player.playerNetworkManager.isTwoHandingWeapon.Value = false;
+                    return;
+                }
+                else
+                {
+                    // if not alreay two handing, change the right two hand bool to true, which triggers an onvaluechange function
+                    // this function two hands the right weapon
+                    player.playerNetworkManager.isTwoHandingRightWeapon.Value = true;
+                    return;
+                }
+            }
+            else if (two_Hand_Left_Weapon_Input)
+            {
+                // if using the two hand input and press the left two hand button want to stop the regular rb input (or else we would attack)
+                LB_Input = false;
+                two_Hand_Left_Weapon_Input = false;
+                player.playerNetworkManager.isBlocking.Value = false;
+
+                if (player.playerNetworkManager.isTwoHandingWeapon.Value)
+                {
+                    // if is two handing a weapon alreay, change the is twohanding bool to false which trigger an "onvaluechanged" function, which un-twohands current weapon
+                    player.playerNetworkManager.isTwoHandingWeapon.Value = false;
+                    return;
+                }
+                else
+                {
+                    // if not alreay two handing, change the left two hand bool to true, which triggers an onvaluechange function
+                    // this function two hands the left weapon
+                    player.playerNetworkManager.isTwoHandingLeftWeapon.Value = true;
+                    return;
+                }
+            }
         }
 
         // Lock on
@@ -371,6 +439,9 @@ namespace JM
 
         private void HandleRBInput()
         {
+            if (two_Hand_Input)
+                return;
+
             if (RB_Input)
             {
                 RB_Input = false;
@@ -382,6 +453,25 @@ namespace JM
                 // todo: if two handing the weapon, use the two handed action
 
                 player.playerCombatManager.PerformWeaponBasedAction(player.playerInventoryManager.currentRightHandWeapon.oh_RB_Action, player.playerInventoryManager.currentRightHandWeapon);
+            }
+        }
+
+        private void HandleLBInput()
+        {
+            if (two_Hand_Input)
+                return;
+
+            if (LB_Input)
+            {
+                LB_Input = false;
+
+                // todo: if ui window open, retuen and do nothing
+
+                player.playerNetworkManager.SetCharacterActionHand(true);
+
+                // todo: if two handing the weapon, use the two handed action
+
+                player.playerCombatManager.PerformWeaponBasedAction(player.playerInventoryManager.currentLeftHandWeapon.oh_LB_Action, player.playerInventoryManager.currentLeftHandWeapon);
             }
         }
 
