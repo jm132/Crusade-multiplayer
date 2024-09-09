@@ -660,10 +660,10 @@ GameObject:
   - component: {fileID: 1758088045608827233}
   - component: {fileID: 4029350345896510375}
   - component: {fileID: 1919170503578859677}
+  - component: {fileID: 5883562579034160942}
   - component: {fileID: 3652954663778914001}
   - component: {fileID: 6858679948751353928}
   - component: {fileID: 6423272322832036945}
-  - component: {fileID: 5883562579034160942}
   m_Layer: 6
   m_Name: Undead_Dummy_01
   m_TagString: Untagged
@@ -788,6 +788,10 @@ MonoBehaviour:
     m_InternalValue: 1
   endurance:
     m_InternalValue: 1
+  strenght:
+    m_InternalValue: 1
+  strenghtModifier:
+    m_InternalValue: 1
 --- !u!114 &42696596601637879
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -896,6 +900,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   applyRootMotion: 0
   lastDamageAnimationPlayed: 
+  hit_Forward_Ping_01: hit_Forward_Ping_01
+  hit_Forward_Ping_02: hit_Forward_Ping_02
+  hit_Backward_Ping_01: hit_Backward_Ping_01
+  hit_Backward_Ping_02: hit_Backward_Ping_02
+  hit_Left_Ping_01: hit_Left_Ping_01
+  hit_Left_Ping_02: hit_Left_Ping_02
+  hit_Right_Ping_01: hit_Right_Ping_01
+  hit_Right_Ping_02: hit_Right_Ping_02
+  forward_Ping_Damage: []
+  backward_Ping_Damage: []
+  left_Ping_Damage: []
+  right_Ping_Damage: []
   hit_Forward_Medium_01: hit_Forward_Medium_01
   hit_Forward_Medium_02: hit_Forward_Medium_02
   hit_Backward_Medium_01: hit_Backward_Medium_01
@@ -928,6 +944,15 @@ MonoBehaviour:
   blockingLightningAbsorption: 0
   blockingHolyAbsorption: 0
   blockingStability: 0
+  armorPhysicalDamageAbsorption: 0
+  armorMagicDamageAbsorption: 0
+  armorFireDamageAbsorption: 0
+  arrmorLightningDamageAbsorption: 0
+  armorHolyDamageAbsorption: 0
+  armorImmunity: 0
+  armorRobustness: 0
+  armorFocus: 0
+  armorVitality: 0
   totalPoiseDamage: 0
   offensivePoiseBonus: 0
   basePoiseDefense: 0
@@ -970,6 +995,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bloodSplatterVFX: {fileID: 0}
+  staticEffects: []
 --- !u!114 &1919170503578859677
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -995,6 +1021,20 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 42e97f1c1fb921c4cbad979986cce035, type: 3}
   - {fileID: 8300000, guid: 57ad52e4a60fbc744a691e2da06a0309, type: 3}
   footSteps: []
+--- !u!114 &5883562579034160942
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1954129479639435311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71bfe111a1193c74f99c437013117bbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hasFloatingHPBar: 1
+  characterHPBar: {fileID: 2785810571015862724}
 --- !u!143 &3652954663778914001
 CharacterController:
   m_ObjectHideFlags: 0
@@ -1041,8 +1081,8 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
+  MinDistance: 0.13452144
+  MaxDistance: 0.13452244
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -1144,20 +1184,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &5883562579034160942
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1954129479639435311}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 71bfe111a1193c74f99c437013117bbe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hasFloatingHPBar: 1
-  characterHPBar: {fileID: 2785810571015862724}
 --- !u!1 &2149191354245607142
 GameObject:
   m_ObjectHideFlags: 0
@@ -2794,7 +2820,7 @@ NavMeshAgent:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7668930488639141320}
-  m_Enabled: 1
+  m_Enabled: 0
   m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 3.5
@@ -2802,8 +2828,8 @@ NavMeshAgent:
   avoidancePriority: 50
   m_AngularSpeed: 120
   m_StoppingDistance: 1
-  m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
+  m_AutoTraverseOffMeshLink: 0
+  m_AutoBraking: 0
   m_AutoRepath: 1
   m_Height: 2
   m_BaseOffset: 0

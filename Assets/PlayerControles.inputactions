@@ -78,6 +78,24 @@
             "id": "df473bb1-b885-45bf-a891-5bb925d9c56d",
             "actions": [
                 {
+                    "name": "OpenCharacterMenu",
+                    "type": "Button",
+                    "id": "fd719344-4cc3-4a91-a754-b80f8fe27a8d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Use Item",
+                    "type": "Button",
+                    "id": "c776e933-c9ab-4e42-a66d-463906862d95",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Dodge",
                     "type": "Button",
                     "id": "593f56e7-a650-4a42-96b0-8bb455ba48ce",
@@ -241,17 +259,6 @@
                 }
             ],
             "bindings": [
-                {
-                    "name": "",
-                    "id": "6274c98d-1618-43d1-aaec-88c659beee5b",
-                    "path": "<Keyboard>/x",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Dodge",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
                 {
                     "name": "",
                     "id": "e021a92d-9651-473e-a414-6c86076e1e1e",
@@ -436,6 +443,39 @@
                     "processors": "",
                     "groups": "",
                     "action": "Two Hand Left Weapon",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "579835de-8ddd-479c-b6fc-d7fb58c5d6b0",
+                    "path": "<Keyboard>/i",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "OpenCharacterMenu",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6274c98d-1618-43d1-aaec-88c659beee5b",
+                    "path": "<Keyboard>/x",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Dodge",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3f6b95c0-8d02-4e3c-90e5-6f07e2b8eb0a",
+                    "path": "<Keyboard>/z",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Use Item",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

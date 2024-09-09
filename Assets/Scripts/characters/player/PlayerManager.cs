@@ -17,6 +17,8 @@ namespace JM
         [HideInInspector] public PlayerEquipmentManager playerEquipmentManager;
         [HideInInspector] public PlayerCombatManager playerCombatManager;
         [HideInInspector] public PlayerInteractionManager playerInteractionManager;
+        [HideInInspector] public PlayerEffectManager playerEffectManager;
+        [HideInInspector] public PlayerBodyManager playerBodyManager;
 
         protected override void Awake()
         {
@@ -32,6 +34,8 @@ namespace JM
             playerEquipmentManager = GetComponent<PlayerEquipmentManager>();
             playerCombatManager = GetComponent<PlayerCombatManager>();
             playerInteractionManager = GetComponent<PlayerInteractionManager>();
+            playerEffectManager = GetComponent<PlayerEffectManager>();
+            playerBodyManager = GetComponent<PlayerBodyManager>();
         }
 
         protected override void Update()
@@ -95,6 +99,9 @@ namespace JM
             if (!IsOwner)
                 characterNetworkManager.currentHealth.OnValueChanged += characterUIManager.OnHPChanged;
 
+            // body type
+            playerNetworkManager.isMale.OnValueChanged += playerNetworkManager.OnIsMaleChanged;
+
             // stats
             playerNetworkManager.currentHealth.OnValueChanged += playerNetworkManager.CheckHP;
 
@@ -107,6 +114,10 @@ namespace JM
             playerNetworkManager.currentLeftHandWeaponID.OnValueChanged += playerNetworkManager.OnCurrentLeftHandWeaponIDChange;
             playerNetworkManager.currentWeaponBeingUsed.OnValueChanged += playerNetworkManager.OnCurrentWeaponBeingUsedIDChange;
             playerNetworkManager.isBlocking.OnValueChanged += playerNetworkManager.OnIsBlockingChanged;
+            playerNetworkManager.headEquipmentID.OnValueChanged += playerNetworkManager.OnHeadEquipmentChanged;
+            playerNetworkManager.bodyEquipmentID.OnValueChanged += playerNetworkManager.OnBodyEquipmentChanged;
+            playerNetworkManager.legEquipmentID.OnValueChanged += playerNetworkManager.OnLegEquipmentChanged;
+            playerNetworkManager.handEquipmentID.OnValueChanged += playerNetworkManager.OnHandEquipmentChanged;
 
             // two hand
             playerNetworkManager.isTwoHandingWeapon.OnValueChanged += playerNetworkManager.OnIsTwoHandingWeaponChanged;
@@ -145,6 +156,9 @@ namespace JM
             if (!IsOwner)
                 characterNetworkManager.currentHealth.OnValueChanged -= characterUIManager.OnHPChanged;
 
+            // body type
+            playerNetworkManager.isMale.OnValueChanged -= playerNetworkManager.OnIsMaleChanged;
+
             // stats
             playerNetworkManager.currentHealth.OnValueChanged -= playerNetworkManager.CheckHP;
 
@@ -157,6 +171,10 @@ namespace JM
             playerNetworkManager.currentLeftHandWeaponID.OnValueChanged -= playerNetworkManager.OnCurrentLeftHandWeaponIDChange;
             playerNetworkManager.currentWeaponBeingUsed.OnValueChanged -= playerNetworkManager.OnCurrentWeaponBeingUsedIDChange;
             playerNetworkManager.isBlocking.OnValueChanged -= playerNetworkManager.OnIsBlockingChanged;
+            playerNetworkManager.headEquipmentID.OnValueChanged -= playerNetworkManager.OnHeadEquipmentChanged;
+            playerNetworkManager.bodyEquipmentID.OnValueChanged -= playerNetworkManager.OnBodyEquipmentChanged;
+            playerNetworkManager.legEquipmentID.OnValueChanged -= playerNetworkManager.OnLegEquipmentChanged;
+            playerNetworkManager.handEquipmentID.OnValueChanged -= playerNetworkManager.OnHandEquipmentChanged;
 
             // two hand
             playerNetworkManager.isTwoHandingWeapon.OnValueChanged -= playerNetworkManager.OnIsTwoHandingWeaponChanged;
@@ -215,8 +233,9 @@ namespace JM
             currentCharacterData.sceneIndex = SceneManager.GetActiveScene().buildIndex;
 
             currentCharacterData.characterName = playerNetworkManager.characterName.Value.ToString();
-            currentCharacterData.yPosition = transform.position.y;
-            currentCharacterData.xPosition = transform.position.x;
+            currentCharacterData.isMale = playerNetworkManager.isMale.Value;
+            currentCharacterData.yPosition = transform.position.x;
+            currentCharacterData.xPosition = transform.position.y;
             currentCharacterData.zPosition = transform.position.z;
 
             currentCharacterData.currentHealth = playerNetworkManager.currentHealth.Value;
@@ -224,11 +243,33 @@ namespace JM
 
             currentCharacterData.vitality = playerNetworkManager.vitality.Value;
             currentCharacterData.endurance = playerNetworkManager.endurance.Value;
+
+            // equipment
+            currentCharacterData.headEquipment = playerNetworkManager.headEquipmentID.Value;
+            currentCharacterData.bodyEquipment = playerNetworkManager.bodyEquipmentID.Value;
+            currentCharacterData.legEquipment = playerNetworkManager.legEquipmentID.Value;
+            currentCharacterData.handEquipment = playerNetworkManager.handEquipmentID.Value;
+
+            currentCharacterData.rightWeaponIndex = playerInventoryManager.rightHandWeaponIndex;
+            currentCharacterData.rightWeapon01 = playerInventoryManager.weaponsInRightHandSlots[0].itemID; // this should never be null
+            currentCharacterData.rightWeapon02 = playerInventoryManager.weaponsInRightHandSlots[1].itemID; // this should never be null
+            currentCharacterData.rightWeapon03 = playerInventoryManager.weaponsInRightHandSlots[2].itemID; // this should never be null
+
+            currentCharacterData.leftWeaponIndex = playerInventoryManager.leftHandWeaponIndex;
+            currentCharacterData.leftWeapon01 = playerInventoryManager.weaponsInLeftHandSlots[0].itemID; // this should never be null
+            currentCharacterData.leftWeapon02 = playerInventoryManager.weaponsInLeftHandSlots[1].itemID; // this should never be null
+            currentCharacterData.leftWeapon03 = playerInventoryManager.weaponsInLeftHandSlots[2].itemID; // this should never be null
         }
 
         public void LoadGameDataFromCurrentCharacterData(ref CharaterSaveData currentCharacterData)
         {
+            // sync body type
+            playerNetworkManager.OnIsMaleChanged(false, playerNetworkManager.isMale.Value);
+
+            // sync weapon 
             playerNetworkManager.characterName.Value = currentCharacterData.characterName;
+            playerNetworkManager.isMale.Value = currentCharacterData.isMale;
+            playerBodyManager.ToggleBodyType(currentCharacterData.isMale); // toggle incase the value is the same as default
             Vector3 myPosition = new Vector3(currentCharacterData.xPosition, currentCharacterData.yPosition, currentCharacterData.zPosition);
             transform.position = myPosition;
 
@@ -241,6 +282,114 @@ namespace JM
             playerNetworkManager.currentHealth.Value = currentCharacterData.currentHealth;
             playerNetworkManager.currentStamina.Value = currentCharacterData.currentStamina;
             PlayerUIManager.instance.playerUIHudManager.SetMaxStaminaValue(playerNetworkManager.maxStamina.Value);
+
+            // equipment
+            if (WorldItemDatabase.Instance.GetHeadEquipmentByID(currentCharacterData.headEquipment))
+            {
+                HeadEquipmentItem headEquipment = Instantiate(WorldItemDatabase.Instance.GetHeadEquipmentByID(currentCharacterData.headEquipment));
+                playerInventoryManager.headEquipment = headEquipment;
+            }
+            else
+            {
+                playerInventoryManager.headEquipment = null;
+            }
+
+            if (WorldItemDatabase.Instance.GetBodyEquipmentByID(currentCharacterData.bodyEquipment))
+            {
+                BodyEquipmentItem bodyEquipment = Instantiate(WorldItemDatabase.Instance.GetBodyEquipmentByID(currentCharacterData.bodyEquipment));
+                playerInventoryManager.bodyEquipment = bodyEquipment;
+            }
+            else
+            {
+                playerInventoryManager.bodyEquipment = null;
+            }
+
+            if (WorldItemDatabase.Instance.GetLegEquipmentByID(currentCharacterData.legEquipment))
+            {
+                LegEquipmentItem LegEquipment = Instantiate(WorldItemDatabase.Instance.GetLegEquipmentByID(currentCharacterData.legEquipment));
+                playerInventoryManager.legEquipment = LegEquipment;
+            }
+            else
+            {
+                playerInventoryManager.legEquipment = null;
+            }
+
+            if (WorldItemDatabase.Instance.GetHandEquipmentByID(currentCharacterData.handEquipment))
+            {
+                HandEquipmentItem handEquipment = Instantiate(WorldItemDatabase.Instance.GetHandEquipmentByID(currentCharacterData.handEquipment));
+                playerInventoryManager.handEquipment = handEquipment;
+            }
+            else
+            {
+                playerInventoryManager.handEquipment = null;
+            }
+
+            if (WorldItemDatabase.Instance.GetWeaponByID(currentCharacterData.rightWeapon01))
+            {
+                WeaponItem rightWeapon01 = Instantiate(WorldItemDatabase.Instance.GetWeaponByID(currentCharacterData.rightWeapon01));
+                playerInventoryManager.weaponsInRightHandSlots[0] = rightWeapon01;
+            }
+            else
+            {
+                playerInventoryManager.weaponsInLeftHandSlots[0] = null;
+            }
+
+            if (WorldItemDatabase.Instance.GetWeaponByID(currentCharacterData.rightWeapon02))
+            {
+                WeaponItem rightWeapon02 = Instantiate(WorldItemDatabase.Instance.GetWeaponByID(currentCharacterData.rightWeapon02));
+                playerInventoryManager.weaponsInRightHandSlots[1] = rightWeapon02;
+            }
+            else
+            {
+                playerInventoryManager.weaponsInRightHandSlots[1] = null;
+            }
+
+            if (WorldItemDatabase.Instance.GetWeaponByID(currentCharacterData.rightWeapon03))
+            {
+                WeaponItem rightWeapon03 = Instantiate(WorldItemDatabase.Instance.GetWeaponByID(currentCharacterData.rightWeapon03));
+                playerInventoryManager.weaponsInRightHandSlots[2] = rightWeapon03;
+            }
+            else
+            {
+                playerInventoryManager.weaponsInRightHandSlots[2] = null;
+            }
+
+            if (WorldItemDatabase.Instance.GetWeaponByID(currentCharacterData.leftWeapon01))
+            {
+                WeaponItem leftWeapon01 = Instantiate(WorldItemDatabase.Instance.GetWeaponByID(currentCharacterData.leftWeapon01));
+                playerInventoryManager.weaponsInLeftHandSlots[0] = leftWeapon01;
+            }
+            else
+            {
+                playerInventoryManager.weaponsInLeftHandSlots[0] = null;
+            }
+
+            if (WorldItemDatabase.Instance.GetWeaponByID(currentCharacterData.leftWeapon02))
+            {
+                WeaponItem leftWeapon02 = Instantiate(WorldItemDatabase.Instance.GetWeaponByID(currentCharacterData.leftWeapon02));
+                playerInventoryManager.weaponsInLeftHandSlots[1] = leftWeapon02;
+            }
+            else
+            {
+                playerInventoryManager.weaponsInLeftHandSlots[1] = null;
+            }
+
+            if (WorldItemDatabase.Instance.GetWeaponByID(currentCharacterData.leftWeapon03))
+            {
+                WeaponItem leftWeapon03 = Instantiate(WorldItemDatabase.Instance.GetWeaponByID(currentCharacterData.leftWeapon03));
+                playerInventoryManager.weaponsInLeftHandSlots[2] = leftWeapon03;
+            }
+            else
+            {
+                playerInventoryManager.weaponsInLeftHandSlots[2] = null;
+            }
+
+            playerEquipmentManager.EquipArmor();
+
+            playerInventoryManager.rightHandWeaponIndex = currentCharacterData.rightWeaponIndex;
+            playerNetworkManager.currentRightHandWeaponID.Value = playerInventoryManager.weaponsInRightHandSlots[currentCharacterData.rightWeaponIndex].itemID;
+            playerInventoryManager.leftHandWeaponIndex = currentCharacterData.leftWeaponIndex;
+            playerNetworkManager.currentLeftHandWeaponID.Value = playerInventoryManager.weaponsInLeftHandSlots[currentCharacterData.leftWeaponIndex].itemID;
         }
 
         public void LoadOtherPlayerCharacterWhenJoiningServer()
@@ -248,6 +397,12 @@ namespace JM
             // sync weapons
             playerNetworkManager.OnCurrentRightHandWeaponIDChange(0, playerNetworkManager.currentRightHandWeaponID.Value);
             playerNetworkManager.OnCurrentLeftHandWeaponIDChange(0, playerNetworkManager.currentLeftHandWeaponID.Value);
+
+            // sync armor
+            playerNetworkManager.OnHeadEquipmentChanged(0, playerNetworkManager.headEquipmentID.Value);
+            playerNetworkManager.OnBodyEquipmentChanged(0, playerNetworkManager.bodyEquipmentID.Value);
+            playerNetworkManager.OnLegEquipmentChanged(0, playerNetworkManager.legEquipmentID.Value);
+            playerNetworkManager.OnHandEquipmentChanged(0, playerNetworkManager.handEquipmentID.Value);
 
             // sync two hand status
             playerNetworkManager.OnIsTwoHandingRightWeaponChanged(false, playerNetworkManager.isTwoHandingRightWeapon.Value);

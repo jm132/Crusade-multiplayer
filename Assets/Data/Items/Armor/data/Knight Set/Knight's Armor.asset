@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6220a2ebeb804574cad81f5eb676a33e, type: 3}
+  m_Name: Knight's Armor
+  m_EditorClassIdentifier: 
+  itemName: 
+  itemIcon: {fileID: 21300000, guid: 991959b8760201844ac759a1ec64f91d, type: 3}
+  itemDescription: 
+  itemID: 12
+  itemWeight: 0
+  physicalDamageAbsorption: 12.4
+  magicDamageAbsorption: 10.9
+  fireDamageAbsorption: 10.9
+  lightningDamageAbsorption: 9.5
+  holyDamageAbsorption: 8.8
+  immunity: 28
+  robustness: 50
+  focus: 18
+  vitality: 18
+  poise: 24
+  equipmentModels:
+  - {fileID: 11400000, guid: bd7b18772cfb7f14e9fa7985f8cba9a0, type: 2}
+  - {fileID: 11400000, guid: cd028fd5c191d12489294d7dbd043ec2, type: 2}
+  - {fileID: 11400000, guid: 1de1a2a4223a03044b78d0565f6587e0, type: 2}
+  - {fileID: 11400000, guid: 07c8cc90feb68924e947a514a5f95807, type: 2}
+  - {fileID: 11400000, guid: 55025dfa532c7004490d32310281eb1d, type: 2}
+  - {fileID: 11400000, guid: 348006f54a5ba384ea05fe04569b6e1d, type: 2}
+  - {fileID: 11400000, guid: c1a2b6691951b2549b634c0a68326507, type: 2}

@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Globalization;
 using UnityEngine;
 
 namespace JM
@@ -23,12 +22,25 @@ namespace JM
         public float blockingHolyAbsorption;
         public float blockingStability;
 
+        [Header("Armor Absorption")]
+        public float armorPhysicalDamageAbsorption;
+        public float armorMagicDamageAbsorption;
+        public float armorFireDamageAbsorption;
+        public float arrmorLightningDamageAbsorption;
+        public float armorHolyDamageAbsorption;
+
+        [Header("Armor Resistances")]
+        public float armorImmunity;     // risistance to poison
+        public float armorRobustness;   // risistance to bleed and frost
+        public float armorFocus;        // risistance to madness and sleep
+        public float armorVitality;     // risistance to death curse
+
         [Header("Poise")]
-        public float totalPoiseDamage; // how much poise damage the character has taken
-        public float offensivePoiseBonus; // the poise bonus gained from using weapons
-        public float basePoiseDefense; // the poise bonus gained from armor/talismans 
+        public float totalPoiseDamage;          // how much poise damage the character has taken
+        public float offensivePoiseBonus;       // the poise bonus gained from using weapons
+        public float basePoiseDefense;          // the poise bonus gained from armor/talismans 
         public float defaultPoiseResetTime = 8; // the time it takes for poise damage to reset (must not be hit in the time or will reset)
-        public float poiseResetTimer = 0; // the current timer for poise reset
+        public float poiseResetTimer = 0;       // the current timer for poise reset
 
         protected virtual void Awake()
         {

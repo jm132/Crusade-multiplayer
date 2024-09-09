@@ -34,7 +34,10 @@ namespace JM
             aiCharacterCombarManager = GetComponent<AiCharacterCombarManager>();
             aiCharacterLocomotionManager = GetComponent<AICharacterLocomotionManager>();
 
+            //navMeshAgent = GetComponentInChildren<NavMeshAgent>(true);
             navMeshAgent = GetComponentInChildren<NavMeshAgent>();
+
+            //StartCoroutine(EnableNavMeshAgentAfterDelay(6));
         }
 
         public override void OnNetworkSpawn()
@@ -109,20 +112,24 @@ namespace JM
                 aiCharacterCombarManager.targetsDirection = aiCharacterCombarManager.currentTarget.transform.position - transform.position;
                 aiCharacterCombarManager.viewableAngle = WorldUtilityManager.instance.GetAngleOfTarget(transform, aiCharacterCombarManager.targetsDirection);
                 aiCharacterCombarManager.distanceFromTarget = Vector3.Distance(transform.position, aiCharacterCombarManager.currentTarget.transform.position);
-            }
-            
-            if (navMeshAgent.enabled)
-            {
-                Vector3 agentDestination = navMeshAgent.destination;
-                float remainingDistance = Vector3.Distance(agentDestination, transform.position);
 
-                if (remainingDistance > navMeshAgent.stoppingDistance)
+                if (navMeshAgent.enabled)
                 {
-                    aiCharacterNetworkManager.isMoving.Value = true;
+                    Vector3 agentDestination = navMeshAgent.destination;
+                    float remainingDistance = Vector3.Distance(agentDestination, transform.position);
+
+                    if (remainingDistance > navMeshAgent.stoppingDistance)
+                    {
+                        aiCharacterNetworkManager.isMoving.Value = true;
+                    }
+                    else
+                    {
+                        aiCharacterNetworkManager.isMoving.Value = false;
+                    }
                 }
                 else
                 {
-                    aiCharacterNetworkManager.isMoving.Value= false;
+                    aiCharacterNetworkManager.isMoving.Value = false;
                 }
             }
             else
@@ -130,5 +137,14 @@ namespace JM
                 aiCharacterNetworkManager.isMoving.Value = false;
             }
         }
+
+        // Coroutine to enable the NavMeshAgent after a delay
+        //private IEnumerator EnableNavMeshAgentAfterDelay(float delay)
+        //{
+            //yield return new WaitForSeconds(delay);
+
+            //Ensure the agent's position is correctly synchronized with the GameObject's position
+            //navMeshAgent.enabled = true;
+        //}
     }
 }

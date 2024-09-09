@@ -7,6 +7,8 @@ namespace JM
 {
     public class PlayerUIHudManager : MonoBehaviour
     {
+        [SerializeField] CanvasGroup[] canvasGroup;
+
         [Header("Stat Bars")]
         [SerializeField] UI_StatBar healthBar;
         [SerializeField] UI_StatBar staminaBar;
@@ -18,6 +20,26 @@ namespace JM
         [Header("Boss Health Bar")]
         public Transform bossHealthBarParent;
         public GameObject bossHealthBarObjects;
+
+        public void ToggleHUD(bool status)
+        {
+            // to do fade in and out time
+
+            if (status)
+            {
+                foreach (var canvas in canvasGroup)
+                {
+                    canvas.alpha = 1;
+                }
+            }
+            else
+            {
+                foreach (var canvas in canvasGroup)
+                {
+                    canvas.alpha = 0;
+                }
+            }
+        }
 
         public void RefreshHUD()
         {

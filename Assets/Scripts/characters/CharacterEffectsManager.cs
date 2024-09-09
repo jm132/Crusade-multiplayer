@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace JM
 {
@@ -16,6 +17,9 @@ namespace JM
 
         [Header("VFX")]
         [SerializeField] GameObject bloodSplatterVFX;
+
+        [Header("Static Effects")]
+        public List<StaticCharacterEffect> staticEffects = new List<StaticCharacterEffect>();
 
         protected virtual void Awake()
         {
@@ -38,6 +42,50 @@ namespace JM
             else
             {
                 GameObject bloodSplatter = Instantiate(WorldCharacterEffectManager.instance.bloodSplatterVFX, contactPoint, Quaternion.identity);
+            }
+        }
+
+        public void AddStaticEffect(StaticCharacterEffect effect)
+        {
+            // 1. add a static effect to the characters
+            staticEffects.Add(effect);
+
+            // 2. process its effect
+            effect.ProcessStaticEffect(charater);
+
+            // 3. check for null entries in list and then remove them
+            for (int i = staticEffects.Count - 1; i > -1; i--)
+            {
+                if (staticEffects[i] == null)
+                    staticEffects.RemoveAt(i);
+            }
+        }
+
+        public void RemoveStaticEffect(int effectID)
+        {
+            // 1. remove static effect from character
+            StaticCharacterEffect effect;
+            
+            for (int i = 0; i < staticEffects.Count; i++)
+            {
+                if (staticEffects[i] != null)
+                {
+                    if (staticEffects[i].staticEffectID == effectID)
+                    {
+                        effect = staticEffects[i];
+                        // 1. remove static effect from character
+                        effect.RemoveStaticEffect(charater);
+                        // 2. remove static effect from list
+                        staticEffects.Remove(effect);
+                    }
+                }
+            }
+
+            // 3. check for null entries in list and then remove them
+            for (int i = staticEffects.Count - 1; i > -1; i--)
+            {
+                if (staticEffects[i] == null)
+                    staticEffects.RemoveAt(i);
             }
         }
     }

@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92d500b7f39df0647bb423af6f6181b9, type: 3}
+  m_Name: Open Face Helm
+  m_EditorClassIdentifier: 
+  itemName: 
+  itemIcon: {fileID: 0}
+  itemDescription: 
+  itemID: 1
+  itemWeight: 0
+  physicalDamageAbsorption: 4.4
+  magicDamageAbsorption: 3.8
+  fireDamageAbsorption: 3.8
+  lightningDamageAbsorption: 3.4
+  holyDamageAbsorption: 3.1
+  immunity: 12
+  robustness: 22
+  focus: 8
+  vitality: 8
+  poise: 8
+  equipmentModels:
+  - {fileID: 11400000, guid: 67359b8a78347bc4c85f06ae4c15a0c7, type: 2}
+  headEquipmentType: 2

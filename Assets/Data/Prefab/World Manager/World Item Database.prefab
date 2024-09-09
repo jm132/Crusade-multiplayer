@@ -24,13 +24,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 312863869296558916}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.2455271, y: 1.5457194, z: 2.1562521}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &312863869296558917
 MonoBehaviour:
@@ -49,3 +49,20 @@ MonoBehaviour:
   - {fileID: 11400000, guid: fe02b75fe7a1fc0479e8a0b0e0bf3378, type: 2}
   - {fileID: 11400000, guid: 498bf1c52e976cb4aa5e69c537cdc6c2, type: 2}
   - {fileID: 11400000, guid: 58ba6799c5649974a813e87246a1beab, type: 2}
+  - {fileID: 11400000, guid: 4abd8cdf849f67643891c0fd782c8c14, type: 2}
+  - {fileID: 11400000, guid: 9e244e0c678968b40b0c0a1645d8b13b, type: 2}
+  - {fileID: 11400000, guid: a100e74b68770f04fa00037dee4fc676, type: 2}
+  - {fileID: 11400000, guid: a2bed2800977590449d94ce8cf27c55a, type: 2}
+  - {fileID: 11400000, guid: 8d4a020ad2d9b514a9e4ad140e3d9f2a, type: 2}
+  - {fileID: 11400000, guid: fb742d876f91d92409c91e0ba090b835, type: 2}
+  - {fileID: 11400000, guid: 2859d32e5e4eb4d4681372568e003495, type: 2}
+  - {fileID: 11400000, guid: d43fcb84ef869aa4c8c4c0c3e252fe4c, type: 2}
+  headEquipment:
+  - {fileID: 11400000, guid: 7b29b3581e2b6c8469871037cc605c87, type: 2}
+  - {fileID: 11400000, guid: 88fff294f665d0c488febc54010e7d2e, type: 2}
+  bodyEquipment:
+  - {fileID: 11400000, guid: 316f16e7e6fd50443aff0db9400608f6, type: 2}
+  legEquipment:
+  - {fileID: 11400000, guid: aa8d3802e4fba8648ae36e5a33a21427, type: 2}
+  handEquipment:
+  - {fileID: 11400000, guid: b1afb15886a1c884888fa86f16e45f60, type: 2}

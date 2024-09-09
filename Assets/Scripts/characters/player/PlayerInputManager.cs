@@ -61,6 +61,10 @@ namespace JM
         [SerializeField] bool que_RB_Input = false;
         [SerializeField] bool que_RT_Input = false;
 
+        [Header("UI Input")]
+        [SerializeField] bool openCharacterMenuInput = false;
+        [SerializeField] bool closeMenuInput = false;
+
 
         private void Awake()
         {
@@ -161,6 +165,10 @@ namespace JM
                 // Qued Input
                 playerControles.PlayerAction.QuedRB.performed += i => QueInput(ref que_RB_Input);
                 playerControles.PlayerAction.QuedRT.performed += i => QueInput(ref que_RT_Input);
+
+                // UI Inputs
+                playerControles.PlayerAction.Dodge.performed += i => closeMenuInput = true;
+                playerControles.PlayerAction.OpenCharacterMenu.performed += i => openCharacterMenuInput = true;
             }
 
             playerControles.Enable();
@@ -211,11 +219,18 @@ namespace JM
             HandleSwitchLeftWeaponInput();
             HandleQuedInputs();
             HandleInteractionInput();
+            HandLeCloseUIInput();
+            HandleOpenCharacterMenuInput();
         }
 
         // Two Hand
         private void HandleTwoHandInput()
         {
+            // if ui window open, simply return without doing anything
+            if (PlayerUIManager.instance.menuWindowIsOpen)
+                return;
+
+
             if (!two_Hand_Input)
                 return;
 
@@ -266,6 +281,11 @@ namespace JM
         // Lock on
         private void HandleLockOnInput()
         {
+            // if ui window open, simply return without doing anything
+            if (PlayerUIManager.instance.menuWindowIsOpen)
+                return;
+
+
             // check for dead target
             if (player.playerNetworkManager.isLockedOn.Value)
             {
@@ -348,6 +368,11 @@ namespace JM
         // Movemt
         private void HandlePlayerMovementInput()
         {
+            // if ui window open, simply return without doing anything
+            if (PlayerUIManager.instance.menuWindowIsOpen)
+                return;
+
+
             vertical_Input = movement_Input.y;
             horizontal_Input = movement_Input.x;
             
@@ -395,6 +420,11 @@ namespace JM
 
         private void HandleCameraMovementInput()
         {
+            // if ui window open, simply return without doing anything
+            if (PlayerUIManager.instance.menuWindowIsOpen)
+                return;
+
+
             cameraVerical_Input = camera_Input.y;
             cameraHorizontal_Input = camera_Input.x;
         }
@@ -406,7 +436,10 @@ namespace JM
             {
                 dodge_Input = false;
 
-                // furter note: return (do nothing) if menu or ui windows is open
+                // if ui window open, simply return without doing anything
+                if (PlayerUIManager.instance.menuWindowIsOpen)
+                    return;
+
 
                 player.playerLocomotionManager.AttemptToPerformDodge();
             }
@@ -431,6 +464,8 @@ namespace JM
                 jump_Input = false;
 
                 // if ui window open, simply return without doing anything
+                if (PlayerUIManager.instance.menuWindowIsOpen)
+                    return;
 
                 // attempt to preform jump
                 player.playerLocomotionManager.AttemptToPerformJump();
@@ -446,7 +481,9 @@ namespace JM
             {
                 RB_Input = false;
 
-                // todo: if ui window open, retuen and do nothing
+                // if ui window open, simply return without doing anything
+                if (PlayerUIManager.instance.menuWindowIsOpen)
+                    return;
 
                 player.playerNetworkManager.SetCharacterActionHand(true);
 
@@ -465,7 +502,10 @@ namespace JM
             {
                 LB_Input = false;
 
-                // todo: if ui window open, retuen and do nothing
+                // if ui window open, simply return without doing anything
+                if (PlayerUIManager.instance.menuWindowIsOpen)
+                    return;
+
 
                 player.playerNetworkManager.SetCharacterActionHand(true);
 
@@ -481,7 +521,10 @@ namespace JM
             {
                 RT_Input = false;
 
-                // todo: if ui window open, retuen and do nothing
+                // if ui window open, simply return without doing anything
+                if (PlayerUIManager.instance.menuWindowIsOpen)
+                    return;
+
 
                 player.playerNetworkManager.SetCharacterActionHand(true);
 
@@ -508,6 +551,10 @@ namespace JM
             if (switch_Right_Weapon_Input)
             {
                 switch_Right_Weapon_Input = false;
+
+                if (PlayerUIManager.instance.menuWindowIsOpen)
+                    return;
+
                 player.playerEquipmentManager.SwitchRightWeapon();
             }
         }
@@ -517,6 +564,10 @@ namespace JM
             if (switch_Left_Weapon_Input)
             {
                 switch_Left_Weapon_Input = false;
+
+                if (PlayerUIManager.instance.menuWindowIsOpen)
+                    return;
+
                 player.playerEquipmentManager.SwitchLeftWeapon();
             }
         }
@@ -579,6 +630,31 @@ namespace JM
 
                     input_Que_Is_Active = false;
                     que_Input_Timer = 0;
+                }
+            }
+        }
+
+        private void HandleOpenCharacterMenuInput()
+        {
+            if (openCharacterMenuInput)
+            {
+                openCharacterMenuInput = false;
+
+                PlayerUIManager.instance.playerUIPopUpManager.CloseAllPopUpWindows();
+                PlayerUIManager.instance.CloseAllMenuWindows();
+                PlayerUIManager.instance.playerUICharacterMenuManager.OpenCharacterMenu();
+            }
+        }
+
+        private void HandLeCloseUIInput()
+        {
+            if (closeMenuInput)
+            {
+                closeMenuInput = false;
+
+                if (PlayerUIManager.instance.menuWindowIsOpen)
+                {
+                    PlayerUIManager.instance.CloseAllMenuWindows();
                 }
             }
         }

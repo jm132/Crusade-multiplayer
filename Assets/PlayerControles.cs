@@ -100,6 +100,24 @@ public partial class @PlayerControles: IInputActionCollection2, IDisposable
             ""id"": ""df473bb1-b885-45bf-a891-5bb925d9c56d"",
             ""actions"": [
                 {
+                    ""name"": ""OpenCharacterMenu"",
+                    ""type"": ""Button"",
+                    ""id"": ""fd719344-4cc3-4a91-a754-b80f8fe27a8d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Use Item"",
+                    ""type"": ""Button"",
+                    ""id"": ""c776e933-c9ab-4e42-a66d-463906862d95"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""Dodge"",
                     ""type"": ""Button"",
                     ""id"": ""593f56e7-a650-4a42-96b0-8bb455ba48ce"",
@@ -263,17 +281,6 @@ public partial class @PlayerControles: IInputActionCollection2, IDisposable
                 }
             ],
             ""bindings"": [
-                {
-                    ""name"": """",
-                    ""id"": ""6274c98d-1618-43d1-aaec-88c659beee5b"",
-                    ""path"": ""<Keyboard>/x"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Dodge"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
                 {
                     ""name"": """",
                     ""id"": ""e021a92d-9651-473e-a414-6c86076e1e1e"",
@@ -460,6 +467,39 @@ public partial class @PlayerControles: IInputActionCollection2, IDisposable
                     ""action"": ""Two Hand Left Weapon"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""579835de-8ddd-479c-b6fc-d7fb58c5d6b0"",
+                    ""path"": ""<Keyboard>/i"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""OpenCharacterMenu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6274c98d-1618-43d1-aaec-88c659beee5b"",
+                    ""path"": ""<Keyboard>/x"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Dodge"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3f6b95c0-8d02-4e3c-90e5-6f07e2b8eb0a"",
+                    ""path"": ""<Keyboard>/z"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Use Item"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -527,6 +567,8 @@ public partial class @PlayerControles: IInputActionCollection2, IDisposable
         m_PlayerMovement_Movement = m_PlayerMovement.FindAction("Movement", throwIfNotFound: true);
         // Player Action
         m_PlayerAction = asset.FindActionMap("Player Action", throwIfNotFound: true);
+        m_PlayerAction_OpenCharacterMenu = m_PlayerAction.FindAction("OpenCharacterMenu", throwIfNotFound: true);
+        m_PlayerAction_UseItem = m_PlayerAction.FindAction("Use Item", throwIfNotFound: true);
         m_PlayerAction_Dodge = m_PlayerAction.FindAction("Dodge", throwIfNotFound: true);
         m_PlayerAction_Jump = m_PlayerAction.FindAction("Jump", throwIfNotFound: true);
         m_PlayerAction_RB = m_PlayerAction.FindAction("RB", throwIfNotFound: true);
@@ -658,6 +700,8 @@ public partial class @PlayerControles: IInputActionCollection2, IDisposable
     // Player Action
     private readonly InputActionMap m_PlayerAction;
     private List<IPlayerActionActions> m_PlayerActionActionsCallbackInterfaces = new List<IPlayerActionActions>();
+    private readonly InputAction m_PlayerAction_OpenCharacterMenu;
+    private readonly InputAction m_PlayerAction_UseItem;
     private readonly InputAction m_PlayerAction_Dodge;
     private readonly InputAction m_PlayerAction_Jump;
     private readonly InputAction m_PlayerAction_RB;
@@ -680,6 +724,8 @@ public partial class @PlayerControles: IInputActionCollection2, IDisposable
     {
         private @PlayerControles m_Wrapper;
         public PlayerActionActions(@PlayerControles wrapper) { m_Wrapper = wrapper; }
+        public InputAction @OpenCharacterMenu => m_Wrapper.m_PlayerAction_OpenCharacterMenu;
+        public InputAction @UseItem => m_Wrapper.m_PlayerAction_UseItem;
         public InputAction @Dodge => m_Wrapper.m_PlayerAction_Dodge;
         public InputAction @Jump => m_Wrapper.m_PlayerAction_Jump;
         public InputAction @RB => m_Wrapper.m_PlayerAction_RB;
@@ -707,6 +753,12 @@ public partial class @PlayerControles: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_PlayerActionActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_PlayerActionActionsCallbackInterfaces.Add(instance);
+            @OpenCharacterMenu.started += instance.OnOpenCharacterMenu;
+            @OpenCharacterMenu.performed += instance.OnOpenCharacterMenu;
+            @OpenCharacterMenu.canceled += instance.OnOpenCharacterMenu;
+            @UseItem.started += instance.OnUseItem;
+            @UseItem.performed += instance.OnUseItem;
+            @UseItem.canceled += instance.OnUseItem;
             @Dodge.started += instance.OnDodge;
             @Dodge.performed += instance.OnDodge;
             @Dodge.canceled += instance.OnDodge;
@@ -765,6 +817,12 @@ public partial class @PlayerControles: IInputActionCollection2, IDisposable
 
         private void UnregisterCallbacks(IPlayerActionActions instance)
         {
+            @OpenCharacterMenu.started -= instance.OnOpenCharacterMenu;
+            @OpenCharacterMenu.performed -= instance.OnOpenCharacterMenu;
+            @OpenCharacterMenu.canceled -= instance.OnOpenCharacterMenu;
+            @UseItem.started -= instance.OnUseItem;
+            @UseItem.performed -= instance.OnUseItem;
+            @UseItem.canceled -= instance.OnUseItem;
             @Dodge.started -= instance.OnDodge;
             @Dodge.performed -= instance.OnDodge;
             @Dodge.canceled -= instance.OnDodge;
@@ -934,6 +992,8 @@ public partial class @PlayerControles: IInputActionCollection2, IDisposable
     }
     public interface IPlayerActionActions
     {
+        void OnOpenCharacterMenu(InputAction.CallbackContext context);
+        void OnUseItem(InputAction.CallbackContext context);
         void OnDodge(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnRB(InputAction.CallbackContext context);

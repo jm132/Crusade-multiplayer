@@ -73,6 +73,10 @@ namespace JM
 
         public void Interact()
         {
+
+            // if press the interact button with or without an interactable, it will clear the pop up windows (item pick ups, message, ect)
+            PlayerUIManager.instance.playerUIPopUpManager.CloseAllPopUpWindows();
+
             if(currentInteractableAction.Count == 0)
                 return;
 
